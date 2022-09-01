@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  mariadb:
+    image: docker.io/bitnami/mariadb:10.6
+    environment:
+      - MARIADB_USER=${DB_USERNAME}
+      - MARIADB_DATABASE=${DB_DATABASE}
+      - MARIADB_ROOT_PASSWORD=${DB_PASSWORD}
+      - MARIADB_PASSWORD=${DB_PASSWORD}
+  backend:
+    image: docker.io/bitnami/laravel:9
+    ports:
+      - '8000:8000'
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - './backend:/app'
+    depends_on:
+      - mariadb
+  frontend:
+    build: ./frontend
+    image: node:lts
+    volumes:
+      - './frontend:/app'
+      - '/app/node_modules'
+    ports:
+      - "8080:8080"
