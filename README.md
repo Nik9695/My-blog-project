@@ -30,6 +30,11 @@ Which translates to
 ```
 docker-compose exec backend php artisan migrate
 ```
+----
+<strong>Install frontend packages</strong>
+```
+docker-compose exec frontend npm i <package>
+```
 
 To learn more about executing commands and MakeFile visit: <a href="https://supreme-gold-b6b.notion.site/Executing-commands-4e10d50133314751a27ceb80ef1d0de5">This link</a>
 
