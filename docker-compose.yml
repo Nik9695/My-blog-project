@@ -28,8 +28,8 @@ services:
   frontend:
     build:
       context: ./frontend
-      target: builder
     volumes:
       - './frontend:/app_frontend'
+      - '/app_frontend/node_modules'
     ports:
       - "8080:8080"
