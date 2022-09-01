@@ -26,7 +26,7 @@ services:
     build: ./frontend
     image: node:lts
     volumes:
-      - './frontend:/app'
-      - '/app/node_modules'
+      - './frontend:/app_frontend'
+      - '/app_frontend/node_modules'
     ports:
       - "8080:8080"
