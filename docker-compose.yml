@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
   mariadb:
@@ -23,10 +23,10 @@ services:
     depends_on:
       - mariadb
   frontend:
-    build: ./frontend
-    image: node:lts
+    build:
+      context: ./frontend
+      target: builder
     volumes:
       - './frontend:/app_frontend'
-      - '/app_frontend/node_modules'
     ports:
       - "8080:8080"
