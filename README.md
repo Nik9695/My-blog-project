@@ -7,6 +7,13 @@ If you are first time here visit:
 If you are already know how to setup this project here is useful commands:
 
 ---
+
+### Server urls (when docker is running)
+Frontend url: http://localhost:8080
+
+Backend url: http://localhost:8000
+
+---
 <strong>Starting server:</strong>
 ```
 docker-compose up
