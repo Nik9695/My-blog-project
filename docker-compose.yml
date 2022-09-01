@@ -9,6 +9,9 @@ services:
       - MARIADB_ROOT_PASSWORD=${DB_PASSWORD}
       - MARIADB_PASSWORD=${DB_PASSWORD}
   backend:
+    build:
+      context: ./backend
+      target: builder
     image: docker.io/bitnami/laravel:9
     ports:
       - '8000:8000'
