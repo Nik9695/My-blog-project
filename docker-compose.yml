@@ -23,10 +23,8 @@ services:
     depends_on:
       - mariadb
   frontend:
-    build:
-      context: ./frontend
+    build: ./frontend
     volumes:
-      - './frontend:/app_frontend'
-      - '/app_frontend/node_modules'
+      - ./frontend/src:/app/src
     ports:
       - "8080:8080"
