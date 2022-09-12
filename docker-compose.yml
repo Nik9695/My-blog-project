@@ -28,5 +28,6 @@ services:
     build: ./frontend
     volumes:
       - ./frontend/src:/app/src
+      - /app/node_modules
     ports:
       - "8080:8080"
