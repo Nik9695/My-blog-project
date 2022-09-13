@@ -9,7 +9,7 @@ services:
       - MARIADB_ROOT_PASSWORD=${DB_PASSWORD}
       - MARIADB_PASSWORD=${DB_PASSWORD}
     ports:
-      - 3306:3306
+      - 3366:3306
   backend:
     image: docker.io/bitnami/laravel:9
     ports:
