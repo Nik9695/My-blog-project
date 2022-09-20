@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
 use App\Utils\StringUtils;
 
+
 class ArticleController extends Controller
 {
     /**
@@ -18,11 +19,13 @@ class ArticleController extends Controller
     {
         $articles = Article::all();
 
+        $sortedArticles = $articles->sortByDesc('title');
+
         if (!request()->routeIs('api.*')) {
-            return view('index', ['articles' => $articles]);
+            return view('index', ['articles' => $sortedArticles]);
         }
 
-        return $articles;
+        return $sortedArticles;
     }
 
     /**
@@ -48,9 +51,18 @@ class ArticleController extends Controller
             'title' => ['required', 'max:255'],
             'content' => ['required'],
             'slug' => ['prohibited'],
+            'summary' => ['']
         ]);
 
         $validatedArticle['slug'] = StringUtils::slugify($validatedArticle['title']);
+
+        /**
+         * Checking if 'summary' field is empty.
+         */
+
+        if($validatedArticle['summary'] == null){
+            $validatedArticle['summary'] = StringUtils::summarize($validatedArticle['content']);
+        }
 
         $article = new Article($validatedArticle);
         try {

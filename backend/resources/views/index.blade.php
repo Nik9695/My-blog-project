@@ -18,7 +18,6 @@
             href="{{ route('articles.show', ['article' => $article]) }}"
             class="{{ $loop->first ? 'first-title' : 'title' }}">
 
-            Something else passed in default slot
         </x-article-card>
     @endforeach
 </x-layout>

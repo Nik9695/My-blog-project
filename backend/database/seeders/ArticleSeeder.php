@@ -18,3 +18,4 @@ class ArticleSeeder extends Seeder
         Article::factory(5)->create();
     }
 }
+

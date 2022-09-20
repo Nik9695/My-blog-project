@@ -25,8 +25,13 @@ Route::name('api.')->group(function () {
     // https://laravel.com/docs/9.x/controllers#actions-handled-by-resource-controller
     // could have used "Route::apiResource"
     // https://laravel.com/docs/9.x/controllers#restful-partial-resource-routes
+
+
     Route::resource('articles', ArticleController::class)->except([
-        'create',
         'edit',
     ]);
+    //Route::apiResource('articles', ArticleController::class);
+
 });
+
+

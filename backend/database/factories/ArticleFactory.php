@@ -20,11 +20,14 @@ class ArticleFactory extends Factory
     {
         $title = fake()->sentence();
         $slug = StringUtils::slugify($title);
+        $content = fake()->realText();
+        $summary = StringUtils::summarize($content);
 
         return [
             'title' => $title,
             'slug' => $slug,
-            'content' => $this->faker->realText(),
+            'content' => $content,
+            'summary' => $summary
         ];
     }
 }
