@@ -6,7 +6,8 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
 use App\Utils\StringUtils;
-
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Database\Eloquent\Collection;
 
 class ArticleController extends Controller
 {
@@ -19,13 +20,19 @@ class ArticleController extends Controller
     {
         $articles = Article::all();
 
-        $sortedArticles = $articles->sortByDesc('title');
+        //$ex = $articles->take()
+
+        $sortedArticles = $articles->sortBy(function ($item){
+            return strlen($item['title']);
+        });
+
+        $slicedArticles = $sortedArticles->take(5);
 
         if (!request()->routeIs('api.*')) {
-            return view('index', ['articles' => $sortedArticles]);
+            return view('index', ['articles' => $slicedArticles]);
         }
 
-        return $sortedArticles;
+        return $slicedArticles;
     }
 
     /**
@@ -35,6 +42,10 @@ class ArticleController extends Controller
      */
     public function create()
     {
+        if (!request()->routeIs('api.*')) {
+            return view('new-article');
+        }
+
         return view('new-article');
     }
 
