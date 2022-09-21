@@ -18,7 +18,7 @@
       </div>
     </article>
     <div class="section">
-      <div class="section__inner aboutArticle__page">
+      <div class="section__inner--aboutArticle__page">
         <div class="aboutArticle__timeline">
           <div class="aboutArticle__date">08.08.2021</div>
           <div class="aboutArticle__timeline-divider"></div>
@@ -42,20 +42,15 @@
             </p>
           </div>
           <div class="aboutArticle__area-tags">
-            <div class="aboutArticle__area-tag-item">
-              Adventure
-            </div>
-            <div class="aboutArticle__area-tag-item">
-              Photo
-            </div>
-            <div class="aboutArticle__area-tag-item">
-              Design
-            </div>
+            <ul class="section__categories-list">
+                <RouterLink to="/" class="aboutArticle__area-tag-item">adventure</RouterLink>
+                <RouterLink to="/" class="aboutArticle__area-tag-item">photo</RouterLink>
+                <RouterLink to="/" class="aboutArticle__area-tag-item">design</RouterLink>
+            </ul>
           </div>
           <div class="aboutArticle__area-author ">
             <div class="aboutArticle__area-author-info ">
-              <div class="aboutArticle__area-author-photo ">
-              </div>
+              <img src="@/assets/images/authorImage.jpg" class="aboutArticle__area-author-photo">
               <div class="aboutArticle__area-author-content ">
                 <div class="aboutArticle__area-author-name ">By Jennifer Lawrence</div>
                 <div class="aboutArticle__area-author-title">Thinker & Designer</div>
