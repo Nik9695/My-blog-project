@@ -1,0 +1,11 @@
+@mixin reset() {
+  all: unset;
+}
+
+@mixin container($contWidth: $width) {
+  width: $contWidth;
+  margin: 0 auto;
+  padding: 0 15px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
