@@ -11,4 +11,7 @@ Posted: <x-timestamp :timestamp="$article->created_at"></x-timestamp> by
 
 <p>{{ $article->content }}</p>
 
+
+
+
 {{ $slot }}
