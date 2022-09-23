@@ -154,6 +154,14 @@
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 15px;
   grid-row-gap: 15px;
+
+  @include for-tablet-down {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include for-phone-only {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 .article {
@@ -215,8 +223,15 @@
 .footer__inner--grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 15px;
-  grid-row-gap: 15px;
+  gap: 15px;
+
+  @include for-tablet-down {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include for-phone-only {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 .footer__section-list {
@@ -606,6 +621,14 @@ blockquote {
 .section__articles-cascade {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 15px;
-  grid-row-gap: 15px;
+  /*   grid-column-gap: 15px;
+  grid-row-gap: 15px; */
+
+  @include for-tablet-down {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include for-phone-only {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
