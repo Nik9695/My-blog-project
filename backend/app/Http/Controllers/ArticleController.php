@@ -16,14 +16,13 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+public function index()
     {
+
         $articles = Article::all();
 
-        //$ex = $articles->take()
-
         $sortedArticles = $articles->sortBy(function ($item){
-            return strlen($item['title']);
+            return strlen(trim($item['title']));
         });
 
         $slicedArticles = $sortedArticles->take(5);
@@ -58,12 +57,15 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
+
         $validatedArticle = $request->validate([
             'title' => ['required', 'max:255'],
             'content' => ['required'],
             'slug' => ['prohibited'],
             'summary' => ['']
         ]);
+
+
 
         $validatedArticle['slug'] = StringUtils::slugify($validatedArticle['title']);
 
@@ -138,3 +140,14 @@ class ArticleController extends Controller
         $article->delete();
     }
 }
+//Et sit aut enim necessitatibus cum consequuntur.
+//Dolor neque harum sequi ullam quam voluptatum.
+
+
+
+//Qui repellat iste quia ut mollitia.
+//Unde non rerum suscipit ut tenetur.
+
+
+//Dolorem omnis praesentium vel quae tempora.
+//Vero sed voluptatibus fuga dolor distinctio.

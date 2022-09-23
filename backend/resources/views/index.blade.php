@@ -5,11 +5,13 @@
             .title {
                 color: gray;
                 background: white;
+                font-family: monospace;
             }
 
             .first-title {
                 color: green;
                 background: gray;
+                font-family: monospace;
             }
 
         </style>

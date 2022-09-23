@@ -28,10 +28,11 @@ Route::name('api.')->group(function () {
 
 
     Route::resource('articles', ArticleController::class)->except([
+        'create',
         'edit',
     ]);
-    //Route::apiResource('articles', ArticleController::class);
+
 
 });
 
-
+    //Route::apiResource('articles', ArticleController::class);
