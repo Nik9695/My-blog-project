@@ -29,10 +29,8 @@
 
         <div class="section__categories">
           <ul class="section__categories-list">
-            <li
-              class="section__categories-item section__categories-item--first"
-            >
-              <RouterLink to="/" class="section__categories-link"
+            <li class="section__categories-item">
+              <RouterLink to="/" class="section__categories-link--active"
                 >All</RouterLink
               >
             </li>
@@ -62,7 +60,7 @@
               >
             </li>
             <li class="section__categories-item section__categories-item--last">
-              <RouterLink to="/" class="section__categories-link"
+              <RouterLink to="/" class="section__categories-link--last"
                 >View all</RouterLink
               >
             </li>
