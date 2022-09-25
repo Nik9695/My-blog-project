@@ -7,7 +7,7 @@
             }
 
             .first-title {
-                color: green;
+                color: rgb(76, 4, 90);
             }
         </style>
     </x-slot:head>
