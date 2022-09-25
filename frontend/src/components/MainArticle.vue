@@ -1,0 +1,28 @@
+<template>
+  <article class="mainArticle">
+    <div class="mainArticle__inner">
+      <ul class="mainArticle__categories">
+        <li class="mainArticle__category">
+          <a href="#" class="mainArticle__category-link">Category</a>
+        </li>
+      </ul>
+      <h2 class="mainArticle__heading">
+        Richird Norton photorealistic rendering as real photos
+      </h2>
+      <p class="mainArticle__content">
+        <time class="marinArticle__content-time">10:00</time>
+        <span class="mainArticle__content-divider"></span>
+        <span class="mainArticle__content-text"
+          >Progressively incentivize cooperative systems through technically
+          sound functionalities. The credibly productivate seamless data.</span
+        >
+      </p>
+    </div>
+  </article>
+</template>
+
+<script>
+export default {
+  name: 'MainArticle'
+}
+</script>

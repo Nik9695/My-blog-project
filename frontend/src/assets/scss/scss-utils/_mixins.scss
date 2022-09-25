@@ -3,7 +3,7 @@
 }
 
 @mixin container($contWidth: $width) {
-  width: $contWidth;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 15px 15px;
 }

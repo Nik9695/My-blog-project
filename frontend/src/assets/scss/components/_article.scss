@@ -1,0 +1,43 @@
+.article {
+  position: relative;
+  background: #000;
+  border-radius: 5px;
+}
+
+.article__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+  border-radius: 5px;
+}
+
+.article__content {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  right: 15px;
+  color: $white;
+}
+
+.article__categories {
+  list-style: none;
+  padding: 0;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  z-index: 2;
+}
+
+.article__category-link {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  font-family: 'Roboto', serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 12px;
+  color: $white;
+  text-decoration: none;
+  padding: 5px 10px;
+}
