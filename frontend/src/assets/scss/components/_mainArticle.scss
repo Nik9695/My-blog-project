@@ -41,6 +41,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  @include for-phone-only {
+    padding-left: 10px;
+  }
 }
 
 .mainArticle__content-divider {

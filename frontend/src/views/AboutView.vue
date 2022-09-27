@@ -44,12 +44,12 @@ import AboutArticleCard from '../components/AboutArticleCard.vue'
               seamless meta-services with impactful opportunities. Distinctively
               transition virtual outsourcing with focused e-tailers.
             </div>
-            <text
+            <div
               class="aboutArticle__area-text aboutArticle__area-text--blockquote"
             >
               “ Monotonectally seize superior mindshare rather than efficient
               technology. ”
-            </text>
+            </div>
 
             <div class="aboutArticle__area-text">
               Compellingly enhance seamless resources through competitive

@@ -6,11 +6,21 @@
   width: 100%;
 }
 
+.header__title {
+  @include for-phone-only {
+    //width: 100%;
+    padding-left: 10px;
+  }
+}
+
 .header__inner {
   width: $width;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @include for-phone-only {
+    justify-content: center;
+  }
 }
 
 .header__title-link {
@@ -18,6 +28,11 @@
   text-decoration: none;
   font-size: 20px;
   color: $white;
+}
+
+.header__nav {
+  @include for-phone-only {
+  }
 }
 
 .header__nav-list {
