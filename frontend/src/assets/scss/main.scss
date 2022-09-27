@@ -1,0 +1,21 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+@import 'scss-utils/mixins';
+@import 'scss-utils/variables';
+
+@import 'layout/header';
+
+@import 'layout/footer';
+
+@import 'pages/home';
+@import 'pages/about';
+
+@import 'components/mainArticle';
+@import 'components/catergory-card';
+@import 'components/article-item';
+@import 'components/article';
+
+.margin-bottom-default {
+  margin-bottom: 3rem;
+}
