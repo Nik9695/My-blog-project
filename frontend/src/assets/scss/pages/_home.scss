@@ -26,8 +26,6 @@
     white-space: nowrap;
   }
   @include for-phone-only {
-    display: flex;
-    flex-wrap: wrap;
     justify-content: center;
   }
 }

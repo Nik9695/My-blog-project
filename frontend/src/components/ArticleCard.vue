@@ -2,9 +2,7 @@
   <article class="article">
     <RouterLink to="/" class="article__link">
       <ul class="article__categories">
-        <li class="article__category">
-          <a href="#" class="article__category-link">Category</a>
-        </li>
+        <CategoryCard />
       </ul>
       <img
         src="https://loremflickr.com/420/350"
@@ -26,7 +24,9 @@
 </template>
 
 <script>
+import CategoryCard from './CategoryCard.vue'
 export default {
-  name: 'ArticleCard'
+  name: 'ArticleCard',
+  components: { CategoryCard }
 }
 </script>

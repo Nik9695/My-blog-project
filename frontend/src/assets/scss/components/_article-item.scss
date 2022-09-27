@@ -1,22 +1,22 @@
+/* Taking width from grid */
+
 .article__item {
-  max-width: 310px;
+  max-width: 100%;
   padding-top: 30px;
 }
 
 .article__item-top {
-  max-width: 310px;
   position: relative;
 }
 
 .article__item-image {
-  max-width: 310px;
+  width: 100%;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   display: block;
 }
 
 .article__item-bottom {
-  max-width: 100%;
   max-height: 285px;
   background-color: #ffffff;
   border-bottom-left-radius: 5px;
@@ -61,7 +61,6 @@
 }
 
 .article__item-bottom-text {
-  max-width: 270px;
   max-height: 60px;
   left: 70px;
   top: 1160px;

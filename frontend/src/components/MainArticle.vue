@@ -2,9 +2,7 @@
   <article class="mainArticle">
     <div class="mainArticle__inner">
       <ul class="mainArticle__categories">
-        <li class="mainArticle__category">
-          <a href="#" class="mainArticle__category-link">Category</a>
-        </li>
+        <CategoryCard />
       </ul>
       <h2 class="mainArticle__heading">
         Richird Norton photorealistic rendering as real photos
@@ -22,7 +20,9 @@
 </template>
 
 <script>
+import CategoryCard from './CategoryCard.vue'
 export default {
-  name: 'MainArticle'
+  name: 'MainArticle',
+  components: { CategoryCard }
 }
 </script>

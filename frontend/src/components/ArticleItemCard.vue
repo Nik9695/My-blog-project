@@ -7,9 +7,7 @@
         class="article__item-image"
       />
       <ul class="article__categories">
-        <li class="article__category">
-          <a href="#" class="article__category-link">Category</a>
-        </li>
+        <CategoryCard />
       </ul>
     </div>
     <div class="article__item-bottom">
@@ -38,7 +36,9 @@
 </template>
 
 <script>
+import CategoryCard from './CategoryCard.vue'
 export default {
-  name: 'ArticleItemCard'
+  name: 'ArticleItemCard',
+  components: { CategoryCard }
 }
 </script>
