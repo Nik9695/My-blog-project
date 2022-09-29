@@ -25,7 +25,7 @@ class ArticleController extends Controller
             return view('index', ['articles' => $articles]);
         }
 
-        return $articles and $comments;
+        return $articles && $comments;
     }
 
     /**
