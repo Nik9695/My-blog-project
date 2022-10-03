@@ -18,16 +18,17 @@
 
         <br>
 
+        <label>Summary</label>
+        <input
+            for="summary"
+            name="summary"
+            placeholder="content goes here"
+
+            value="{{ request()->old('summary') }}">
+
+        <br>
+
         {!! Form::submit('create') !!}
     </form>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 </x-layout>

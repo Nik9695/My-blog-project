@@ -1,7 +1,8 @@
 <h1>
-    <a {{ $attributes->merge(['class' => '']) }}>
+    <a {{ $attributes->merge() }}>
         {{ $article->title }}
     </a>
+
 </h1>
 
 Posted: <x-timestamp :timestamp="$article->created_at"></x-timestamp> by
@@ -9,7 +10,11 @@ Posted: <x-timestamp :timestamp="$article->created_at"></x-timestamp> by
     {{ $article->user->name }}
 </a>
 
-<p>{{ $article->content }}</p>
+
+
+<p {{ $attributes->merge() }}>
+    {{ $article->content }}</p>
+
 
 
 

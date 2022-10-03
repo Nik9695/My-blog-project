@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Utils\StringUtils;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Database\Eloquent\Collection;
 
 class ArticleController extends Controller
 {
@@ -15,14 +17,20 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+public function index()
     {
         // N+1 problem
         $articles = Article::all()->load(['user'])->load(['comments']);
         $comments = Comment::all();
 
+        $sortedArticles = $articles->sortBy(function ($item){
+            return strlen(trim($item['title']));
+        });
+
+        $slicedArticles = $sortedArticles->take(5);
+
         if (!request()->routeIs('api.*')) {
-            return view('index', ['articles' => $articles]);
+            return view('index', ['articles' => $slicedArticles]);
         }
 
         return $articles and $comments;
@@ -35,6 +43,10 @@ class ArticleController extends Controller
      */
     public function create()
     {
+        if (!request()->routeIs('api.*')) {
+            return view('new-article');
+        }
+
         return view('new-article');
     }
 
@@ -47,6 +59,7 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
+
         $validatedArticle = $request->validate([
             'title' => ['required', 'max:255'],
             'content' => ['required'],
@@ -54,7 +67,17 @@ class ArticleController extends Controller
             'user_id' => ['required'],
         ]);
 
+
+
         $validatedArticle['slug'] = StringUtils::slugify($validatedArticle['title']);
+
+        /**
+         * Checking if 'summary' field is empty.
+         */
+
+        if($validatedArticle['summary'] == null){
+            $validatedArticle['summary'] = StringUtils::summarize($validatedArticle['content']);
+        }
 
         $article = new Article($validatedArticle);
         try {
@@ -119,3 +142,14 @@ class ArticleController extends Controller
         $article->delete();
     }
 }
+//Et sit aut enim necessitatibus cum consequuntur.
+//Dolor neque harum sequi ullam quam voluptatum.
+
+
+
+//Qui repellat iste quia ut mollitia.
+//Unde non rerum suscipit ut tenetur.
+
+
+//Dolorem omnis praesentium vel quae tempora.
+//Vero sed voluptatibus fuga dolor distinctio.
