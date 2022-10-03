@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
             ->set('name', 'Test User')
             ->set('slug', 'test-user')
             ->set('email', 'test@example.com')
-            ->hasArticles(3) // special magic method
+            ->hasArticles(3)
+            ->hasComments(3) // special magic method
             ->create();
 
         // create two more users without posts
@@ -34,6 +35,7 @@ class DatabaseSeeder extends Seeder
         // seeder is a place in which to create the objects
         $this->call([
             ArticleSeeder::class,
+            CommentSeeder::class
         ]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
+use App\Models\Comment;
 use App\Utils\StringUtils;
 
 class ArticleController extends Controller
@@ -17,13 +18,14 @@ class ArticleController extends Controller
     public function index()
     {
         // N+1 problem
-        $articles = Article::all()->load(['user']);
+        $articles = Article::all()->load(['user'])->load(['comments']);
+        $comments = Comment::all();
 
         if (!request()->routeIs('api.*')) {
             return view('index', ['articles' => $articles]);
         }
 
-        return $articles;
+        return $articles and $comments;
     }
 
     /**
