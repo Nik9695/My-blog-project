@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 use App\Utils\StringUtils;
@@ -26,8 +27,8 @@ class ArticleFactory extends Factory
         return [
             'title' => $title,
             'slug' => $slug,
-            'content' => $content,
-            'summary' => $summary
+            'content' => $this->faker->realText(),
+            'user_id' => User::factory()->create()->id,
         ];
     }
 }

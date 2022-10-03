@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
+use App\Models\Comment;
 use App\Utils\StringUtils;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Database\Eloquent\Collection;
@@ -18,8 +19,9 @@ class ArticleController extends Controller
      */
 public function index()
     {
-
-        $articles = Article::all();
+        // N+1 problem
+        $articles = Article::all()->load(['user'])->load(['comments']);
+        $comments = Comment::all();
 
         $sortedArticles = $articles->sortBy(function ($item){
             return strlen(trim($item['title']));
@@ -31,7 +33,7 @@ public function index()
             return view('index', ['articles' => $slicedArticles]);
         }
 
-        return $slicedArticles;
+        return $articles and $comments;
     }
 
     /**
@@ -62,7 +64,7 @@ public function index()
             'title' => ['required', 'max:255'],
             'content' => ['required'],
             'slug' => ['prohibited'],
-            'summary' => ['']
+            'user_id' => ['required'],
         ]);
 
 

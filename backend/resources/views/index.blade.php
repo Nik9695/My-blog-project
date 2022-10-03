@@ -9,9 +9,7 @@
             }
 
             .first-title {
-                color: green;
-                background: gray;
-                font-family: monospace;
+                color: rgb(76, 4, 90);
             }
 
         </style>
@@ -25,7 +23,6 @@
             :article="$article"
             href="{{ route('articles.show', ['article' => $article]) }}"
             class="{{ $loop->first ? 'first-title' : 'title' }}">
-
         </x-article-card>
 
     @endforeach
