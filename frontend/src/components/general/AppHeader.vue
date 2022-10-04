@@ -1,7 +1,3 @@
-<script setup>
-import { RouterLink } from 'vue-router'
-</script>
-
 <template>
   <header class="header">
     <div class="header__inner">
@@ -21,6 +17,7 @@ import { RouterLink } from 'vue-router'
           <li class="header__nav-item">
             <a href="#" class="header__nav-item-link">Contact</a>
           </li>
+          <Logger />
         </ul>
       </nav>
     </div>
@@ -28,7 +25,10 @@ import { RouterLink } from 'vue-router'
 </template>
 
 <script>
+import Logger from '@/components/authentication/Logger.vue'
+
 export default {
-  name: 'AppHeader'
+  name: 'AppHeader',
+  components: { Logger }
 }
 </script>

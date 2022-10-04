@@ -1,0 +1,25 @@
+.btn {
+  background: beige;
+  color: black;
+  border: none;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: 0.5s all;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+
+  &:hover {
+    background: gold;
+  }
+}
+
+.btn__loader {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid $mainColor;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  animation: spin 2s linear infinite;
+}
