@@ -21,7 +21,7 @@
           v-model="credentials.email"
         />
       </div>
-      <label for="password" class="login__label">Password </label>
+      <label for="text" class="login__label">Password </label>
 
       <div class="login__inputWrapper-with-addons">
         <div class="login__password">
@@ -41,7 +41,7 @@
           />
         </div>
         <div class="login__password-security">
-          <button class="btn__showPassword" @click="showPassword">
+          <button class="btn__showPassword" @click.prevent="showPassword">
             <span class="btn__showPassword-small-right">
               <i
                 class="fas"
