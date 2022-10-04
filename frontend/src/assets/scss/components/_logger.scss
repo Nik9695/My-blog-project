@@ -1,0 +1,63 @@
+.login {
+  width: 100%;
+  margin-bottom: 70px;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.login__inputWrapper {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.login__label {
+  display: block;
+  font-weight: 600;
+}
+
+.login__input {
+  //border-radius: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  border: 1px solid goldenrod;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.login__error {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  position: relative;
+  border-radius: 10px;
+  background: rgb(171, 89, 89);
+  margin-bottom: 10px;
+}
+
+.login__inputWrapper-with-addons {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.login__password {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  width: 100%;
+}
+.btn__showPassword {
+  height: calc(100% - 10px);
+  border: 1px solid goldenrod;
+  border-left: none;
+  cursor: pointer;
+  &:hover {
+    transition: 1s;
+    background-color: goldenrod;
+  }
+}

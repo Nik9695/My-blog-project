@@ -2,12 +2,13 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\UserController;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\Password;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +68,22 @@ Route::name('api.')->group(function () {
         'create',
         'edit',
     ]);
+
+    Route::post('/authenticate', function (Request $request) {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', Password::min(8)]
+        ]);
+
+        if (!Auth::attempt($credentials)) {
+            return response()->json(['code' => 403, 'message' => 'invalid credentials'], 403);
+        }
+
+        $user = User::where('email', $credentials['email'])->firstOrFail();
+
+        return $user->createToken('auth_token')->plainTextToken;
+    });
+
 });
 
     //Route::apiResource('articles', ArticleController::class);

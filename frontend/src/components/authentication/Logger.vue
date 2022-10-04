@@ -13,25 +13,48 @@
         Wrong email or password
       </div>
       <div class="login__inputWrapper">
-        <label for="email" class="login__inputWrapper-label">Email </label>
+        <label for="email" class="login__label">Email </label>
         <input
           type="text"
-          class="login__inputWrapper-input"
+          class="login__input"
           name="email"
           v-model="credentials.email"
         />
       </div>
-      <div class="login__inputWrapper">
-        <label for="password" class="login__inputWrapper-label"
-          >Password
-        </label>
-        <input
-          type="text"
-          class="login__inputWrapper-input"
-          name="password"
-          v-model="credentials.password"
-        />
+      <label for="password" class="login__label">Password </label>
+
+      <div class="login__inputWrapper-with-addons">
+        <div class="login__password">
+          <input
+            v-if="passwordHidden"
+            type="password"
+            class="login__input"
+            name="password"
+            v-model="credentials.password"
+          />
+          <input
+            v-else
+            type="text"
+            class="login__input"
+            name="password"
+            v-model="credentials.password"
+          />
+        </div>
+        <div class="login__password-security">
+          <button class="btn__showPassword" @click="showPassword">
+            <span class="btn__showPassword-small-right">
+              <i
+                class="fas"
+                :class="{
+                  'fa-eye-slash': passwordHidden,
+                  'fa-eye': !passwordHidden
+                }"
+              ></i>
+            </span>
+          </button>
+        </div>
       </div>
+
       <Btn type="submit" :isLoading="isLoading">Login</Btn>
     </form>
   </Modal>
@@ -48,11 +71,12 @@ export default {
   data() {
     return {
       modalIsOpened: false,
-      invalidCredentials: true,
+      invalidCredentials: false,
       isLoading: false,
+      passwordHidden: true,
       credentials: {
-        email: 'nik@gmail.com',
-        password: '123'
+        email: 'test@example.com',
+        password: 'password'
       }
     }
   },
@@ -78,6 +102,9 @@ export default {
         console.log(error)
       }
       this.isLoading = false
+    },
+    showPassword() {
+      this.passwordHidden = !this.passwordHidden
     }
   }
 }
