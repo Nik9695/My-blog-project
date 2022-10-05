@@ -11,15 +11,14 @@
       </ul>
     </div>
     <div class="article__item-bottom">
-      <time class="article__item-bottom-date">08.08.2021</time>
+      <time class="article__item-bottom-date">{{ formatDate }}</time>
       <h3 class="article__item-bottom-title">
-        <RouterLink to="/" class="article__item-bottom-titleLink"
-          >Richird Norton photorealistic rendering as real photos</RouterLink
-        >
+        <RouterLink to="/" class="article__item-bottom-titleLink">{{
+          article.title.substring(0, 10)
+        }}</RouterLink>
       </h3>
       <p class="article__item-bottom-text">
-        Progressively incentivize cooperative systems through technically sound
-        functionalities. The credibly productivate seamless data.
+        {{ article.content.substring(0, 100) }}
       </p>
       <div class="article__area-author-info">
         <img
@@ -37,8 +36,21 @@
 
 <script>
 import CategoryCard from './CategoryCard.vue'
+import { format, parseISO } from 'date-fns'
 export default {
   name: 'ArticleItemCard',
-  components: { CategoryCard }
+  components: { CategoryCard },
+  props: {
+    article: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    formatDate() {
+      const stringFromDate = parseISO(this.article.created_at)
+      return format(stringFromDate, 'dd-MM-yyyy')
+    }
+  }
 }
 </script>

@@ -26,13 +26,7 @@ public function index()
             return strlen(trim($item['title']));
         });
 
-        $slicedArticles = $sortedArticles->take(5);
-
-        if (!request()->routeIs('api.*')) {
-            return view('index', ['articles' => $articles]);
-        }
-
-        return $articles ;
+        return $sortedArticles ;
     }
 
     /**

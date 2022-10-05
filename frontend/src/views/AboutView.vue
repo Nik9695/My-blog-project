@@ -105,7 +105,11 @@
       <div class="section__inner">
         <h2 class="aboutArticle__section-heading">Related Posts</h2>
         <div class="section__articles">
-          <ArticleCard v-for="i in 3" :key="i" />
+          <ArticleCard
+            v-for="article in articlesRelated"
+            :key="article.id"
+            :article="article"
+          />
         </div>
       </div>
     </div>
@@ -115,8 +119,27 @@
 <script>
 import ArticleCard from '../components/article/ArticleCard.vue'
 import AboutArticleCard from '../components/article/AboutArticleCard.vue'
+import axios from 'axios'
 
 export default {
-  components: { ArticleCard, AboutArticleCard }
+  components: { ArticleCard, AboutArticleCard },
+  data() {
+    return {
+      articlesRelated: []
+    }
+  },
+
+  created() {
+    axios
+      .get('http://localhost:8000/api/articles')
+      .then((response) => {
+        for (let i = 0; i < 3; ++i) {
+          this.articlesRelated.push(response.data[i])
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 }
 </script>

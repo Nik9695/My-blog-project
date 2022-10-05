@@ -5,15 +5,14 @@
         <CategoryCard />
       </ul>
       <h2 class="mainArticle__heading">
-        Richird Norton photorealistic rendering as real photos
+        {{ article.title }}
       </h2>
       <p class="mainArticle__content">
-        <time class="marinArticle__content-time">10:00</time>
+        <time class="marinArticle__content-time">{{ formatDate }}</time>
         <span class="mainArticle__content-divider"></span>
-        <span class="mainArticle__content-text"
-          >Progressively incentivize cooperative systems through technically
-          sound functionalities. The credibly productivate seamless data.</span
-        >
+        <span class="mainArticle__content-text">{{
+          article.content.substring(0, 100)
+        }}</span>
       </p>
     </div>
   </article>
@@ -21,8 +20,21 @@
 
 <script>
 import CategoryCard from './CategoryCard.vue'
+import { format, parseISO } from 'date-fns'
 export default {
   name: 'MainArticle',
-  components: { CategoryCard }
+  components: { CategoryCard },
+  props: {
+    article: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    formatDate() {
+      const stringFromDate = parseISO(this.article.created_at)
+      return format(stringFromDate, 'dd-MM-yyyy')
+    }
+  }
 }
 </script>
