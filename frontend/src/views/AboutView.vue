@@ -1,8 +1,3 @@
-<script setup>
-import ArticleCard from '../components/ArticleCard.vue'
-import AboutArticleCard from '../components/AboutArticleCard.vue'
-</script>
-
 <template>
   <main>
     <AboutArticleCard />
@@ -116,3 +111,12 @@ import AboutArticleCard from '../components/AboutArticleCard.vue'
     </div>
   </main>
 </template>
+
+<script>
+import ArticleCard from '../components/article/ArticleCard.vue'
+import AboutArticleCard from '../components/article/AboutArticleCard.vue'
+
+export default {
+  components: { ArticleCard, AboutArticleCard }
+}
+</script>

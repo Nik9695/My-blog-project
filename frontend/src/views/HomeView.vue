@@ -63,8 +63,12 @@
   </main>
 </template>
 
-<script setup>
-import MainArticle from '../components/MainArticle.vue'
-import ArticleItemCard from '../components/ArticleItemCard.vue'
-import ArticleCard from '../components/ArticleCard.vue'
+<script>
+import MainArticle from '../components/article/MainArticle.vue'
+import ArticleItemCard from '../components/article/ArticleItemCard.vue'
+import ArticleCard from '../components/article/ArticleCard.vue'
+
+export default {
+  components: { MainArticle, ArticleItemCard, ArticleCard }
+}
 </script>

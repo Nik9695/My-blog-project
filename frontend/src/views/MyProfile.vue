@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import ArticleCard from '../components/ArticleCard.vue'
-import AboutArticleCard from '../components/AboutArticleCard.vue'
+import ArticleCard from '../components/article/ArticleCard.vue'
+import AboutArticleCard from '../components/article/AboutArticleCard.vue'
 import axios from 'axios'
 export default {
   components: { AboutArticleCard, ArticleCard },
