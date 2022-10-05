@@ -11,8 +11,10 @@
         </p>
       </div>
     </article>
+
     <div class="section">
       <div class="section__inner section__inner--myProfile__page">
+        <h2 class="myProfile__section-heading">My articles:</h2>
         <div class="section__articles">
           <ArticleCard
             v-for="article in articles"
@@ -22,24 +24,11 @@
         </div>
       </div>
     </div>
-    <!--     <div class="section">
-      <div class="section__inner">
-        <h2 class="myProfile__section-heading">Related Posts</h2>
-        <div class="section__articles">
-          <ArticleCard
-            v-for="article in articles"
-            :key="article.id"
-            :article="article"
-          />
-        </div>
-      </div>
-    </div> -->
   </main>
 </template>
 
 <script>
 import ArticleCard from '../components/article/ArticleCard.vue'
-//import MyProfileCard from '../components/article/MyProfileCard.vue'
 import axios from 'axios'
 export default {
   components: { ArticleCard },

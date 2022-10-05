@@ -11,8 +11,10 @@
       />
       <div class="article__content">
         <time class="article__time">{{ article.created_at }}</time>
-        <h3 class="article__heading">{{ article.title }}</h3>
-        <p class="article__text">{{ article.content }}</p>
+        <h3 class="article__heading">
+          {{ article.title }}
+        </h3>
+        <p class="article__text">{{ article.content.substring(0, 100) }} ...</p>
       </div>
     </RouterLink>
   </article>
