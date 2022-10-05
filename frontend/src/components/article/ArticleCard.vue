@@ -11,13 +11,8 @@
       />
       <div class="article__content">
         <time class="article__time">10:00</time>
-        <h3 class="article__heading">
-          Richird Norton photorealistic rendering as real photos
-        </h3>
-        <p class="article__text">
-          Progressively incentivize cooperative systems through technically
-          sound functionalities. The credibly productivate seamless data.
-        </p>
+        <h3 class="article__heading">{{ articleTitle }}</h3>
+        <p class="article__text">{{ articleContent }}</p>
       </div>
     </RouterLink>
   </article>
@@ -27,6 +22,17 @@
 import CategoryCard from './CategoryCard.vue'
 export default {
   name: 'ArticleCard',
-  components: { CategoryCard }
+  components: { CategoryCard },
+
+  props: {
+    articleTitle: {
+      type: String,
+      required: true
+    },
+    articleContent: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>

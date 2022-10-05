@@ -13,7 +13,14 @@
     </article>
     <div class="section">
       <div class="section__inner section__inner--myProfile__page">
-        MY PROFILE
+        <div class="section__articles">
+          <ArticleCard
+            v-for="article in articles"
+            :key="article.id"
+            :articleTitle="article.title"
+            :articleContent="article.content"
+          />
+        </div>
       </div>
     </div>
     <div class="section">
@@ -36,15 +43,17 @@ export default {
   data() {
     return {
       user: {},
-      articles: {}
+      articles: []
     }
   },
   async created() {
     const token = localStorage.getItem('token')
+
     if (!token) {
       this.$router.push('/')
       console.log()
     }
+
     try {
       const response = await axios.get('http://localhost:8000/api/user', {
         headers: {
@@ -52,17 +61,19 @@ export default {
         }
       })
       this.user = response.data
-      //console.log(response.data)
-      //console.log(this.user)
     } catch (error) {
-      console.log(error)
+      console.log("Error during loading user's info")
       localStorage.setItem('token', '')
       this.$router.push('/')
     }
-  },
-  computed: {
-    loadArticles() {
-      const articles = this.user
+
+    try {
+      const response = await axios.get(
+        `http://localhost:8000/api/${this.user.slug}/articles`
+      )
+      this.articles = response.data
+    } catch (error) {
+      console.log('Error while loading list of articles')
     }
   }
 }
