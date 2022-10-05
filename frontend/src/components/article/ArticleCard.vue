@@ -10,9 +10,9 @@
         class="article__image"
       />
       <div class="article__content">
-        <time class="article__time">10:00</time>
-        <h3 class="article__heading">{{ articleTitle }}</h3>
-        <p class="article__text">{{ articleContent }}</p>
+        <time class="article__time">{{ article.created_at }}</time>
+        <h3 class="article__heading">{{ article.title }}</h3>
+        <p class="article__text">{{ article.content }}</p>
       </div>
     </RouterLink>
   </article>
@@ -25,12 +25,8 @@ export default {
   components: { CategoryCard },
 
   props: {
-    articleTitle: {
-      type: String,
-      required: true
-    },
-    articleContent: {
-      type: String,
+    article: {
+      type: Object,
       required: true
     }
   }

@@ -29,7 +29,7 @@ public function index()
         $slicedArticles = $sortedArticles->take(5);
 
         if (!request()->routeIs('api.*')) {
-            return view('index', ['articles' => $slicedArticles]);
+            return view('index', ['articles' => $articles]);
         }
 
         return $articles ;

@@ -60,7 +60,7 @@ Route::name('api.')->group(function () {
         return $user;
     })->name('users.store');
 
-    Route::get('/{author:slug}/articles', function (User $author) {
+    Route::get('/users/{author:slug}/articles', function (User $author) {
         return $author->articles;
     })->name('author.articles');
 

@@ -17,20 +17,23 @@
           <ArticleCard
             v-for="article in articles"
             :key="article.id"
-            :articleTitle="article.title"
-            :articleContent="article.content"
+            :article="article"
           />
         </div>
       </div>
     </div>
-    <div class="section">
+    <!--     <div class="section">
       <div class="section__inner">
         <h2 class="myProfile__section-heading">Related Posts</h2>
         <div class="section__articles">
-          <ArticleCard v-for="i in 3" :key="i" />
+          <ArticleCard
+            v-for="article in articles"
+            :key="article.id"
+            :article="article"
+          />
         </div>
       </div>
-    </div>
+    </div> -->
   </main>
 </template>
 
@@ -69,7 +72,7 @@ export default {
 
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/${this.user.slug}/articles`
+        `http://localhost:8000/api/users/${this.user.slug}/articles`
       )
       this.articles = response.data
     } catch (error) {
