@@ -60,7 +60,11 @@ Route::name('api.')->group(function () {
         return $user;
     })->name('users.store');
 
-    Route::get('/users/{author:slug}/articles', function (User $author) {
+    Route::middleware('auth:sanctum')->get('/{author:slug}/articles', function (User $author) {
+        if (!request()->user()?->is($author)) {
+            return 'not user';
+        }
+
         return $author->articles;
     })->name('author.articles');
 

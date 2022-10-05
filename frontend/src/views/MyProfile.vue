@@ -60,8 +60,14 @@ export default {
     }
 
     try {
+      const token = localStorage.getItem('token')
       const response = await axios.get(
-        `http://localhost:8000/api/users/${this.user.slug}/articles`
+        `http://localhost:8000/api/${this.user.slug}/articles`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
       )
       this.articles = response.data
     } catch (error) {
