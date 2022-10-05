@@ -95,6 +95,8 @@ export default {
           }
         )
         localStorage.setItem('token', response.data)
+        this.$router.push({ name: `my-profile` })
+        this.modalIsOpened = false
       } catch (error) {
         if (error.response?.status === 403) {
           this.invalidCredentials = true

@@ -7,15 +7,24 @@
       <nav class="header__nav">
         <ul class="header__nav-list">
           <li class="header__nav-item">
-            <RouterLink to="/" class="header__nav-item-link">Home</RouterLink>
+            <RouterLink :to="{ name: `home` }" class="header__nav-item-link"
+              >Home</RouterLink
+            >
           </li>
           <li class="header__nav-item">
-            <RouterLink to="/about" class="header__nav-item-link"
+            <RouterLink :to="{ name: `about` }" class="header__nav-item-link"
               >About</RouterLink
             >
           </li>
           <li class="header__nav-item">
             <a href="#" class="header__nav-item-link">Contact</a>
+          </li>
+          <li class="header__nav-item">
+            <RouterLink
+              :to="{ name: `my-profile` }"
+              class="header__nav-item-link"
+              >My profile</RouterLink
+            >
           </li>
           <Logger />
         </ul>
