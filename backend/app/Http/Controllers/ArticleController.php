@@ -21,7 +21,6 @@ public function index()
     {
         // N+1 problem
         $articles = Article::all()->load(['user'])->load(['comments']);
-        $comments = Comment::all();
 
         $sortedArticles = $articles->sortBy(function ($item){
             return strlen(trim($item['title']));
@@ -33,7 +32,7 @@ public function index()
             return view('index', ['articles' => $slicedArticles]);
         }
 
-        return $articles && $comments;
+        return $articles;
     }
 
     /**
