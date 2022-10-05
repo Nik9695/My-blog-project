@@ -2,7 +2,7 @@
   <main>
     <AboutArticleCard />
     <div class="section">
-      <div class="section__inner--aboutArticle__page">
+      <div class="section__inner section__inner--aboutArticle__page">
         <div class="aboutArticle__timeline">
           <div class="aboutArticle__date">08.08.2021</div>
           <div class="aboutArticle__timeline-divider"></div>
