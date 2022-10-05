@@ -10,7 +10,7 @@
         class="article__image"
       />
       <div class="article__content">
-        <time class="article__time">{{ article.created_at }}</time>
+        <time class="article__time">{{ formatDate }}</time>
         <h3 class="article__heading">
           {{ article.title }}
         </h3>
@@ -22,6 +22,7 @@
 
 <script>
 import CategoryCard from './CategoryCard.vue'
+import { format, parseISO } from 'date-fns'
 export default {
   name: 'ArticleCard',
   components: { CategoryCard },
@@ -30,6 +31,12 @@ export default {
     article: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    formatDate() {
+      const stringFromDate = parseISO(this.article.created_at)
+      return format(stringFromDate, 'dd-MM-yyyy')
     }
   }
 }
