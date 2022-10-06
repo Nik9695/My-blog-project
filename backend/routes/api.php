@@ -4,6 +4,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
+use App\Utils\StringUtils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -44,15 +45,16 @@ Route::middleware('auth:sanctum')->group(function () {
     ]);
 });
 
-Route::post('/users', function (StoreUserRequest $request) {
+Route::post('/register', function (StoreUserRequest $request) {
     $validated = $request->validate([
         'name' => 'required',
         'email' => 'required|email',
-        'slug' => 'required',
+        'slug' => '',
         'password' => 'required'
     ]);
 
     $validated['password'] = Hash::make($validated['password']);
+    $validated['slug'] = StringUtils::slugify($validated['name']);
 
     $user = new User($validated);
     $user->save();
@@ -60,10 +62,10 @@ Route::post('/users', function (StoreUserRequest $request) {
     return $user;
 })->name('users.store');
 
-Route::get('/users/{user:slug}', function (User $user) {
+/* Route::get('/users/{user:slug}', function (User $user) {
     return $user;
 })->name('users.show');
-
+ */
 Route::get('/comments', [CommentController::class, 'index']);
 
 Route::post('/authenticate', function (Request $request) {

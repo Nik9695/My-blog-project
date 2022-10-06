@@ -73,23 +73,6 @@ public function index()
         }
 
         $article = new Article($validatedArticle);
-        try {
-            $article->save();
-        } catch (\Exception $e) {
-            if (!request()->routeIs('api.*')) {
-                return redirect()
-                    ->back()
-                    ->withInput()
-                    ->withErrors(['msg' => $e->getMessage()]);
-            }
-
-            throw $e;
-        }
-
-        if (!request()->routeIs('api.*')) {
-            return redirect(route('articles.show', ['article' => $article]));
-        }
-
         return $article;
     }
 
@@ -101,10 +84,6 @@ public function index()
      */
     public function show(Article $article)
     {
-        if (!request()->routeIs('api.*')) {
-            return view('article', ['article' => $article]);
-        }
-
         return $article;
     }
 

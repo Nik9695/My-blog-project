@@ -27,6 +27,8 @@
             >
           </li>
           <Logger />
+
+          <Register />
         </ul>
       </nav>
     </div>
@@ -35,9 +37,9 @@
 
 <script>
 import Logger from '@/components/authentication/Logger.vue'
-
+import Register from '@/components/authentication/Register.vue'
 export default {
   name: 'AppHeader',
-  components: { Logger }
+  components: { Logger, Register }
 }
 </script>
