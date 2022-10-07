@@ -9,6 +9,12 @@ use App\Utils\StringUtils;
 
 class ArticleController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Article::class, options: ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,22 +22,14 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        // N+1 problem
-        $articles = Article::all()->load(['user', 'comments', 'comments.author']);
+        $articles = Article::all()->load(['user'])->load(['comments']);
 
-        return $articles;
+        $sortedArticles = $articles->sortBy(function ($item) {
+            return strlen(trim($item['title']));
+        });
+
+        return $sortedArticles;
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('new-article');
-    }
-
 
     /**
      * Store a newly created resource in storage.
@@ -41,17 +39,10 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        $validatedArticle = $request->validate([
-            'title' => ['required', 'max:255'],
-            'content' => ['required'],
-            'slug' => ['prohibited'],
-            'user_id' => ['required'],
-        ]);
-
-        $validatedArticle['slug'] = StringUtils::slugify($validatedArticle['title']);
-
-        $article = new Article($validatedArticle);
-
+        $article = new Article($request->validated());
+        $article->user_id = auth()->id();
+        $article->slug = StringUtils::slugify($article->title);
+        $article->save();
         return $article;
     }
 
@@ -75,11 +66,8 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
-        $validatedArticle = $request->validate([
-            'content' => ['required'],
-        ]);
-
-        $article->update($validatedArticle);
+        $article->update($request->validated());
+        return $article;
     }
 
     /**
@@ -90,6 +78,8 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        $article->delete();
+        if ($article->delete()) {
+            return 'Article was deleted';
+        }
     }
 }
