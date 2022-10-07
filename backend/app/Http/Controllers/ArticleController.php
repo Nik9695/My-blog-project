@@ -40,6 +40,12 @@ class ArticleController extends Controller
     public function store(StoreArticleRequest $request)
     {
         $article = new Article($request->validated());
+
+        //"auth()->id()" will allow to store article only for authorized user
+        //admin will be allowed to store article only using his own id
+
+        //please correct me if I am wrong :)
+
         $article->user_id = auth()->id();
         $article->slug = StringUtils::slugify($article->title);
         $article->save();
