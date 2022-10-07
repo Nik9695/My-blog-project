@@ -58,7 +58,8 @@ class CommentController extends Controller
      */
     public function update(UpdateCommentRequest $request, Comment $comment)
     {
-        return $comment->update($request->validated());
+        $comment->update($request->validated());
+        return $comment;
     }
 
     /**
