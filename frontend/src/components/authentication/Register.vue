@@ -5,14 +5,11 @@
 
   <Modal v-if="modalIsOpened" @close="modalIsOpened = false" title="Sign up">
     <form @submit.prevent="registerUser" class="register">
-      <div class="register__status">
+      <div class="register__error" v-if="!registrationPassed">
         Please fill the form to sign up.
-        <div class="register__error" v-if="!registrationPassed">
-          Please fill the form to sign up.
-        </div>
-        <div class="register__success" v-if="registrationPassed">
-          You were registered successfully!
-        </div>
+      </div>
+      <div class="register__success" v-if="registrationPassed">
+        You were registered successfully!
       </div>
 
       <div class="register__inputWrapper">
@@ -95,27 +92,54 @@ export default {
   methods: {
     async registerUser() {
       this.isLoading = true
-      try {
-        await axios.post('http://localhost:8000/api/register', {
+      axios
+        .post('http://localhost:8000/api/register', {
           name: this.userData.name,
           email: this.userData.email,
           password: this.userData.password
         })
-        this.registrationPassed = true
-        this.$router.push({ name: `home` })
-      } catch (error) {
-        if (error.response?.status === 403) {
-          this.invalidCredentials = true
-        }
-        console.log(error)
-      }
-      setTimeout(() => {
-        this.isLoading = false
-        this.modalIsOpened = false
-      }, 2000)
+        .then((response) => {
+          this.registrationPassed = true
+          this.loginAfterRegister()
+
+          setTimeout(() => {
+            this.isLoading = false
+            this.modalIsOpened = false
+          }, 2000)
+        })
+        .catch((error) => {
+          this.registrationPassed = false
+          setTimeout(() => {
+            this.isLoading = false
+            this.modalIsOpened = true
+          }, 2000)
+
+          console.log(error)
+        })
     },
     showPassword() {
       this.passwordHidden = !this.passwordHidden
+    },
+    async loginAfterRegister() {
+      try {
+        const response = await axios.post(
+          'http://localhost:8000/api/authenticate',
+          {
+            email: this.userData.email,
+            password: this.userData.password
+          },
+          {
+            headers: {
+              accept: 'application/json'
+            }
+          }
+        )
+        localStorage.setItem('token', response.data)
+        this.$router.push({ name: `my-profile` })
+        this.$router.go()
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }

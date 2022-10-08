@@ -62,10 +62,6 @@ Route::post('/register', function (StoreUserRequest $request) {
     return $user;
 })->name('users.store');
 
-/* Route::get('/users/{user:slug}', function (User $user) {
-    return $user;
-})->name('users.show');
- */
 Route::get('/comments', [CommentController::class, 'index']);
 
 Route::post('/authenticate', function (Request $request) {
