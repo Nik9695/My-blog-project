@@ -22,13 +22,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all()->load(['user'])->load(['comments']);
-
-        $sortedArticles = $articles->sortBy(function ($item) {
-            return strlen(trim($item['title']));
-        });
-
-        return $sortedArticles;
+        $articles = Article::paginate(5);
+        return $articles;
     }
 
     /**

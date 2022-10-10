@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -43,8 +44,9 @@ Route::middleware('auth:sanctum')->group(function () use ($unauthenticatedRoutes
 
 Route::apiResource('comments', CommentController::class)->only($unauthenticatedRoutes);
 Route::apiResource('articles', ArticleController::class)->only($unauthenticatedRoutes);
+Route::apiResource('users', UserController::class)->only($unauthenticatedRoutes);
 
-Route::post('/users', function (StoreUserRequest $request) {
+Route::post('/registration', function (StoreUserRequest $request) {
     $validated = $request->validate([
         'name' => 'required',
         'email' => 'required|email',
