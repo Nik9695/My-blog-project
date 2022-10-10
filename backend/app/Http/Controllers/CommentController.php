@@ -33,12 +33,6 @@ class CommentController extends Controller
     {
 
         $comment = new Comment($request->validated());
-
-        //"auth()->id()" will allow to store comment only for authorized user
-        //admin will be allowed to store comment only using his own id
-
-        //please correct me if I am wrong :)
-
         $comment->user_id = auth()->id();
         $comment->save();
 

@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
             ->set('slug', 'admin-user')
             ->set('email', 'admin@user.com')
             ->set('password', Hash::make('admin_user'))
-            ->set('admin_identifier', 1)
+            ->set('admin_identifier', true)
             ->create();
 
         // create two more users without posts
