@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use PHPUnit\Framework\Constraint\IsTrue;
 
 class CommentPolicy
 {
@@ -53,7 +54,7 @@ class CommentPolicy
      */
     public function update(User $user, Comment $comment)
     {
-        return ($user->id === $comment->user_id || $user->admin_identifier === 1);
+        return ($user->id === $comment->user_id || $user->admin_identifier == true);
     }
 
     /**
@@ -65,7 +66,7 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment)
     {
-        return ($user->id === $comment->user_id || $user->admin_identifier === 1);
+        return ($user->id === $comment->user_id || $user->admin_identifier == true);
     }
 
     /**

@@ -53,9 +53,7 @@ class ArticlePolicy
      */
     public function update(User $user, Article $article)
     {
-        //dd($user->id === $article->user_id || $user->admin_identifier === 1);
-
-        return ($user->id === $article->user_id || $user->admin_identifier === 1);
+        return ($user->id === $article->user_id || $user->admin_identifier == true);
     }
 
     /**
@@ -68,7 +66,7 @@ class ArticlePolicy
     public function delete(User $user, Article $article)
 
     {
-        return ($user->id === $article->user_id || $user->admin_identifier === 1);
+        return ($user->id === $article->user_id || $user->admin_identifier == true);
     }
 
     /**
