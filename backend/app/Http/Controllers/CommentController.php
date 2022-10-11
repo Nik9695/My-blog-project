@@ -32,6 +32,7 @@ class CommentController extends Controller
     public function store(StoreCommentRequest $request)
     {
         $comment = new Comment($request->validated());
+        $comment->user_id = auth()->id();
         $comment->save();
 
         return $comment;
@@ -68,6 +69,8 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        return $comment->delete();
+        if ($comment->delete()) {
+            return 'Comment was deleted';
+        }
     }
 }
