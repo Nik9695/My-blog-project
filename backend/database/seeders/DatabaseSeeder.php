@@ -18,8 +18,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // create a user with known credentials and 3 posts
-        // https://laravel.com/docs/9.x/seeding#using-model-factories
+
         User::factory(1)
             ->set('name', 'Test User')
             ->set('slug', 'test-user')

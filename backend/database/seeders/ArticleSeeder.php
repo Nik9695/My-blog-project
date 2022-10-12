@@ -19,11 +19,6 @@ class ArticleSeeder extends Seeder
             ->hasComments(1)
             ->create();
 
-        // we could omit specifying slug for example by employing ArticleObserver
-        // but we will get to that
-        // https://www.larashout.com/how-to-use-laravel-model-observers
-
-        // create one Article manually without factory
         $article = new Article([
             'title' => 'manually created',
             'content' => 'manual content',

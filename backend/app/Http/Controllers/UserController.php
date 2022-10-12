@@ -28,15 +28,6 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        /*    $validated = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'slug' => 'required',
-            'password' => 'required'
-        ]);
-        $user = new User($validated);
-        $validated['password'] = Hash::make($validated['password']); */
-
         $user = new User($request->validated());
         $user['password'] = Hash::make($user['password']);
         $user->save();

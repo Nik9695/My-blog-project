@@ -24,9 +24,7 @@ class StoreCommentRequest extends FormRequest
      */
     public function rules()
     {
-        //$user_id = auth()->id();
         return [
-            //'user_id' => ['required'],
             'content' => ['required'],
             'article_id' => ['required',  Rule::exists('articles', 'id')]
         ];

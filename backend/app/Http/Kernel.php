@@ -39,8 +39,6 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            // we need this to allow session-based auth in our API routes
-            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
