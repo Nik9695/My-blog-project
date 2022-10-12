@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleCommentController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserArticleController;
 use App\Http\Controllers\UserCommentController;
@@ -42,8 +43,9 @@ Route::apiResource('users', UserController::class)->only($unauthenticatedRoutes)
 Route::apiResource('users.articles', UserArticleController::class)->shallow()->only($unauthenticatedRoutes);
 Route::apiResource('users.comments', UserCommentController::class)->shallow()->only($unauthenticatedRoutes);
 Route::apiResource('articles.comments', ArticleCommentController::class)->shallow()->only($unauthenticatedRoutes);
+Route::post('/authenticate', [AuthController::class, 'authenticate']);
 
-Route::post('/authenticate', function (Request $request) {
+/* Route::post('/authenticate', function (Request $request) {
     $credentials = $request->validate([
         'email' => ['required', 'email'],
         'password' => ['required', Password::min(8)]
@@ -56,7 +58,7 @@ Route::post('/authenticate', function (Request $request) {
     $user = User::where('email', $credentials['email'])->firstOrFail();
 
     return $user->createToken('auth_token')->plainTextToken;
-});
+}); */
 
 /* Route::post('/registration', function (StoreUserRequest $request) {
     $validated = $request->validate([
