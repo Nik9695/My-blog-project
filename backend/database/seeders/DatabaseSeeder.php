@@ -38,6 +38,14 @@ class DatabaseSeeder extends Seeder
             ->hasComments(3) // special magic method
             ->create();
 
+        User::factory(1)
+            ->set('name', 'Admin user')
+            ->set('slug', 'admin-user')
+            ->set('email', 'admin@user.com')
+            ->set('password', Hash::make('admin_user'))
+            ->set('admin_identifier', true)
+            ->create();
+
         // create two more users without posts
         (new UserFactory(2))
             ->set('name', 'user without posts')
