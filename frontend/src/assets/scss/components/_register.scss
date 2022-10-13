@@ -17,6 +17,7 @@
   font-size: 20px;
   display: block;
   font-weight: 600;
+  margin-top: 10px;
 }
 
 .register__input {
@@ -25,6 +26,9 @@
   border: 1px solid goldenrod;
   box-sizing: border-box;
   padding: 10px;
+}
+.register__input--error {
+  border: 1px solid red;
 }
 .register__status {
   width: 100%;
@@ -43,17 +47,16 @@
 
 .register__error {
   width: 100%;
-  height: 50px;
+  height: 30px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 20px;
-  position: relative;
-  border-radius: 10px;
   background: rgb(171, 89, 89);
   margin-bottom: 10px;
+  border-radius: 5px;
   margin-top: 10px;
 }
 

@@ -9,41 +9,55 @@
 
     <Modal v-if="modalIsOpened" @close="modalIsOpened = false" title="Sign up">
       <form @submit.prevent="registerUser" class="register">
-        <div class="register__error" v-if="!registrationPassed">
-          Please fill the form to sign up.
-        </div>
-        <div class="register__success" v-if="registrationPassed">
+        <div class="register__success" v-if="!hasErrors">
           You were registered successfully!
+        </div>
+        <div class="register__inputWrapper">
+          <div class="register__error" v-if="errors.name">
+            {{ errors.name[0] }}
+          </div>
+          <label for="name" class="register__label">Name</label>
+          <input
+            v-model="userData.name"
+            type="text"
+            class="register__input"
+            name="name"
+            :class="{ 'register__input--error': errors.name }"
+          />
         </div>
 
         <div class="register__inputWrapper">
-          <label for="name" class="register__label">Name</label>
-          <input
-            type="text"
-            class="register__input"
-            name="name"
-            v-model="userData.name"
-          />
-        </div>
-        <div class="register__inputWrapper">
           <label for="name" class="register__label">Username</label>
+          <div class="register__error" v-if="errors.slug">
+            {{ errors.slug[0] }}
+          </div>
           <input
             type="text"
             class="register__input"
-            name="name"
+            name="slug"
             v-model="userData.slug"
+            :class="{ 'register__input--error': errors.slug }"
           />
         </div>
+
         <div class="register__inputWrapper">
           <label for="email" class="register__label">Email</label>
+          <div class="register__error" v-if="errors.email">
+            {{ errors.email[0] }}
+          </div>
           <input
             type="text"
             class="register__input"
             name="email"
             v-model="userData.email"
+            :class="{ 'register__input--error': errors.email }"
           />
         </div>
+
         <label for="text" class="register__label">Password</label>
+        <div class="register__error" v-if="errors.password">
+          {{ errors.password[0] }}
+        </div>
 
         <div class="register__inputWrapper-with-addons">
           <div class="register__password">
@@ -53,6 +67,7 @@
               class="register__input"
               name="password"
               v-model="userData.password"
+              :class="{ 'register__input--error': errors.password }"
             />
             <input
               v-else
@@ -60,6 +75,7 @@
               class="register__input"
               name="password"
               v-model="userData.password"
+              :class="{ 'register__input--error': errors.password }"
             />
           </div>
           <div class="register__password-security">
@@ -101,15 +117,18 @@ export default {
         slug: '',
         email: '',
         password: ''
-      }
+      },
+      errors: {}
     }
   },
   methods: {
     async registerUser() {
+      this.errors = []
       this.isLoading = true
       axios
         .post('http://localhost:8000/api/register', {
           name: this.userData.name,
+          slug: this.userData.slug,
           email: this.userData.email,
           password: this.userData.password
         })
@@ -123,13 +142,15 @@ export default {
           }, 2000)
         })
         .catch((error) => {
-          this.registrationPassed = false
+          if (error.response?.status == 422) {
+            this.errors = error.response.data.errors
+          }
+          //this.registrationPassed = false
+
           setTimeout(() => {
             this.isLoading = false
-            this.modalIsOpened = true
-          }, 2000)
-
-          console.log(this.user)
+            //this.modalIsOpened = true
+          }, 1000)
         })
     },
     showPassword() {
@@ -154,6 +175,11 @@ export default {
       } catch (error) {
         console.log(error)
       }
+    }
+  },
+  computed: {
+    hasErrors() {
+      return Object.keys(this.errors).length
     }
   }
 }
