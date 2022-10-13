@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'slug',
+        'admin_identifier'
     ];
 
     /**
@@ -56,5 +57,10 @@ class User extends Authenticatable
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

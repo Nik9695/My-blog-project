@@ -22,8 +22,9 @@ use Illuminate\Validation\Rules\Password;
 |
 */
 
+$unauthenticatedRoutes = ['index', 'show'];
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:sanctum')->group(function () use ($unauthenticatedRoutes) {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
@@ -36,25 +37,23 @@ Route::middleware('auth:sanctum')->group(function () {
         return $author->articles;
     })->name('author.articles');
 
-    Route::apiResource('comments', CommentController::class)->except(['index']);
 
-    Route::resource('articles', ArticleController::class)->only([
-        'store',
-        'update',
-        'destroy'
-    ]);
+    Route::apiResource('articles', ArticleController::class)->except($unauthenticatedRoutes);
+    Route::apiResource('comments', CommentController::class)->except($unauthenticatedRoutes);
 });
 
-Route::post('/register', function (StoreUserRequest $request) {
+Route::apiResource('comments', CommentController::class)->only($unauthenticatedRoutes);
+Route::apiResource('articles', ArticleController::class)->only($unauthenticatedRoutes);
+
+Route::post('/users', function (StoreUserRequest $request) {
     $validated = $request->validate([
         'name' => 'required',
         'email' => 'required|email',
-        'slug' => '',
+        'slug' => 'required',
         'password' => 'required'
     ]);
 
     $validated['password'] = Hash::make($validated['password']);
-    $validated['slug'] = StringUtils::slugify($validated['name']);
 
     $user = new User($validated);
     $user->save();
@@ -62,7 +61,9 @@ Route::post('/register', function (StoreUserRequest $request) {
     return $user;
 })->name('users.store');
 
-Route::get('/comments', [CommentController::class, 'index']);
+Route::get('/users/{user:slug}', function (User $user) {
+    return $user;
+})->name('users.show');
 
 Route::post('/authenticate', function (Request $request) {
     $credentials = $request->validate([

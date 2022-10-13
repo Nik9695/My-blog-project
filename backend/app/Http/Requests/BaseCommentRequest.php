@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class UpdateArticleRequest extends FormRequest
+class BaseCommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class UpdateArticleRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return request()->user_id == auth()->user()->id;
     }
 
     /**
@@ -24,7 +25,9 @@ class UpdateArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'content' => ['required'],
+            'content' => ['required', 'string'],
+            'article_id' => ['required', Rule::exists('articles', 'id')],
+            'user_id' => ['required', 'exists:users,id'],
         ];
     }
 }

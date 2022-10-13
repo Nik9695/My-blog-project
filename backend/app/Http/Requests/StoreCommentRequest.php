@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreCommentRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class StoreCommentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +24,11 @@ class StoreCommentRequest extends FormRequest
      */
     public function rules()
     {
+        //$user_id = auth()->id();
         return [
-            //
+            //'user_id' => ['required'],
+            'content' => ['required'],
+            'article_id' => ['required',  Rule::exists('articles', 'id')]
         ];
     }
 }

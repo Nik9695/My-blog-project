@@ -8,28 +8,19 @@ use App\Models\Comment;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Comment::class, options: ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
     {
-        $comments = Comment::all()->load(['user'])->load(['article']);
-
-
-        return $comments;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Comment::all()->load('author');
     }
 
     /**
@@ -40,7 +31,12 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
-        //
+
+        $comment = new Comment($request->validated());
+        $comment->user_id = auth()->id();
+        $comment->save();
+
+        return $comment;
     }
 
     /**
@@ -51,18 +47,7 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Comment $comment)
-    {
-        //
+        return $comment;
     }
 
     /**
@@ -74,7 +59,8 @@ class CommentController extends Controller
      */
     public function update(UpdateCommentRequest $request, Comment $comment)
     {
-        //
+        $comment->update($request->validated());
+        return $comment;
     }
 
     /**
@@ -85,6 +71,8 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        if ($comment->delete()) {
+            return 'Comment was deleted';
+        }
     }
 }

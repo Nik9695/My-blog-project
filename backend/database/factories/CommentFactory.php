@@ -18,12 +18,10 @@ class CommentFactory extends Factory
      */
     public function definition()
     {
-        $content = fake()->sentence();
-
         return [
-            'content' => $content,
-            'user_id' => User::factory()->create()->id,
-            'article_id' => Article::factory()->create()->id
+            'content' => fake()->sentence(),
+            'user_id' => User::factory(),
+            'article_id' => Article::factory(),
         ];
     }
 }

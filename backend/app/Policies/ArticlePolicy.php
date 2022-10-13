@@ -18,7 +18,7 @@ class ArticlePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class ArticlePolicy
      */
     public function view(User $user, Article $article)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class ArticlePolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class ArticlePolicy
      */
     public function update(User $user, Article $article)
     {
-        //
+        return ($user->id === $article->user_id || $user->admin_identifier == true);
     }
 
     /**
@@ -64,8 +64,9 @@ class ArticlePolicy
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(User $user, Article $article)
+
     {
-        //
+        return ($user->id === $article->user_id || $user->admin_identifier == true);
     }
 
     /**
@@ -77,7 +78,7 @@ class ArticlePolicy
      */
     public function restore(User $user, Article $article)
     {
-        //
+        return $user->id === $article->user_id;
     }
 
     /**
@@ -89,6 +90,6 @@ class ArticlePolicy
      */
     public function forceDelete(User $user, Article $article)
     {
-        //
+        return $user->id === $article->user_id;
     }
 }
