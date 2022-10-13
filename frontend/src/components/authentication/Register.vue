@@ -12,70 +12,49 @@
         <div class="register__success" v-if="!hasErrors">
           You were registered successfully!
         </div>
-        <div class="register__inputWrapper">
-          <div class="register__error" v-if="errors.name">
-            {{ errors.name[0] }}
-          </div>
-          <label for="name" class="register__label">Name</label>
-          <input
-            v-model="userData.name"
-            type="text"
-            class="register__input"
-            name="name"
-            :class="{ 'register__input--error': errors.name }"
-          />
-        </div>
 
-        <div class="register__inputWrapper">
-          <label for="name" class="register__label">Username</label>
-          <div class="register__error" v-if="errors.slug">
-            {{ errors.slug[0] }}
-          </div>
-          <input
-            type="text"
-            class="register__input"
-            name="slug"
-            v-model="userData.slug"
-            :class="{ 'register__input--error': errors.slug }"
-          />
-        </div>
+        <Input
+          v-model="userData.name"
+          name="name"
+          lable="Name"
+          placeholder="Enter your name"
+          :errors="errors"
+        />
 
-        <div class="register__inputWrapper">
-          <label for="email" class="register__label">Email</label>
-          <div class="register__error" v-if="errors.email">
-            {{ errors.email[0] }}
-          </div>
-          <input
-            type="text"
-            class="register__input"
-            name="email"
-            v-model="userData.email"
-            :class="{ 'register__input--error': errors.email }"
-          />
-        </div>
+        <Input
+          v-model="userData.slug"
+          name="slug"
+          lable="Username"
+          placeholder="Enter your username"
+          :errors="errors"
+        />
 
-        <label for="text" class="register__label">Password</label>
-        <div class="register__error" v-if="errors.password">
-          {{ errors.password[0] }}
-        </div>
-
+        <Input
+          v-model="userData.email"
+          name="email"
+          lable="Email"
+          type="email"
+          placeholder="enter.your@email.com"
+          :errors="errors"
+        />
         <div class="register__inputWrapper-with-addons">
           <div class="register__password">
-            <input
+            <Input
               v-if="passwordHidden"
+              v-model="userData.password"
+              name="password"
+              lable="Password"
               type="password"
-              class="register__input"
-              name="password"
-              v-model="userData.password"
-              :class="{ 'register__input--error': errors.password }"
+              placeholder="Enter at least 8 symbols"
+              :errors="errors"
             />
-            <input
-              v-else
-              type="text"
-              class="register__input"
-              name="password"
+            <Input
+              v-if="!passwordHidden"
               v-model="userData.password"
-              :class="{ 'register__input--error': errors.password }"
+              name="password"
+              lable="Password"
+              placeholder="Enter at least 8 symbols"
+              :errors="errors"
             />
           </div>
           <div class="register__password-security">
@@ -102,10 +81,11 @@
 <script>
 import Modal from '../general/Modal.vue'
 import Btn from '../general/Btn.vue'
+import Input from '../general/Input.vue'
 import axios from 'axios'
 export default {
   name: 'Register',
-  components: { Modal, Btn },
+  components: { Modal, Btn, Input },
   data() {
     return {
       modalIsOpened: false,

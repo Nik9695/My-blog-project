@@ -87,6 +87,10 @@
   font-size: 20px;
   width: 100%;
 }
+.register__password-security {
+  height: 55px;
+  align-self: flex-end;
+}
 .btn__showPassword {
   height: calc(100% - 10px);
   border: 1px solid goldenrod;
