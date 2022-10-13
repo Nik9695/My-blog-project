@@ -26,6 +26,15 @@
           />
         </div>
         <div class="register__inputWrapper">
+          <label for="name" class="register__label">Username</label>
+          <input
+            type="text"
+            class="register__input"
+            name="name"
+            v-model="userData.slug"
+          />
+        </div>
+        <div class="register__inputWrapper">
           <label for="email" class="register__label">Email</label>
           <input
             type="text"
@@ -89,6 +98,7 @@ export default {
       passwordHidden: true,
       userData: {
         name: '',
+        slug: '',
         email: '',
         password: ''
       }
