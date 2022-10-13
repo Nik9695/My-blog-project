@@ -40,7 +40,6 @@ export default {
   },
   async created() {
     this.getAuth()
-    this.getArticles()
   },
   methods: {
     async getAuth() {
@@ -62,9 +61,8 @@ export default {
         localStorage.setItem('token', '')
         this.$router.push('/')
       }
-    }
-  },
-  computed: {
+      this.getArticles()
+    },
     async getArticles() {
       try {
         const token = localStorage.getItem('token')

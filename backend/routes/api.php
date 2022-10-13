@@ -4,7 +4,6 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
-use App\Utils\StringUtils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -45,7 +44,7 @@ Route::middleware('auth:sanctum')->group(function () use ($unauthenticatedRoutes
 Route::apiResource('comments', CommentController::class)->only($unauthenticatedRoutes);
 Route::apiResource('articles', ArticleController::class)->only($unauthenticatedRoutes);
 
-Route::post('/users', function (StoreUserRequest $request) {
+Route::post('/register', function (StoreUserRequest $request) {
     $validated = $request->validate([
         'name' => 'required',
         'email' => 'required|email',

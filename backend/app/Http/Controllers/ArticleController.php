@@ -31,7 +31,7 @@ class ArticleController extends Controller
             return strlen(trim($item['title']));
         });
 
-        return $sortedArticles;
+        return $articles;
     }
 
     /**

@@ -67,8 +67,8 @@
           />
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </main>
 </template>
 
 <script>
