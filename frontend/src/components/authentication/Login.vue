@@ -65,7 +65,7 @@ import Modal from '../general/Modal.vue'
 import Btn from '../general/Btn.vue'
 import axios from 'axios'
 export default {
-  name: 'Logger',
+  name: 'Login',
   components: { Modal, Btn },
 
   data() {

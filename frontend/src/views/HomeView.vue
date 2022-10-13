@@ -81,28 +81,16 @@ export default {
   components: { MainArticle, ArticleItemCard, ArticleCard },
   data() {
     return {
-      articlesPopular: [],
-      articlesEditorsPick: []
+      articles: []
+      //articlesPopular: [],
+      //articlesEditorsPick: []
     }
   },
   created() {
     axios
       .get('http://localhost:8000/api/articles')
       .then((response) => {
-        for (let i = 0; i < 3; ++i) {
-          this.articlesEditorsPick.push(response.data[i])
-        }
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-
-    axios
-      .get('http://localhost:8000/api/articles')
-      .then((response) => {
-        for (let i = 0; i < 8; ++i) {
-          this.articlesPopular.push(response.data[i])
-        }
+        this.articles = response.data
       })
       .catch((error) => {
         console.log(error)
@@ -110,11 +98,17 @@ export default {
   },
   computed: {
     featuredArticle() {
-      if (this.articlesPopular.length) {
-        return this.articlesPopular[0]
+      if (this.articles.length) {
+        return this.articles[0]
       } else {
         return {}
       }
+    },
+    articlesPopular() {
+      return this.articles.slice(0, 8)
+    },
+    articlesEditorsPick() {
+      return this.articles.slice(0, 3)
     }
   }
 }
