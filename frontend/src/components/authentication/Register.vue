@@ -68,7 +68,7 @@
           </div>
         </div>
 
-        <Btn type="send" :isLoading="isLoading">Sign up</Btn>
+        <Btn type="submit" :isLoading="isLoading">Sign up</Btn>
       </form>
     </Modal>
   </div>
@@ -119,7 +119,7 @@ export default {
             this.modalIsOpened = true
           }, 2000)
 
-          console.log(error)
+          console.log(this.user)
         })
     },
     showPassword() {
