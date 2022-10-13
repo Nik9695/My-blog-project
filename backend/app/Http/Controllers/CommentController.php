@@ -18,9 +18,6 @@ class CommentController extends Controller
     {
         $comments = Comment::all()->load(['user'])->load(['article']);
 
-        if (!request()->routeIs('api.*')) {
-            return view('index_comments', ['comments' => $comments]);
-        }
 
         return $comments;
     }

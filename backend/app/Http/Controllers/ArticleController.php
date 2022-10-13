@@ -21,19 +21,12 @@ public function index()
     {
         // N+1 problem
         $articles = Article::all()->load(['user'])->load(['comments']);
-        $comments = Comment::all();
 
         $sortedArticles = $articles->sortBy(function ($item){
             return strlen(trim($item['title']));
         });
 
-        $slicedArticles = $sortedArticles->take(5);
-
-        if (!request()->routeIs('api.*')) {
-            return view('index', ['articles' => $slicedArticles]);
-        }
-
-        return $articles && $comments;
+        return $sortedArticles ;
     }
 
     /**
@@ -80,23 +73,6 @@ public function index()
         }
 
         $article = new Article($validatedArticle);
-        try {
-            $article->save();
-        } catch (\Exception $e) {
-            if (!request()->routeIs('api.*')) {
-                return redirect()
-                    ->back()
-                    ->withInput()
-                    ->withErrors(['msg' => $e->getMessage()]);
-            }
-
-            throw $e;
-        }
-
-        if (!request()->routeIs('api.*')) {
-            return redirect(route('articles.show', ['article' => $article]));
-        }
-
         return $article;
     }
 
@@ -108,10 +84,6 @@ public function index()
      */
     public function show(Article $article)
     {
-        if (!request()->routeIs('api.*')) {
-            return view('article', ['article' => $article]);
-        }
-
         return $article;
     }
 

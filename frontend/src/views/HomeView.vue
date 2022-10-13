@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="section">
-      <MainArticle />
+      <MainArticle :article="featuredArticle" />
       <div class="section__inner">
         <h2 class="section__heading">Popular topics</h2>
 
@@ -46,7 +46,11 @@
         </div>
 
         <div class="section__articles-cascade">
-          <ArticleItemCard v-for="i in 8" :key="i" />
+          <ArticleItemCard
+            v-for="article in articlesPopular"
+            :key="article.id"
+            :article="article"
+          />
         </div>
       </div>
     </div>
@@ -56,15 +60,62 @@
         <h2 class="section__heading">Editor's pick</h2>
 
         <div class="section__articles">
-          <ArticleCard v-for="i in 3" :key="i" />
+          <ArticleCard
+            v-for="article in articlesEditorsPick"
+            :key="article.id"
+            :article="article"
+          />
         </div>
       </div>
     </div>
   </main>
 </template>
 
-<script setup>
-import MainArticle from '../components/MainArticle.vue'
-import ArticleItemCard from '../components/ArticleItemCard.vue'
-import ArticleCard from '../components/ArticleCard.vue'
+<script>
+import MainArticle from '../components/article/MainArticle.vue'
+import ArticleItemCard from '../components/article/ArticleItemCard.vue'
+import ArticleCard from '../components/article/ArticleCard.vue'
+import axios from 'axios'
+
+export default {
+  components: { MainArticle, ArticleItemCard, ArticleCard },
+  data() {
+    return {
+      articlesPopular: [],
+      articlesEditorsPick: []
+    }
+  },
+  created() {
+    axios
+      .get('http://localhost:8000/api/articles')
+      .then((response) => {
+        for (let i = 0; i < 3; ++i) {
+          this.articlesEditorsPick.push(response.data[i])
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+
+    axios
+      .get('http://localhost:8000/api/articles')
+      .then((response) => {
+        for (let i = 0; i < 8; ++i) {
+          this.articlesPopular.push(response.data[i])
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
+  computed: {
+    featuredArticle() {
+      if (this.articlesPopular.length) {
+        return this.articlesPopular[0]
+      } else {
+        return {}
+      }
+    }
+  }
+}
 </script>

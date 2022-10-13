@@ -21,7 +21,7 @@
           v-model="credentials.email"
         />
       </div>
-      <label for="password" class="login__label">Password </label>
+      <label for="text" class="login__label">Password </label>
 
       <div class="login__inputWrapper-with-addons">
         <div class="login__password">
@@ -41,7 +41,7 @@
           />
         </div>
         <div class="login__password-security">
-          <button class="btn__showPassword" @click="showPassword">
+          <button class="btn__showPassword" @click.prevent="showPassword">
             <span class="btn__showPassword-small-right">
               <i
                 class="fas"
@@ -95,13 +95,17 @@ export default {
           }
         )
         localStorage.setItem('token', response.data)
+        this.$router.push({ name: `my-profile` })
       } catch (error) {
         if (error.response?.status === 403) {
           this.invalidCredentials = true
         }
         console.log(error)
       }
-      this.isLoading = false
+      setTimeout(() => {
+        this.isLoading = false
+        this.modalIsOpened = false
+      }, 2000)
     },
     showPassword() {
       this.passwordHidden = !this.passwordHidden
