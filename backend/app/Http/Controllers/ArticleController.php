@@ -17,20 +17,14 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-public function index()
+    public function index()
     {
         // N+1 problem
         $articles = Article::all()->load(['user'])->load(['comments']);
 
-        $sortedArticles = $articles->sortBy(function ($item){
+        $sortedArticles = $articles->sortBy(function ($item) {
             return strlen(trim($item['title']));
         });
-
-        $slicedArticles = $sortedArticles->take(5);
-
-        if (!request()->routeIs('api.*')) {
-            return view('index', ['articles' => $slicedArticles]);
-        }
 
         return $articles;
     }
@@ -74,28 +68,11 @@ public function index()
          * Checking if 'summary' field is empty.
          */
 
-        if($validatedArticle['summary'] == null){
+        if ($validatedArticle['summary'] == null) {
             $validatedArticle['summary'] = StringUtils::summarize($validatedArticle['content']);
         }
 
         $article = new Article($validatedArticle);
-        try {
-            $article->save();
-        } catch (\Exception $e) {
-            if (!request()->routeIs('api.*')) {
-                return redirect()
-                    ->back()
-                    ->withInput()
-                    ->withErrors(['msg' => $e->getMessage()]);
-            }
-
-            throw $e;
-        }
-
-        if (!request()->routeIs('api.*')) {
-            return redirect(route('articles.show', ['article' => $article]));
-        }
-
         return $article;
     }
 
@@ -107,10 +84,6 @@ public function index()
      */
     public function show(Article $article)
     {
-        if (!request()->routeIs('api.*')) {
-            return view('article', ['article' => $article]);
-        }
-
         return $article;
     }
 

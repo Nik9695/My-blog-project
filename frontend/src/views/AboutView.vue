@@ -1,13 +1,8 @@
-<script setup>
-import ArticleCard from '../components/ArticleCard.vue'
-import AboutArticleCard from '../components/AboutArticleCard.vue'
-</script>
-
 <template>
   <main>
     <AboutArticleCard />
     <div class="section">
-      <div class="section__inner--aboutArticle__page">
+      <div class="section__inner section__inner--aboutArticle__page">
         <div class="aboutArticle__timeline">
           <div class="aboutArticle__date">08.08.2021</div>
           <div class="aboutArticle__timeline-divider"></div>
@@ -110,9 +105,41 @@ import AboutArticleCard from '../components/AboutArticleCard.vue'
       <div class="section__inner">
         <h2 class="aboutArticle__section-heading">Related Posts</h2>
         <div class="section__articles">
-          <ArticleCard v-for="i in 3" :key="i" />
+          <ArticleCard
+            v-for="article in articlesRelated"
+            :key="article.id"
+            :article="article"
+          />
         </div>
       </div>
     </div>
   </main>
 </template>
+
+<script>
+import ArticleCard from '../components/article/ArticleCard.vue'
+import AboutArticleCard from '../components/article/AboutArticleCard.vue'
+import axios from 'axios'
+
+export default {
+  components: { ArticleCard, AboutArticleCard },
+  data() {
+    return {
+      articlesRelated: []
+    }
+  },
+
+  created() {
+    axios
+      .get('http://localhost:8000/api/articles')
+      .then((response) => {
+        for (let i = 0; i < 3; ++i) {
+          this.articlesRelated.push(response.data[i])
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+}
+</script>

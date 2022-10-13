@@ -1,12 +1,13 @@
 <template>
   <button class="btn" :type="type" :disabled="isLoading">
     <slot></slot>
-    <div v-if="isLoading" class="btn__loader"></div>
+    <span v-if="isLoading" class="btn__loader"></span>
   </button>
 </template>
 
 <script>
 export default {
+  name: 'Btn',
   props: {
     type: {
       type: String,

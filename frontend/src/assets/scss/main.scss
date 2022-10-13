@@ -10,13 +10,15 @@
 
 @import 'pages/home';
 @import 'pages/about';
+@import 'pages/my-profile';
 
 @import 'components/mainArticle';
 @import 'components/catergory-card';
 @import 'components/article-item';
 @import 'components/article';
 
-@import 'components/logger';
+@import 'components/login';
+@import 'components/register';
 @import 'components/modal';
 @import 'components/btn';
 
