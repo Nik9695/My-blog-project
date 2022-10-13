@@ -82,8 +82,6 @@ export default {
   data() {
     return {
       articles: []
-      //articlesPopular: [],
-      //articlesEditorsPick: []
     }
   },
   created() {
