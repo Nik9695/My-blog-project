@@ -39,39 +39,47 @@ export default {
     }
   },
   async created() {
-    const token = localStorage.getItem('token')
-
-    if (!token) {
-      this.$router.push('/')
-      console.log()
-    }
-
-    try {
-      const response = await axios.get('http://localhost:8000/api/user', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      this.user = response.data
-    } catch (error) {
-      console.log(error)
-      localStorage.setItem('token', '')
-      this.$router.push('/')
-    }
-
-    try {
+    this.getAuth()
+    this.getArticles()
+  },
+  methods: {
+    async getAuth() {
       const token = localStorage.getItem('token')
-      const response = await axios.get(
-        `http://localhost:8000/api/users/${this.user.slug}/articles`,
-        {
+
+      if (!token) {
+        this.$router.push('/')
+        console.log()
+      }
+      try {
+        const response = await axios.get('http://localhost:8000/api/user', {
           headers: {
             Authorization: `Bearer ${token}`
           }
-        }
-      )
-      this.articles = response.data
-    } catch (error) {
-      console.log(error)
+        })
+        this.user = response.data
+      } catch (error) {
+        console.log(error)
+        localStorage.setItem('token', '')
+        this.$router.push('/')
+      }
+    }
+  },
+  computed: {
+    async getArticles() {
+      try {
+        const token = localStorage.getItem('token')
+        const response = await axios.get(
+          `http://localhost:8000/api/users/${this.user.slug}/articles`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        )
+        this.articles = response.data
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }

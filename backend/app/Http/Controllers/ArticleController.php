@@ -17,16 +17,16 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-public function index()
+    public function index()
     {
         // N+1 problem
         $articles = Article::all()->load(['user'])->load(['comments']);
 
-        $sortedArticles = $articles->sortBy(function ($item){
+        $sortedArticles = $articles->sortBy(function ($item) {
             return strlen(trim($item['title']));
         });
 
-        return $sortedArticles ;
+        return $articles;
     }
 
     /**
@@ -68,7 +68,7 @@ public function index()
          * Checking if 'summary' field is empty.
          */
 
-        if($validatedArticle['summary'] == null){
+        if ($validatedArticle['summary'] == null) {
             $validatedArticle['summary'] = StringUtils::summarize($validatedArticle['content']);
         }
 

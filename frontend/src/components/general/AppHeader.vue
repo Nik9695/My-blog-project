@@ -26,7 +26,7 @@
               >My profile</RouterLink
             >
           </li>
-          <Logger />
+          <Login />
 
           <Register />
         </ul>
@@ -36,10 +36,10 @@
 </template>
 
 <script>
-import Logger from '@/components/authentication/Logger.vue'
+import Login from '@/components/authentication/Login.vue'
 import Register from '@/components/authentication/Register.vue'
 export default {
   name: 'AppHeader',
-  components: { Logger, Register }
+  components: { Login, Register }
 }
 </script>
