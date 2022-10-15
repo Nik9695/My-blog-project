@@ -120,7 +120,7 @@ export default {
           setTimeout(() => {
             this.isLoading = false
             this.modalIsOpened = false
-          }, 2000)
+          }, 1000)
         })
         .catch((error) => {
           if (error.response?.status == 422) {

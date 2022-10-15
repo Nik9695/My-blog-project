@@ -81,31 +81,34 @@ export default {
     }
   },
   methods: {
-    async loginUser() {
+    loginUser() {
       this.isLoading = true
       this.invalidCredentials = false
-      try {
-        const response = await axios.post(
-          'http://localhost:8000/api/authenticate',
-          this.credentials,
-          {
-            headers: {
-              accept: 'application/json'
-            }
+
+      axios
+        .post('http://localhost:8000/api/authenticate', this.credentials, {
+          headers: {
+            accept: 'application/json'
           }
-        )
-        localStorage.setItem('token', response.data)
-        this.$router.push({ name: `my-profile` })
-      } catch (error) {
-        if (error.response?.status === 403) {
-          this.invalidCredentials = true
-        }
-        console.log(error)
-      }
-      setTimeout(() => {
-        this.isLoading = false
-        this.modalIsOpened = false
-      }, 2000)
+        })
+        .then((response) => {
+          localStorage.setItem('token', response.data)
+
+          setTimeout(() => {
+            this.isLoading = false
+            this.modalIsOpened = false
+            this.$router.push({ name: `my-profile` })
+          }, 1000)
+        })
+        .catch((error) => {
+          if (error.response?.status === 403) {
+            this.invalidCredentials = true
+          }
+          setTimeout(() => {
+            this.isLoading = false
+            this.modalIsOpened = true
+          }, 1000)
+        })
     },
     showPassword() {
       this.passwordHidden = !this.passwordHidden
