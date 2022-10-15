@@ -9,38 +9,32 @@
   </li>
   <Modal v-if="modalIsOpened" @close="modalIsOpened = false" title="Login">
     <form @submit.prevent="loginUser" class="login">
-      <div class="login__error" v-if="invalidCredentials">
-        Wrong email or password
-      </div>
-      <div class="login__inputWrapper">
-        <label for="email" class="login__label">Email </label>
-        <input
-          type="text"
-          class="login__input"
-          name="email"
-          v-model="credentials.email"
-        />
-      </div>
-      <label for="text" class="login__label">Password </label>
-
-      <div class="login__inputWrapper-with-addons">
-        <div class="login__password">
-          <input
+      <Input
+        v-model="credentials.email"
+        name="email"
+        lable="Email"
+        type="email"
+        placeholder="enter.your@email.com"
+      />
+      <div class="register__inputWrapper-with-addons">
+        <div class="register__password">
+          <Input
             v-if="passwordHidden"
+            v-model="credentials.password"
+            name="password"
+            lable="Password"
             type="password"
-            class="login__input"
-            name="password"
-            v-model="credentials.password"
+            placeholder="Enter your password"
           />
-          <input
-            v-else
-            type="text"
-            class="login__input"
-            name="password"
+          <Input
+            v-if="!passwordHidden"
             v-model="credentials.password"
+            name="password"
+            lable="Password"
+            placeholder="Enter your password"
           />
         </div>
-        <div class="login__password-security">
+        <div class="register__password-security">
           <button class="btn__showPassword" @click.prevent="showPassword">
             <span class="btn__showPassword-small-right">
               <i
@@ -63,10 +57,11 @@
 <script>
 import Modal from '../general/Modal.vue'
 import Btn from '../general/Btn.vue'
+import Input from '../general/Input.vue'
 import axios from 'axios'
 export default {
   name: 'Login',
-  components: { Modal, Btn },
+  components: { Modal, Btn, Input },
 
   data() {
     return {
