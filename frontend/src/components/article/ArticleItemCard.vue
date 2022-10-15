@@ -18,7 +18,7 @@
         }}</RouterLink>
       </h3>
       <p class="article__item-bottom-text">
-        {{ article.content.substring(0, 100) }}
+        {{ article.content.substring(0, 70) }}
       </p>
       <div class="article__area-author-info">
         <img
@@ -36,20 +36,15 @@
 
 <script>
 import CategoryCard from './CategoryCard.vue'
-import { format, parseISO } from 'date-fns'
+import ArticleCardMixin from '@/mixins/ArticleCardMixin'
 export default {
   name: 'ArticleItemCard',
   components: { CategoryCard },
+  mixins: [ArticleCardMixin],
   props: {
     article: {
       type: Object,
       required: true
-    }
-  },
-  computed: {
-    formatDate() {
-      const stringFromDate = parseISO(this.article.created_at)
-      return format(stringFromDate, 'dd-MM-yyyy')
     }
   }
 }
