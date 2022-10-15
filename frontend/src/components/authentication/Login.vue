@@ -15,6 +15,7 @@
         lable="Email"
         type="email"
         placeholder="enter.your@email.com"
+        :errors="errors"
       />
       <div class="inputForm__inputWrapper-with-addons">
         <div class="inputForm__password">
@@ -25,6 +26,7 @@
             lable="Password"
             type="password"
             placeholder="Enter your password"
+            :errors="errors"
           />
           <Input
             v-if="!passwordHidden"
@@ -32,6 +34,7 @@
             name="password"
             lable="Password"
             placeholder="Enter your password"
+            :errors="errors"
           />
         </div>
         <div class="inputForm__password-security">
@@ -72,11 +75,13 @@ export default {
       credentials: {
         email: 'test@example.com',
         password: 'password'
-      }
+      },
+      errors: {}
     }
   },
   methods: {
     loginUser() {
+      this.errors = []
       this.isLoading = true
       this.invalidCredentials = false
 
@@ -97,7 +102,10 @@ export default {
         })
         .catch((error) => {
           if (error.response?.status === 403) {
-            this.invalidCredentials = true
+            this.errors = error.response.data
+            console.log(this.errors)
+          } else if (error.response?.status == 422) {
+            this.errors = error.response.data.errors
           }
           setTimeout(() => {
             this.isLoading = false
