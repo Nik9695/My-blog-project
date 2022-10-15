@@ -114,7 +114,8 @@ export default {
         })
         .then((response) => {
           this.registrationPassed = true
-          this.loginAfterRegister()
+          localStorage.setItem('token', response.data.token)
+          this.$router.push({ name: `my-profile` })
 
           setTimeout(() => {
             this.isLoading = false
@@ -125,36 +126,15 @@ export default {
           if (error.response?.status == 422) {
             this.errors = error.response.data.errors
           }
-          //this.registrationPassed = false
 
           setTimeout(() => {
             this.isLoading = false
-            //this.modalIsOpened = true
+            this.modalIsOpened = true
           }, 1000)
         })
     },
     showPassword() {
       this.passwordHidden = !this.passwordHidden
-    },
-    async loginAfterRegister() {
-      try {
-        const response = await axios.post(
-          'http://localhost:8000/api/authenticate',
-          {
-            email: this.userData.email,
-            password: this.userData.password
-          },
-          {
-            headers: {
-              accept: 'application/json'
-            }
-          }
-        )
-        localStorage.setItem('token', response.data)
-        this.$router.push({ name: `my-profile` })
-      } catch (error) {
-        console.log(error)
-      }
     }
   },
   computed: {
