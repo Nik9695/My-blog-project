@@ -13,7 +13,10 @@
     </article>
 
     <div class="section">
-      <div class="section__inner section__inner--myProfile__page">
+      <div
+        class="section__inner section__inner--myProfile__page"
+        v-if="hasArticles"
+      >
         <h2 class="myProfile__section-heading">My articles:</h2>
         <div class="section__articles">
           <ArticleCard
@@ -22,6 +25,13 @@
             :article="article"
           />
         </div>
+      </div>
+      <div
+        class="section__inner section__inner--myProfile__page"
+        :class="{ noArticles: !hasArticles }"
+        v-else
+      >
+        <h2 class="myProfile__section-heading">You don't have any articles</h2>
       </div>
     </div>
   </main>
@@ -78,6 +88,11 @@ export default {
       } catch (error) {
         console.log(error)
       }
+    }
+  },
+  computed: {
+    hasArticles() {
+      return this.articles.length
     }
   }
 }
