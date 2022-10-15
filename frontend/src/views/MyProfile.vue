@@ -54,36 +54,22 @@ export default {
   methods: {
     async getAuth() {
       const token = localStorage.getItem('token')
-
       if (!token) {
         this.$router.push('/')
         console.log()
       }
-
       try {
-        const response = await Http.get('/user', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
+        const response = await Http.get('/user')
         this.user = response.data
       } catch (error) {
-        console.log(error)
         localStorage.setItem('token', '')
         this.$router.push('/')
       }
       this.getArticles()
     },
     async getArticles() {
-      const token = localStorage.getItem('token')
-
       try {
-        const token = localStorage.getItem('token')
-        const response = await Http.get(`/users/${this.user.slug}/articles`, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
+        const response = await Http.get(`/users/${this.user.slug}/articles`)
         this.articles = response.data
       } catch (error) {
         console.log(error)
