@@ -8,11 +8,7 @@
     </li>
 
     <Modal v-if="modalIsOpened" @close="modalIsOpened = false" title="Sign up">
-      <form @submit.prevent="registerUser" class="register">
-        <div class="register__success" v-if="!hasErrors">
-          You were registered successfully!
-        </div>
-
+      <form @submit.prevent="registerUser" class="inputForm">
         <Input
           v-model="userData.name"
           name="name"
@@ -37,8 +33,8 @@
           placeholder="enter.your@email.com"
           :errors="errors"
         />
-        <div class="register__inputWrapper-with-addons">
-          <div class="register__password">
+        <div class="inputForm__inputWrapper-with-addons">
+          <div class="inputForm__password">
             <Input
               v-if="passwordHidden"
               v-model="userData.password"
@@ -57,7 +53,7 @@
               :errors="errors"
             />
           </div>
-          <div class="register__password-security">
+          <div class="inputForm__password-security">
             <button class="btn__showPassword" @click.prevent="showPassword">
               <span class="btn__showPassword-small-right">
                 <i

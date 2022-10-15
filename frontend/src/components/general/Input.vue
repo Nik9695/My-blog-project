@@ -1,16 +1,16 @@
 <template>
-  <div class="register__inputWrapper">
-    <div class="register__error" v-if="errors[name]">
+  <div class="inputForm__inputWrapper">
+    <div class="inputForm__error" v-if="errors[name]">
       {{ errors[name][0] }}
     </div>
-    <label :for="name" class="register__label">{{ lable }}</label>
+    <label :for="name" class="inputForm__label">{{ lable }}</label>
     <input
       v-model="inputValue"
-      class="register__input"
+      class="inputForm__input"
       :type="type"
       :name="name"
       :placeholder="placeholder"
-      :class="{ 'register__input--error': errors[name] }"
+      :class="{ 'inputForm__input--error': errors[name] }"
     />
   </div>
 </template>

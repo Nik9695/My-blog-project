@@ -8,7 +8,7 @@
     >
   </li>
   <Modal v-if="modalIsOpened" @close="modalIsOpened = false" title="Login">
-    <form @submit.prevent="loginUser" class="login">
+    <form @submit.prevent="loginUser" class="inputForm">
       <Input
         v-model="credentials.email"
         name="email"
@@ -16,8 +16,8 @@
         type="email"
         placeholder="enter.your@email.com"
       />
-      <div class="register__inputWrapper-with-addons">
-        <div class="register__password">
+      <div class="inputForm__inputWrapper-with-addons">
+        <div class="inputForm__password">
           <Input
             v-if="passwordHidden"
             v-model="credentials.password"
@@ -34,7 +34,7 @@
             placeholder="Enter your password"
           />
         </div>
-        <div class="register__password-security">
+        <div class="inputForm__password-security">
           <button class="btn__showPassword" @click.prevent="showPassword">
             <span class="btn__showPassword-small-right">
               <i
