@@ -39,7 +39,7 @@
 
 <script>
 import ArticleCard from '../components/article/ArticleCard.vue'
-import axios from 'axios'
+import Http from '@/services/Http.js'
 export default {
   components: { ArticleCard },
   data() {
@@ -59,8 +59,9 @@ export default {
         this.$router.push('/')
         console.log()
       }
+
       try {
-        const response = await axios.get('http://localhost:8000/api/user', {
+        const response = await Http.get('/user', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -74,16 +75,15 @@ export default {
       this.getArticles()
     },
     async getArticles() {
+      const token = localStorage.getItem('token')
+
       try {
         const token = localStorage.getItem('token')
-        const response = await axios.get(
-          `http://localhost:8000/api/users/${this.user.slug}/articles`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
+        const response = await Http.get(`/users/${this.user.slug}/articles`, {
+          headers: {
+            Authorization: `Bearer ${token}`
           }
-        )
+        })
         this.articles = response.data
       } catch (error) {
         console.log(error)

@@ -119,7 +119,7 @@
 <script>
 import ArticleCard from '../components/article/ArticleCard.vue'
 import AboutArticleCard from '../components/article/AboutArticleCard.vue'
-import axios from 'axios'
+import Http from '@/services/Http.js'
 
 export default {
   components: { ArticleCard, AboutArticleCard },
@@ -130,8 +130,7 @@ export default {
   },
 
   created() {
-    axios
-      .get('http://localhost:8000/api/articles')
+    Http.get('/articles')
       .then((response) => {
         for (let i = 0; i < 3; ++i) {
           this.articlesRelated.push(response.data[i])

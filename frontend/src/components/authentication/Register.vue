@@ -78,7 +78,7 @@
 import Modal from '../general/Modal.vue'
 import Btn from '../general/Btn.vue'
 import Input from '../general/Input.vue'
-import axios from 'axios'
+import Http from '@/services/Http.js'
 export default {
   name: 'Register',
   components: { Modal, Btn, Input },
@@ -125,13 +125,12 @@ export default {
     async registerUser() {
       this.errors = []
       this.isLoading = true
-      axios
-        .post('http://localhost:8000/api/register', {
-          name: this.userData.name,
-          slug: this.userData.slug,
-          email: this.userData.email,
-          password: this.userData.password
-        })
+      Http.post('/register', {
+        name: this.userData.name,
+        slug: this.userData.slug,
+        email: this.userData.email,
+        password: this.userData.password
+      })
         .then((response) => {
           this.registrationPassed = true
           localStorage.setItem('token', response.data.token)

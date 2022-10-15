@@ -75,7 +75,7 @@
 import MainArticle from '../components/article/MainArticle.vue'
 import ArticleItemCard from '../components/article/ArticleItemCard.vue'
 import ArticleCard from '../components/article/ArticleCard.vue'
-import axios from 'axios'
+import Http from '@/services/Http.js'
 
 export default {
   components: { MainArticle, ArticleItemCard, ArticleCard },
@@ -85,8 +85,7 @@ export default {
     }
   },
   created() {
-    axios
-      .get('http://localhost:8000/api/articles')
+    Http.get('/articles')
       .then((response) => {
         this.articles = response.data
       })

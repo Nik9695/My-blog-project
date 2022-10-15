@@ -61,7 +61,7 @@
 import Modal from '../general/Modal.vue'
 import Btn from '../general/Btn.vue'
 import Input from '../general/Input.vue'
-import axios from 'axios'
+import Http from '@/services/Http.js'
 export default {
   name: 'Login',
   components: { Modal, Btn, Input },
@@ -106,12 +106,11 @@ export default {
       this.isLoading = true
       this.invalidCredentials = false
 
-      axios
-        .post('http://localhost:8000/api/authenticate', this.credentials, {
-          headers: {
-            accept: 'application/json'
-          }
-        })
+      Http.post('/authenticate', this.credentials, {
+        headers: {
+          accept: 'application/json'
+        }
+      })
         .then((response) => {
           localStorage.setItem('token', response.data)
 
