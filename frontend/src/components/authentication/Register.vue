@@ -97,6 +97,30 @@ export default {
       errors: {}
     }
   },
+  computed: {
+    hasErrors() {
+      return Object.keys(this.errors).length
+    },
+    userDataComputed() {
+      return Object.assign({}, this.userData)
+    }
+  },
+  watch: {
+    userDataComputed: {
+      handler(newValue, oldValue) {
+        if (!oldValue) {
+          return
+        }
+
+        Object.keys(newValue).forEach((key) => {
+          if (newValue[key] !== oldValue[key]) {
+            this.errors[key] = null
+          }
+        })
+      },
+      deep: true
+    }
+  },
   methods: {
     async registerUser() {
       this.errors = []
@@ -131,11 +155,6 @@ export default {
     },
     showPassword() {
       this.passwordHidden = !this.passwordHidden
-    }
-  },
-  computed: {
-    hasErrors() {
-      return Object.keys(this.errors).length
     }
   }
 }

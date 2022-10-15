@@ -79,6 +79,27 @@ export default {
       errors: {}
     }
   },
+  computed: {
+    cridentialsComputed() {
+      return Object.assign({}, this.credentials)
+    }
+  },
+  watch: {
+    cridentialsComputed: {
+      handler(newValue, oldValue) {
+        if (!oldValue) {
+          return
+        }
+
+        Object.keys(newValue).forEach((key) => {
+          if (newValue[key] !== oldValue[key]) {
+            this.errors[key] = null
+          }
+        })
+      },
+      deep: true
+    }
+  },
   methods: {
     loginUser() {
       this.errors = []
