@@ -1,7 +1,7 @@
 <template>
   <div class="inputForm__inputWrapper">
-    <div class="inputForm__error" v-if="errors[name]">
-      {{ errors[name][0] }}
+    <div class="inputForm__error" v-if="errorStore.errors[name]">
+      {{ errorStore.errors[name][0] }}
     </div>
     <label :for="name" class="inputForm__label">{{ lable }}</label>
     <input
@@ -10,12 +10,15 @@
       :type="type"
       :name="name"
       :placeholder="placeholder"
-      :class="{ 'inputForm__input--error': errors[name] }"
+      :class="{ 'inputForm__input--error': errorStore.errors[name] }"
     />
   </div>
 </template>
 
 <script>
+import { mapStores } from 'pinia'
+import { useErrorStore } from '@/store/Error.js'
+
 export default {
   props: {
     modelValue: {
@@ -37,11 +40,6 @@ export default {
     placeholder: {
       type: String,
       default: 'text'
-    },
-
-    errors: {
-      type: Object,
-      default: () => ({})
     }
   },
   computed: {
@@ -52,7 +50,8 @@ export default {
       set(value) {
         this.$emit('update:modelValue', value)
       }
-    }
+    },
+    ...mapStores(useErrorStore)
   }
 }
 </script>

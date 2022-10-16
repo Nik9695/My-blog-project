@@ -7,7 +7,6 @@
         lable="Email"
         type="email"
         placeholder="enter.your@email.com"
-        :errors="errors"
       />
       <div class="inputForm__inputWrapper-with-addons">
         <div class="inputForm__password">
@@ -18,7 +17,6 @@
             lable="Password"
             type="password"
             placeholder="Enter your password"
-            :errors="errors"
           />
           <Input
             v-if="!passwordHidden"
@@ -26,7 +24,6 @@
             name="password"
             lable="Password"
             placeholder="Enter your password"
-            :errors="errors"
           />
         </div>
         <div class="inputForm__password-security">
@@ -63,6 +60,7 @@ import Input from '../general/Input.vue'
 import Auth from '@/services/Auth.js'
 import { mapStores } from 'pinia'
 import { useModalStore } from '@/store/Modal.js'
+import { useErrorStore } from '@/store/Error.js'
 
 export default {
   name: 'Login',
@@ -76,12 +74,12 @@ export default {
       credentials: {
         email: 'test@example.com',
         password: 'password'
-      },
-      errors: {}
+      }
     }
   },
   computed: {
-    ...mapStores(useModalStore),
+    ...mapStores(useModalStore, useErrorStore),
+
     cridentialsComputed() {
       return Object.assign({}, this.credentials)
     }
@@ -95,7 +93,7 @@ export default {
 
         Object.keys(newValue).forEach((key) => {
           if (newValue[key] !== oldValue[key]) {
-            this.errors[key] = null
+            this.errorStore.deleteErrors(key)
           }
         })
       },
@@ -104,7 +102,7 @@ export default {
   },
   methods: {
     loginUser() {
-      this.errors = []
+      this.errorStore.clearErrors()
       this.isLoading = true
       this.invalidCredentials = false
 
@@ -120,10 +118,9 @@ export default {
         })
         .catch((error) => {
           if (error.response?.status === 403) {
-            this.errors = error.response.data
-            console.log(this.errors)
+            this.errorStore.setErrors(error.response.data)
           } else if (error.response?.status == 422) {
-            this.errors = error.response.data.errors
+            this.errorStore.setErrors(error.response.data.errors)
           }
           setTimeout(() => {
             this.isLoading = false
