@@ -2,12 +2,12 @@
   <div>
     <li
       class="header__nav-item--register"
-      @click.prevent="modalIsOpened = true"
+      @click.prevent="modalStore.openModal('register')"
     >
       <a href="#" class="header__nav-item-link--register">Sign up</a>
     </li>
 
-    <Modal v-if="modalIsOpened" @close="modalIsOpened = false" title="Sign up">
+    <Modal v-if="modalStore.activeModal === 'register'" title="Sign up">
       <form @submit.prevent="registerUser" class="inputForm">
         <Input
           v-model="userData.name"
@@ -79,12 +79,14 @@ import Modal from '../general/Modal.vue'
 import Btn from '../general/Btn.vue'
 import Input from '../general/Input.vue'
 import Auth from '@/services/Auth.js'
+import { mapStores } from 'pinia'
+import { useModalStore } from '@/store/Modal.js'
+
 export default {
   name: 'Register',
   components: { Modal, Btn, Input },
   data() {
     return {
-      modalIsOpened: false,
       registrationPassed: false,
       isLoading: false,
       passwordHidden: true,
@@ -103,7 +105,8 @@ export default {
     },
     userDataComputed() {
       return Object.assign({}, this.userData)
-    }
+    },
+    ...mapStores(useModalStore)
   },
   watch: {
     userDataComputed: {
@@ -134,7 +137,7 @@ export default {
 
           setTimeout(() => {
             this.isLoading = false
-            this.modalIsOpened = false
+            this.modalStore.closeModal()
           }, 1000)
         })
         .catch((error) => {
@@ -144,7 +147,6 @@ export default {
 
           setTimeout(() => {
             this.isLoading = false
-            this.modalIsOpened = true
           }, 1000)
         })
     },
