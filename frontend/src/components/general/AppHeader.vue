@@ -17,18 +17,30 @@
             >
           </li>
           <li class="header__nav-item">
-            <a href="#" class="header__nav-item-link">Contact</a>
-          </li>
-          <li class="header__nav-item">
             <RouterLink
               :to="{ name: `my-profile` }"
               class="header__nav-item-link"
               >My profile</RouterLink
             >
           </li>
-          <Login />
-
-          <Register />
+          <li class="header__nav-item">
+            <a
+              class="header__nav-item-link"
+              href="#"
+              @click.prevent="modalStore.openModal('login')"
+            >
+              Log in</a
+            >
+          </li>
+          <li class="header__nav-item--register">
+            <a
+              class="header__nav-item-link--register"
+              href="#"
+              @click.prevent="modalStore.openModal('register')"
+            >
+              Sign up</a
+            >
+          </li>
         </ul>
       </nav>
     </div>
@@ -36,10 +48,13 @@
 </template>
 
 <script>
-import Login from '@/components/authentication/Login.vue'
-import Register from '@/components/authentication/Register.vue'
+import { mapStores } from 'pinia'
+import { useModalStore } from '@/store/Modal.js'
+
 export default {
   name: 'AppHeader',
-  components: { Login, Register }
+  computed: {
+    ...mapStores(useModalStore)
+  }
 }
 </script>

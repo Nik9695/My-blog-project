@@ -1,12 +1,4 @@
 <template>
-  <li class="header__nav-item">
-    <a
-      href="#"
-      @click.prevent="modalStore.openModal('login')"
-      class="header__nav-item-link"
-      >Login</a
-    >
-  </li>
   <Modal v-if="modalStore.activeModal === 'login'" title="Login">
     <form @submit.prevent="loginUser" class="inputForm">
       <Input

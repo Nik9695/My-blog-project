@@ -1,12 +1,5 @@
 <template>
   <div>
-    <li
-      class="header__nav-item--register"
-      @click.prevent="modalStore.openModal('register')"
-    >
-      <a href="#" class="header__nav-item-link--register">Sign up</a>
-    </li>
-
     <Modal v-if="modalStore.activeModal === 'register'" title="Sign up">
       <form @submit.prevent="registerUser" class="inputForm">
         <Input
