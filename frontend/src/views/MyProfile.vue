@@ -39,7 +39,8 @@
 
 <script>
 import ArticleCard from '../components/article/ArticleCard.vue'
-import Http from '@/services/Http.js'
+import Auth from '@/services/Auth.js'
+import Article from '@/services/Article.js'
 export default {
   components: { ArticleCard },
   data() {
@@ -59,7 +60,7 @@ export default {
         console.log()
       }
       try {
-        const response = await Http.get('/user')
+        const response = await Auth.me()
         this.user = response.data
       } catch (error) {
         localStorage.setItem('token', '')
@@ -69,7 +70,7 @@ export default {
     },
     async getArticles() {
       try {
-        const response = await Http.get(`/users/${this.user.slug}/articles`)
+        const response = await Article.bySlug(this.user.slug)
         this.articles = response.data
       } catch (error) {
         console.log(error)

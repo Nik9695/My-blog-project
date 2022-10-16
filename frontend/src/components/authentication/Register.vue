@@ -78,7 +78,7 @@
 import Modal from '../general/Modal.vue'
 import Btn from '../general/Btn.vue'
 import Input from '../general/Input.vue'
-import Http from '@/services/Http.js'
+import Auth from '@/services/Auth.js'
 export default {
   name: 'Register',
   components: { Modal, Btn, Input },
@@ -125,12 +125,8 @@ export default {
     async registerUser() {
       this.errors = []
       this.isLoading = true
-      Http.post('/register', {
-        name: this.userData.name,
-        slug: this.userData.slug,
-        email: this.userData.email,
-        password: this.userData.password
-      })
+
+      Auth.registerUser(this.userData)
         .then((response) => {
           this.registrationPassed = true
           localStorage.setItem('token', response.data.token)

@@ -75,7 +75,7 @@
 import MainArticle from '../components/article/MainArticle.vue'
 import ArticleItemCard from '../components/article/ArticleItemCard.vue'
 import ArticleCard from '../components/article/ArticleCard.vue'
-import Http from '@/services/Http.js'
+import Article from '@/services/Article.js'
 
 export default {
   components: { MainArticle, ArticleItemCard, ArticleCard },
@@ -85,7 +85,7 @@ export default {
     }
   },
   created() {
-    Http.get('/articles')
+    Article.getAll()
       .then((response) => {
         this.articles = response.data
       })

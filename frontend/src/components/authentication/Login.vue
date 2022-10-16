@@ -61,7 +61,7 @@
 import Modal from '../general/Modal.vue'
 import Btn from '../general/Btn.vue'
 import Input from '../general/Input.vue'
-import Http from '@/services/Http.js'
+import Auth from '@/services/Auth.js'
 export default {
   name: 'Login',
   components: { Modal, Btn, Input },
@@ -106,11 +106,7 @@ export default {
       this.isLoading = true
       this.invalidCredentials = false
 
-      Http.post('/authenticate', this.credentials, {
-        headers: {
-          accept: 'application/json'
-        }
-      })
+      Auth.loginUser(this.credentials)
         .then((response) => {
           localStorage.setItem('token', response.data)
 
