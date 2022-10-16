@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             ->set('email', 'test@example.com')
             ->set('password', Hash::make('password'))
             ->hasArticles(3)
-            ->hasComments(3) // special magic method
+            ->hasComments(3)
             ->create();
 
         User::factory(1)
@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             ->set('email', 'other@example.com')
             ->set('password', Hash::make('password'))
             ->hasArticles(3)
-            ->hasComments(3) // special magic method
+            ->hasComments(3)
             ->create();
 
         User::factory(1)
@@ -46,12 +46,10 @@ class DatabaseSeeder extends Seeder
             ->set('admin_identifier', true)
             ->create();
 
-        // create two more users without posts
         (new UserFactory(2))
             ->set('name', 'user without posts')
             ->create();
 
-        // seeder is a place in which to create the objects
         $this->call([
             ArticleSeeder::class,
             CommentSeeder::class,
