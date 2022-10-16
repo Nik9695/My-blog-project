@@ -2,12 +2,12 @@
   <li class="header__nav-item">
     <a
       href="#"
-      @click.prevent="modalIsOpened = true"
+      @click.prevent="modalStore.openModal('login')"
       class="header__nav-item-link"
       >Login</a
     >
   </li>
-  <Modal v-if="modalIsOpened" @close="modalIsOpened = false" title="Login">
+  <Modal v-if="modalStore.activeModal === 'login'" title="Login">
     <form @submit.prevent="loginUser" class="inputForm">
       <Input
         v-model="credentials.email"
@@ -62,13 +62,15 @@ import Modal from '../general/Modal.vue'
 import Btn from '../general/Btn.vue'
 import Input from '../general/Input.vue'
 import Auth from '@/services/Auth.js'
+import { mapStores } from 'pinia'
+import { useModalStore } from '@/store/Modal.js'
+
 export default {
   name: 'Login',
   components: { Modal, Btn, Input },
 
   data() {
     return {
-      modalIsOpened: false,
       invalidCredentials: false,
       isLoading: false,
       passwordHidden: true,
@@ -80,6 +82,7 @@ export default {
     }
   },
   computed: {
+    ...mapStores(useModalStore),
     cridentialsComputed() {
       return Object.assign({}, this.credentials)
     }
@@ -112,7 +115,7 @@ export default {
 
           setTimeout(() => {
             this.isLoading = false
-            this.modalIsOpened = false
+            this.modalStore.closeModal()
             this.$router.push({ name: `my-profile` })
           }, 1000)
         })
@@ -125,7 +128,6 @@ export default {
           }
           setTimeout(() => {
             this.isLoading = false
-            this.modalIsOpened = true
           }, 1000)
         })
     },
