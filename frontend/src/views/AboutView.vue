@@ -119,26 +119,29 @@
 <script>
 import ArticleCard from '../components/article/ArticleCard.vue'
 import AboutArticleCard from '../components/article/AboutArticleCard.vue'
-import Http from '@/services/Http.js'
+import Article from '@/services/Article.js'
 
 export default {
   components: { ArticleCard, AboutArticleCard },
   data() {
     return {
-      articlesRelated: []
+      articles: []
     }
   },
 
   created() {
-    Http.get('/articles')
+    Article.getAll()
       .then((response) => {
-        for (let i = 0; i < 3; ++i) {
-          this.articlesRelated.push(response.data[i])
-        }
+        this.articles = response.data
       })
       .catch((error) => {
         console.log(error)
       })
+  },
+  computed: {
+    articlesRelated() {
+      return this.articles.slice(0, 3)
+    }
   }
 }
 </script>
