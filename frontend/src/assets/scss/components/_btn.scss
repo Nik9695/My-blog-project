@@ -3,9 +3,12 @@
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 20px;
+  width: auto;
   color: black;
   border: none;
   padding: 10px 30px;
+  justify-content: center;
+  align-self: center;
   cursor: pointer;
   transition: 1s all;
   display: flex;
