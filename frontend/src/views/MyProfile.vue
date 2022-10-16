@@ -41,27 +41,42 @@
 import ArticleCard from '../components/article/ArticleCard.vue'
 import Auth from '@/services/Auth.js'
 import Article from '@/services/Article.js'
+import { mapStores } from 'pinia'
+import { useAuthStore } from '@/store/Auth.js'
+
 export default {
   components: { ArticleCard },
   data() {
     return {
-      user: {},
       articles: []
     }
   },
   async created() {
     this.getAuth()
   },
+  computed: {
+    hasArticles() {
+      return this.articles.length
+    },
+
+    ...mapStores(useAuthStore),
+
+    user() {
+      return this.authStore.user
+    }
+  },
   methods: {
     async getAuth() {
       const token = localStorage.getItem('token')
+
       if (!token) {
         this.$router.push('/')
         console.log()
       }
+
       try {
         const response = await Auth.me()
-        this.user = response.data
+        this.authStore.setUser(response.data)
       } catch (error) {
         localStorage.setItem('token', '')
         this.$router.push('/')
@@ -70,16 +85,11 @@ export default {
     },
     async getArticles() {
       try {
-        const response = await Article.bySlug(this.user.slug)
+        const response = await Article.bySlug(this.authStore.user.slug)
         this.articles = response.data
       } catch (error) {
         console.log(error)
       }
-    }
-  },
-  computed: {
-    hasArticles() {
-      return this.articles.length
     }
   }
 }

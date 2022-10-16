@@ -16,14 +16,22 @@
               >About</RouterLink
             >
           </li>
-          <li class="header__nav-item">
+          <li class="header__nav-item" v-if="authStore.isLoggedIn">
             <RouterLink
               :to="{ name: `my-profile` }"
               class="header__nav-item-link"
               >My profile</RouterLink
             >
           </li>
-          <li class="header__nav-item">
+          <li class="header__nav-item" v-if="authStore.isLoggedIn">
+            <a
+              href="#"
+              @click.prevent="authStore.logoutUser()"
+              class="header__nav-item-link"
+              >Log out</a
+            >
+          </li>
+          <li class="header__nav-item" v-if="authStore.isGuest">
             <a
               class="header__nav-item-link"
               href="#"
@@ -32,7 +40,7 @@
               Log in</a
             >
           </li>
-          <li class="header__nav-item--register">
+          <li class="header__nav-item--register" v-if="authStore.isGuest">
             <a
               class="header__nav-item-link--register"
               href="#"
@@ -50,11 +58,12 @@
 <script>
 import { mapStores } from 'pinia'
 import { useModalStore } from '@/store/Modal.js'
+import { useAuthStore } from '@/store/Auth.js'
 
 export default {
   name: 'AppHeader',
   computed: {
-    ...mapStores(useModalStore)
+    ...mapStores(useModalStore, useAuthStore)
   }
 }
 </script>
