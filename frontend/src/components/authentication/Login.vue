@@ -53,6 +53,13 @@
       </div>
 
       <Btn type="submit" :isLoading="isLoading">Login</Btn>
+      <a
+        class="modal__switcher"
+        href="#"
+        @click.prevent="modalStore.openModal('register')"
+      >
+        Not on LevelUp blog yet? Sign up</a
+      >
     </form>
   </Modal>
 </template>

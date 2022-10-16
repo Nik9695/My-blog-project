@@ -69,6 +69,13 @@
         </div>
 
         <Btn type="submit" :isLoading="isLoading">Sign up</Btn>
+        <a
+          class="modal__switcher"
+          href="#"
+          @click.prevent="modalStore.openModal('login')"
+        >
+          Already a member? Log in</a
+        >
       </form>
     </Modal>
   </div>
