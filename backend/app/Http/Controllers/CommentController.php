@@ -20,7 +20,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        return Comment::all()->load('author');
+        $comments = Comment::paginate(5);
+        return $comments;
     }
 
     /**
