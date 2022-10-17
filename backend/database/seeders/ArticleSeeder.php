@@ -29,3 +29,4 @@ class ArticleSeeder extends Seeder
         $article->save();
     }
 }
+

@@ -13,4 +13,20 @@ class StringUtils
 
         return $slug;
     }
+
+    public static function summarize(string $value, $numberOfSentences = 1): string {
+
+        /**
+         * Making 'String Object' from 'string' variable $value
+         */
+        $stringValue = Str::of($value);
+
+        /**
+         * Splitting content by sentences and returning the first one.
+         */
+        $firstSentence = $stringValue->explode('.')->take($numberOfSentences);
+
+        return $firstSentence;
+    }
+
 }

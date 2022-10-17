@@ -49,13 +49,13 @@ class User extends Authenticatable
         return $this->hasMany(Article::class);
     }
 
-    public function getRouteKeyName()
+    public function comments()
     {
         return 'id';
     }
 
-    public function comments()
+    public function getRouteKeyName()
     {
-        return $this->hasMany(Comment::class);
+        return 'slug';
     }
 }
