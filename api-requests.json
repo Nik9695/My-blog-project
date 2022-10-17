@@ -16,29 +16,40 @@
 							"name": "register",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "urlencoded",
 									"urlencoded": [
 										{
 											"key": "name",
-											"value": "nik nik",
+											"value": "qwseqwdqwdasda",
 											"type": "text"
 										},
 										{
 											"key": "email",
-											"value": "nik@mail.com",
+											"value": "nikqweqwasdase@mail.comqwe",
 											"type": "text"
 										},
 										{
 											"key": "password",
-											"value": "123456789",
+											"value": "12345678921321",
+											"type": "text"
+										},
+										{
+											"key": "slug",
+											"value": "nikqweqweasdasd",
 											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "http://localhost:8000/api/register",
+									"raw": "http://localhost:8000/api/registration",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -46,7 +57,7 @@
 									"port": "8000",
 									"path": [
 										"api",
-										"register"
+										"registration"
 									]
 								}
 							},
@@ -137,7 +148,7 @@
 					]
 				},
 				{
-					"name": "articles",
+					"name": "ArticleController",
 					"item": [
 						{
 							"name": "index",
@@ -146,14 +157,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "96|R29nqktQnxDq4IVDoFqQI2Kc04b6hBdsuHG9PCGR",
-											"type": "string"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [],
@@ -184,7 +188,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "1|7HIFcCxPzmTd4c0trdClA3Ax4u53qE5Ip4dnkx1N",
+											"value": "1|W1PVijT62i0P3lAHSuryA1SjTAWpJBHZr1Hz74wt",
 											"type": "string"
 										}
 									]
@@ -421,49 +425,7 @@
 					]
 				},
 				{
-					"name": "my",
-					"item": [
-						{
-							"name": "my-profile",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "96|R29nqktQnxDq4IVDoFqQI2Kc04b6hBdsuHG9PCGR",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"url": {
-									"raw": "http://localhost:8000/api/user",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8000",
-									"path": [
-										"api",
-										"user"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "comments",
+					"name": "CommentController",
 					"item": [
 						{
 							"name": "index",
@@ -599,7 +561,14 @@
 							"name": "store_user",
 							"request": {
 								"auth": {
-									"type": "noauth"
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|u1ArbtMqpUObAtt14EKt8jHISLjddAEAN8atLI0w",
+											"type": "string"
+										}
+									]
 								},
 								"method": "POST",
 								"header": [
@@ -625,7 +594,7 @@
 										},
 										{
 											"key": "article_id",
-											"value": "10",
+											"value": "1",
 											"type": "text"
 										}
 									]
@@ -731,6 +700,189 @@
 										"api",
 										"comments",
 										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "UserArticleController",
+					"item": [
+						{
+							"name": "index",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8000/api/users/1/articles",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"users",
+										"1",
+										"articles"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "UserCommentController",
+					"item": [
+						{
+							"name": "index",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8000/api/users/1/comments",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"users",
+										"1",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ArticleCommentController",
+					"item": [
+						{
+							"name": "index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8000/api/articles/1/comments",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"articles",
+										"1",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "store_comment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "1|uTlidm4nylTYpT6w5hLwurdANqYfVhmR6pmprYjL",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "content",
+											"value": "HELLO FROM NESTED ROUTES",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/articles/10/comments",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"articles",
+										"10",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "my",
+					"item": [
+						{
+							"name": "my-profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "96|R29nqktQnxDq4IVDoFqQI2Kc04b6hBdsuHG9PCGR",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8000/api/user",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"user"
 									]
 								}
 							},
