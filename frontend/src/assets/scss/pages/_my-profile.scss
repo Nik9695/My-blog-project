@@ -1,0 +1,102 @@
+.myProfile {
+  background: url('@/assets/images/my-profile.jpg') center no-repeat;
+  background-size: cover;
+  min-height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.myProfile__inner {
+  max-width: $width;
+  text-align: center;
+}
+.myProfile__section-heading {
+  width: 116px;
+  height: 10px;
+  left: 70px;
+  top: 1689px;
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #495057;
+  padding-bottom: 50px;
+}
+
+.section__inner--myProfile__page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 50px;
+  padding-bottom: 50px;
+
+  .myProfile__area {
+    max-width: 860px;
+  }
+  @include for-phone-only {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-right: 0%;
+  }
+}
+
+.myProfile__categories {
+  list-style: none;
+  padding: 0;
+}
+
+.myProfile__category-link {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  font-family: 'Roboto', serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 12px;
+  color: $white;
+  text-decoration: none;
+  padding: 5px 10px;
+}
+
+.myProfile__heading {
+  font-family: 'Lora', serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 46px;
+  color: $white;
+  max-width: 530px;
+  margin: 13px auto;
+}
+
+.myProfile__content {
+  font-family: 'Lora', serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  color: white;
+  margin: 0px auto;
+  max-width: 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.myProfile__content-author {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 20px;
+  color: white;
+  margin: 13px auto;
+  max-width: 133px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

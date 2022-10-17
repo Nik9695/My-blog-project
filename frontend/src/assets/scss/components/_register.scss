@@ -1,0 +1,96 @@
+.register {
+  width: 100%;
+  margin-bottom: 10px;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.register__inputWrapper {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.register__label {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  display: block;
+  font-weight: 600;
+}
+
+.register__input {
+  margin-bottom: 10px;
+  width: 100%;
+  border: 1px solid goldenrod;
+  box-sizing: border-box;
+  padding: 10px;
+}
+.register__status {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  position: relative;
+  border-radius: 10px;
+  background: rgb(61, 148, 156);
+  margin-bottom: 10px;
+}
+
+.register__error {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  position: relative;
+  border-radius: 10px;
+  background: rgb(171, 89, 89);
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.register__success {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  position: relative;
+  border-radius: 10px;
+  background: rgb(43, 129, 59);
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.register__inputWrapper-with-addons {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.register__password {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  width: 100%;
+}
+.btn__showPassword {
+  height: calc(100% - 10px);
+  border: 1px solid goldenrod;
+  border-left: none;
+  cursor: pointer;
+  &:hover {
+    transition: 1s;
+    background-color: goldenrod;
+  }
+}

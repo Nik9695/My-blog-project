@@ -5,6 +5,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
+use App\Utils\StringUtils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -50,17 +51,19 @@ Route::post('/registration', function (StoreUserRequest $request) {
     $validated = $request->validate([
         'name' => 'required',
         'email' => 'required|email',
-        'slug' => 'required',
+        'slug' => '',
         'password' => 'required'
     ]);
 
     $validated['password'] = Hash::make($validated['password']);
+    $validated['slug'] =  StringUtils::slugify($validated['name']);
 
     $user = new User($validated);
     $user->save();
 
     return $user;
 })->name('users.store');
+
 
 Route::get('/users/{user:slug}', function (User $user) {
     return $user;
@@ -80,3 +83,8 @@ Route::post('/authenticate', function (Request $request) {
 
     return $user->createToken('auth_token')->plainTextToken;
 });
+
+Route::resource('articles', ArticleController::class)->only([
+    'index',
+    'show'
+]);

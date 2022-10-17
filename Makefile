@@ -11,7 +11,7 @@ backend-init:
 		-v "$$(pwd)/backend:/app" \
 		-w /app \
 		laravelsail/php81-composer:latest \
-		composer install --ignore-platform-reqs
+		composer install --ignore-platform-reqs	
 
 backend-run: | backend-init
 	docker-compose up -d backend
