@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Utils\StringUtils;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,5 +30,16 @@ class Article extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
+    protected function setTitleAttribute(string $title)
+    {
+        $this->attributes['title'] = $title;
+        $this->attributes['slug'] = StringUtils::slugify($title);
     }
 }

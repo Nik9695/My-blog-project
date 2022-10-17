@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Article;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -15,9 +16,15 @@ class ArticleSeeder extends Seeder
      */
     public function run()
     {
+        $categories = Category::factory(2)->create();
+
         Article::factory(2)
             ->hasComments(1)
+            ->afterCreating(function (Article $article) use ($categories) {
+                $article->categories()->attach($categories);
+            })
             ->create();
+
 
         $article = new Article([
             'title' => 'manually created',

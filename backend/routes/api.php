@@ -3,11 +3,14 @@
 use App\Http\Controllers\ArticleCommentController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserArticleController;
 use App\Http\Controllers\UserCommentController;
 use App\Http\Controllers\UserController;
 use App\Http\Requests\StoreUserRequest;
+use App\Models\Article;
+use App\Models\Category;
 use App\Models\User;
 use App\Utils\StringUtils;
 use Illuminate\Http\Request;
@@ -50,3 +53,12 @@ Route::apiResource('articles.comments', ArticleCommentController::class)->shallo
 
 Route::post('/authenticate', [AuthController::class, 'authenticate']);
 Route::post('/registration', [UserController::class, 'store']);
+
+Route::apiResource('categories', CategoryController::class)->only($unauthenticatedRoutes);
+
+
+/* Route::get('/categories/{category}/articles', function (Category $category) {
+    $allArticles = Article::all();
+
+    return $allArticles;
+}); */
