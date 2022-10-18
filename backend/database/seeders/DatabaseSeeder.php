@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             ->set('email', 'test@example.com')
             ->set('password', Hash::make('password'))
             ->hasArticles(3)
-            ->hasComments(3)
+            //->hasComments(3)
             ->create();
 
         User::factory(1)
@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             ->set('email', 'other@example.com')
             ->set('password', Hash::make('password'))
             ->hasArticles(3)
-            ->hasComments(3)
+            //->hasComments(3)
             ->create();
 
         User::factory(1)
