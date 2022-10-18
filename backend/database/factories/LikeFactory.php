@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Article;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,9 @@ class LikeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'like_status' => true,
+            'user_id' => User::factory(),
+            'article_id' => Article::factory(),
         ];
     }
 }

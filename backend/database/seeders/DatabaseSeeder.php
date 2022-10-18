@@ -25,16 +25,17 @@ class DatabaseSeeder extends Seeder
             ->set('email', 'test@example.com')
             ->set('password', Hash::make('password'))
             ->hasArticles(3)
-            //->hasComments(3)
+            ->hasComments(3)
             ->create();
 
         User::factory(1)
-            ->set('name', 'other User')
-            ->set('slug', 'other-user')
-            ->set('email', 'other@example.com')
-            ->set('password', Hash::make('password'))
+            ->set('name', 'nik')
+            ->set('slug', 'nik-user')
+            ->set('email', 'nik@mail.com')
+            ->set('password', Hash::make('12345678'))
             ->hasArticles(3)
-            //->hasComments(3)
+            ->hasComments(3)
+            ->hasLikes(3)
             ->create();
 
         User::factory(1)
@@ -45,14 +46,15 @@ class DatabaseSeeder extends Seeder
             ->set('admin_identifier', true)
             ->create();
 
-        (new UserFactory(2))
+        /*         (new UserFactory(2))
             ->set('name', 'user without posts')
-            ->create();
+            ->create(); */
 
         $this->call([
             ArticleSeeder::class,
             CommentSeeder::class,
-            CategorySeeder::class
+            CategorySeeder::class,
+            LikeSeeder::class
         ]);
     }
 }
