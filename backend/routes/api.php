@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleCommentController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ArticleLikeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
@@ -42,10 +43,46 @@ Route::middleware('auth:sanctum')->group(function () use ($unauthenticatedRoutes
     Route::apiResource('comments', CommentController::class)->except($unauthenticatedRoutes);
     Route::apiResource('articles.comments', ArticleCommentController::class)->shallow()->except($unauthenticatedRoutes);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     Route::apiResource('articles.likes', ArticleLikeController::class)->shallow()->except($unauthenticatedRoutes);
 });
 
 Route::apiResource('articles.likes', ArticleLikeController::class)->shallow()->only($unauthenticatedRoutes);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Route::apiResource('comments', CommentController::class)->only($unauthenticatedRoutes);
 Route::apiResource('articles', ArticleController::class)->only($unauthenticatedRoutes);
