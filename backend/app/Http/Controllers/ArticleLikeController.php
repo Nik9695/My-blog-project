@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreLikeRequest;
 use App\Models\Article;
 use App\Models\Like;
 use Illuminate\Http\Request;
@@ -31,9 +32,24 @@ class ArticleLikeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreLikeRequest $request, Article $article)
     {
-        //
+
+        $likes = Like::all();
+
+        if ($likes->contains('article_id', $article->id) && $likes->contains('user_id', auth()->id())) {
+            return 'you have already put like';
+        } else {
+            $like = new Like(['like_status' => true]);
+
+            $like->like_status = true;
+            $like->user_id = auth()->id();
+
+            $like->article_id = $article->id;
+            $like->save();
+
+            return $like;
+        }
     }
 
     /**
@@ -65,8 +81,11 @@ class ArticleLikeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Like $like)
     {
-        //
+        //dd('qweqw');
+        if ($like->delete()) {
+            return 'like has been removed';
+        }
     }
 }

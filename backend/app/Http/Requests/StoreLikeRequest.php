@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Like;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreLikeRequest extends FormRequest
@@ -13,7 +15,7 @@ class StoreLikeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +25,7 @@ class StoreLikeRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+
+        return [];
     }
 }

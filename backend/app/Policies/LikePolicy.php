@@ -18,7 +18,7 @@ class LikePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class LikePolicy
      */
     public function view(User $user, Like $like)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class LikePolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class LikePolicy
      */
     public function delete(User $user, Like $like)
     {
-        //
+        return ($user->id === $like->user_id || $user->admin_identifier == true);
     }
 
     /**
