@@ -20,11 +20,11 @@ class ArticleControllerTest extends TestCase
 
     public function test_any_user_can_view_all_articles()
     {
-        $response = $this->get('/api/articles');
+        $responseAll = $this->get('/api/articles');
 
-        $response->assertStatus(200);
+        $responseAll->assertStatus(200);
 
-        $response->assertJson(['per_page' => 5]);
+        $responseAll->assertJson(['per_page' => 5]);
     }
 
     public function test_only_authenticated_user_can_create_article()

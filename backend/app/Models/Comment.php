@@ -25,4 +25,9 @@ class Comment extends Model
     {
         return $this->HasMany(Like::class);
     }
+
+    public function getRouteKeyName()
+    {
+        return 'id';
+    }
 }
