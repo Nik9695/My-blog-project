@@ -4,15 +4,29 @@ namespace Tests\Feature;
 
 use App\Models\Category;
 use App\Models\User;
-
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ArticleControllerTest extends TestCase
 {
-    //use RefreshDatabase;
     //use DatabaseMigrations;
 
-    public function test_user_can_create_article()
+    //use RefreshDatabase;
+
+    use DatabaseTransactions;
+
+    public function test_any_user_can_view_all_articles()
+    {
+        $response = $this->get('/api/articles');
+
+        $response->assertStatus(200);
+
+        $response->assertJson(['per_page' => 5]);
+    }
+
+    public function test_only_authenticated_user_can_create_article()
     {
         $user = User::factory(1)->create()[0];
 
