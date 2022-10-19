@@ -6,7 +6,7 @@ export default {
   },
 
   async registerUser(userData) {
-    return await Http.post('/register', userData)
+    return await Http.post('/registration', userData)
   },
 
   async me() {

@@ -132,7 +132,7 @@ export default {
   created() {
     Article.getAll()
       .then((response) => {
-        this.articles = response.data
+        this.articles = response.data.data
       })
       .catch((error) => {
         console.log(error)
