@@ -34,6 +34,13 @@
             :article="article"
           />
         </div>
+        <div class="section__articles">
+          <ArticleCard
+            v-for="article in articles"
+            :key="article.id"
+            :article="article"
+          />
+        </div>
       </div>
       <div
         class="section__inner section__inner--myProfile__page"
@@ -48,7 +55,6 @@
 
 <script>
 import ArticleCard from '../components/article/ArticleCard.vue'
-import Auth from '@/services/Auth.js'
 import Article from '@/services/Article.js'
 import { mapStores } from 'pinia'
 import { useAuthStore } from '@/store/Auth.js'
