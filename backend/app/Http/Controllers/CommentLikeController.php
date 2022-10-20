@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreLikeRequest;
-use App\Models\Article;
+use App\Models\Comment;
 use App\Models\Like;
 use Illuminate\Http\Request;
 
-class ArticleLikeController extends Controller
+class CommentLikeController extends Controller
 {
 
     public function __construct()
@@ -20,9 +19,9 @@ class ArticleLikeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Article $article)
+    public function index(Comment $comment)
     {
-        $likes = Like::where('article_id', $article->id)->get();
+        $likes = Like::where('comment_id', $comment->id)->get();
         return $likes;
     }
 
@@ -32,20 +31,20 @@ class ArticleLikeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Article $article)
+    public function store(Comment $comment)
     {
 
         $likes = Like::all();
 
-        if ($likes->contains('article_id', $article->id) && $likes->contains('user_id', auth()->id())) {
-            return 'you have already put like on this article';
+        if ($likes->contains('comment_id', $comment->id) && $likes->contains('user_id', auth()->id())) {
+            return 'you have already put like on this comment';
         } else {
             $like = new Like(['like_status' => true]);
 
             $like->like_status = true;
             $like->user_id = auth()->id();
 
-            $like->article_id = $article->id;
+            $like->comment_id = $comment->id;
             $like->save();
 
             return $like;
