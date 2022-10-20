@@ -29,6 +29,13 @@
             <p class="addArticle__btn-text">Add new article</p>
           </div>
         </div>
+        <div class="section__articles">
+          <ArticleCard
+            v-for="article in articles"
+            :key="article.id"
+            :article="article"
+          />
+        </div>
       </div>
       <div
         class="section__inner section__inner--myProfile__page"
