@@ -52,7 +52,7 @@ export default {
     }
   },
   async created() {
-    this.getAuth()
+    this.getArticles()
   },
   computed: {
     hasArticles() {
@@ -66,23 +66,6 @@ export default {
     }
   },
   methods: {
-    async getAuth() {
-      const token = localStorage.getItem('token')
-
-      if (!token) {
-        this.$router.push('/')
-        console.log()
-      }
-
-      try {
-        const response = await Auth.me()
-        this.authStore.setUser(response.data)
-      } catch (error) {
-        localStorage.setItem('token', '')
-        this.$router.push('/')
-      }
-      this.getArticles()
-    },
     async getArticles() {
       try {
         const response = await Article.byUserId(this.authStore.user.id)
