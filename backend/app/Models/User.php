@@ -65,7 +65,6 @@ class User extends Authenticatable
         return $this->hasOne(Like::class);
     }
 
-
     public function getRouteKeyName()
     {
         return 'id';
