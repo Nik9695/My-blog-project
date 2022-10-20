@@ -1,16 +1,25 @@
 <template>
   <main>
-    <article class="myProfile">
+    <div class="myProfile">
       <div class="myProfile__inner">
-        <ul class="myProfile__categories"></ul>
+        <img
+          src="@/assets/images/default-user-icon.png"
+          class="myProfile__image"
+        />
         <h2 class="myProfile__heading">
           {{ user.name }}
         </h2>
         <p class="myProfile__content">
           {{ user.email }}
         </p>
+
+        <p>
+          <RouterLink class="myProfile__editProfile-link" to="/edit-my-profile">
+            Edit profile</RouterLink
+          >
+        </p>
       </div>
-    </article>
+    </div>
 
     <div class="section">
       <div
