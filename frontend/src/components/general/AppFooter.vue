@@ -6,10 +6,22 @@
           <h4 class="footer__section-title">Title</h4>
           <ul class="footer__section-list">
             <li class="footer__section-item">
-              <RouterLink to="/" class="footer__section-link">Link</RouterLink>
+              <a
+                class="footer__section-link"
+                href="#"
+                @click.prevent="modalStore.openModal('login')"
+              >
+                Log in</a
+              >
             </li>
             <li class="footer__section-item">
-              <RouterLink to="/" class="footer__section-link">Link</RouterLink>
+              <a
+                class="footer__section-link"
+                href="#"
+                @click.prevent="modalStore.openModal('register')"
+              >
+                Sign up</a
+              >
             </li>
             <li class="footer__section-item">
               <RouterLink to="/" class="footer__section-link">Link</RouterLink>
@@ -86,7 +98,13 @@
 </template>
 
 <script>
+import { mapStores } from 'pinia'
+import { useModalStore } from '@/store/Modal.js'
+
 export default {
-  name: 'AppFooter'
+  name: 'AppFooter',
+  computed: {
+    ...mapStores(useModalStore)
+  }
 }
 </script>

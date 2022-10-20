@@ -13,7 +13,10 @@
     </article>
 
     <div class="section">
-      <div class="section__inner section__inner--myProfile__page">
+      <div
+        class="section__inner section__inner--myProfile__page"
+        v-if="hasArticles"
+      >
         <h2 class="myProfile__section-heading">My articles:</h2>
         <div class="section__articles">
           <ArticleCard
@@ -23,58 +26,50 @@
           />
         </div>
       </div>
+      <div
+        class="section__inner section__inner--myProfile__page"
+        :class="{ noArticles: !hasArticles }"
+        v-else
+      >
+        <h2 class="myProfile__section-heading">You don't have any articles</h2>
+      </div>
     </div>
   </main>
 </template>
 
 <script>
 import ArticleCard from '../components/article/ArticleCard.vue'
-import axios from 'axios'
+import Auth from '@/services/Auth.js'
+import Article from '@/services/Article.js'
+import { mapStores } from 'pinia'
+import { useAuthStore } from '@/store/Auth.js'
+
 export default {
   components: { ArticleCard },
   data() {
     return {
-      user: {},
       articles: []
     }
   },
   async created() {
-    this.getAuth()
+    this.getArticles()
+  },
+  computed: {
+    hasArticles() {
+      return this.articles.length
+    },
+
+    ...mapStores(useAuthStore),
+
+    user() {
+      return this.authStore.user
+    }
   },
   methods: {
-    async getAuth() {
-      const token = localStorage.getItem('token')
-
-      if (!token) {
-        this.$router.push('/')
-        console.log()
-      }
-      try {
-        const response = await axios.get('http://localhost:8000/api/user', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
-        this.user = response.data
-      } catch (error) {
-        console.log(error)
-        localStorage.setItem('token', '')
-        this.$router.push('/')
-      }
-      this.getArticles()
-    },
     async getArticles() {
       try {
-        const token = localStorage.getItem('token')
-        const response = await axios.get(
-          `http://localhost:8000/api/users/${this.user.slug}/articles`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          }
-        )
-        this.articles = response.data
+        const response = await Article.byUserId(this.authStore.user.id)
+        this.articles = response.data.data
       } catch (error) {
         console.log(error)
       }

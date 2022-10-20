@@ -31,6 +31,10 @@ $unauthenticatedRoutes = ['index', 'show'];
 
 Route::middleware('auth:sanctum')->group(function () use ($unauthenticatedRoutes) {
 
+    Route::get('/user', function () {
+        return auth()->user();
+    });
+
     Route::apiResource('articles', ArticleController::class)->except($unauthenticatedRoutes);
     Route::apiResource('comments', CommentController::class)->except($unauthenticatedRoutes);
     Route::apiResource('articles.comments', ArticleCommentController::class)->shallow()->except($unauthenticatedRoutes);

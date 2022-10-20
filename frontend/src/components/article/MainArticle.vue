@@ -20,20 +20,15 @@
 
 <script>
 import CategoryCard from './CategoryCard.vue'
-import { format, parseISO } from 'date-fns'
+import ArticleCardMixin from '@/mixins/ArticleCardMixin'
 export default {
   name: 'MainArticle',
   components: { CategoryCard },
+  mixins: [ArticleCardMixin],
   props: {
     article: {
       type: Object,
       required: true
-    }
-  },
-  computed: {
-    formatDate() {
-      const stringFromDate = parseISO(this.article.created_at)
-      return format(stringFromDate, 'dd-MM-yyyy')
     }
   }
 }

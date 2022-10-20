@@ -1,68 +1,49 @@
 <template>
   <div>
-    <li
-      class="header__nav-item--register"
-      @click.prevent="modalIsOpened = true"
-    >
-      <a href="#" class="header__nav-item-link--register">Sign up</a>
-    </li>
+    <Modal v-if="modalStore.activeModal === 'register'" title="Sign up">
+      <form @submit.prevent="registerUser" class="inputForm">
+        <Input
+          v-model="userData.name"
+          name="name"
+          lable="Name"
+          placeholder="Enter your name"
+        />
 
-    <Modal v-if="modalIsOpened" @close="modalIsOpened = false" title="Sign up">
-      <form @submit.prevent="registerUser" class="register">
-        <div class="register__error" v-if="!registrationPassed">
-          Please fill the form to sign up.
-        </div>
-        <div class="register__success" v-if="registrationPassed">
-          You were registered successfully!
-        </div>
+        <Input
+          v-model="userData.slug"
+          name="slug"
+          lable="Username"
+          placeholder="Enter your username"
+        />
 
-        <div class="register__inputWrapper">
-          <label for="name" class="register__label">Name</label>
-          <input
-            type="text"
-            class="register__input"
-            name="name"
-            v-model="userData.name"
-          />
-        </div>
-        <div class="register__inputWrapper">
-          <label for="name" class="register__label">Username</label>
-          <input
-            type="text"
-            class="register__input"
-            name="name"
-            v-model="userData.slug"
-          />
-        </div>
-        <div class="register__inputWrapper">
-          <label for="email" class="register__label">Email</label>
-          <input
-            type="text"
-            class="register__input"
-            name="email"
-            v-model="userData.email"
-          />
-        </div>
-        <label for="text" class="register__label">Password</label>
+        <Input
+          v-model="userData.email"
+          name="email"
+          lable="Email"
+          type="email"
+          placeholder="enter.your@email.com"
+        />
 
-        <div class="register__inputWrapper-with-addons">
-          <div class="register__password">
-            <input
+        <div class="inputForm__inputWrapper-with-addons">
+          <div class="inputForm__password">
+            <Input
               v-if="passwordHidden"
+              v-model="userData.password"
+              name="password"
+              lable="Password"
               type="password"
-              class="register__input"
-              name="password"
-              v-model="userData.password"
+              placeholder="Enter at least 8 symbols"
             />
-            <input
-              v-else
-              type="text"
-              class="register__input"
-              name="password"
+            <Input
+              v-if="!passwordHidden"
               v-model="userData.password"
+              name="password"
+              lable="Password"
+              placeholder="Enter at least 8 symbols"
             />
           </div>
-          <div class="register__password-security">
+
+          <div class="inputForm__password-security">
             <button class="btn__showPassword" @click.prevent="showPassword">
               <span class="btn__showPassword-small-right">
                 <i
@@ -78,6 +59,13 @@
         </div>
 
         <Btn type="submit" :isLoading="isLoading">Sign up</Btn>
+        <a
+          class="modal__switcher"
+          href="#"
+          @click.prevent="modalStore.openModal('login')"
+        >
+          Already a member? Log in</a
+        >
       </form>
     </Modal>
   </div>
@@ -86,13 +74,17 @@
 <script>
 import Modal from '../general/Modal.vue'
 import Btn from '../general/Btn.vue'
-import axios from 'axios'
+import Input from '../general/Input.vue'
+import Auth from '@/services/Auth.js'
+import { mapStores } from 'pinia'
+import { useModalStore } from '@/store/Modal.js'
+import { useErrorStore } from '@/store/Error.js'
+
 export default {
   name: 'Register',
-  components: { Modal, Btn },
+  components: { Modal, Btn, Input },
   data() {
     return {
-      modalIsOpened: false,
       registrationPassed: false,
       isLoading: false,
       passwordHidden: true,
@@ -104,56 +96,59 @@ export default {
       }
     }
   },
+  computed: {
+    hasErrors() {
+      return Object.keys(this.errors).length
+    },
+    userDataComputed() {
+      return Object.assign({}, this.userData)
+    },
+    ...mapStores(useModalStore, useErrorStore)
+  },
+  watch: {
+    userDataComputed: {
+      handler(newValue, oldValue) {
+        if (!oldValue) {
+          return
+        }
+
+        Object.keys(newValue).forEach((key) => {
+          if (newValue[key] !== oldValue[key]) {
+            this.errorStore.deleteErrors(key)
+          }
+        })
+      },
+      deep: true
+    }
+  },
   methods: {
     async registerUser() {
+      this.errorStore.clearErrors()
       this.isLoading = true
-      axios
-        .post('http://localhost:8000/api/register', {
-          name: this.userData.name,
-          email: this.userData.email,
-          password: this.userData.password
-        })
+
+      Auth.registerUser(this.userData)
         .then((response) => {
           this.registrationPassed = true
-          this.loginAfterRegister()
+          localStorage.setItem('token', response.data.token)
+          this.$router.push({ name: `my-profile` })
 
           setTimeout(() => {
             this.isLoading = false
-            this.modalIsOpened = false
-          }, 2000)
+            this.modalStore.closeModal()
+          }, 1000)
         })
         .catch((error) => {
-          this.registrationPassed = false
+          if (error.response?.status == 422) {
+            this.errorStore.setErrors(error.response.data.errors)
+          }
+
           setTimeout(() => {
             this.isLoading = false
-            this.modalIsOpened = true
-          }, 2000)
-
-          console.log(this.user)
+          }, 1000)
         })
     },
     showPassword() {
       this.passwordHidden = !this.passwordHidden
-    },
-    async loginAfterRegister() {
-      try {
-        const response = await axios.post(
-          'http://localhost:8000/api/authenticate',
-          {
-            email: this.userData.email,
-            password: this.userData.password
-          },
-          {
-            headers: {
-              accept: 'application/json'
-            }
-          }
-        )
-        localStorage.setItem('token', response.data)
-        this.$router.push({ name: `my-profile` })
-      } catch (error) {
-        console.log(error)
-      }
     }
   }
 }

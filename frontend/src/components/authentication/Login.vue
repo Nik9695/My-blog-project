@@ -1,46 +1,32 @@
 <template>
-  <li class="header__nav-item">
-    <a
-      href="#"
-      @click.prevent="modalIsOpened = true"
-      class="header__nav-item-link"
-      >Login</a
-    >
-  </li>
-  <Modal v-if="modalIsOpened" @close="modalIsOpened = false" title="Login">
-    <form @submit.prevent="loginUser" class="login">
-      <div class="login__error" v-if="invalidCredentials">
-        Wrong email or password
-      </div>
-      <div class="login__inputWrapper">
-        <label for="email" class="login__label">Email </label>
-        <input
-          type="text"
-          class="login__input"
-          name="email"
-          v-model="credentials.email"
-        />
-      </div>
-      <label for="text" class="login__label">Password </label>
-
-      <div class="login__inputWrapper-with-addons">
-        <div class="login__password">
-          <input
+  <Modal v-if="modalStore.activeModal === 'login'" title="Login">
+    <form @submit.prevent="loginUser" class="inputForm">
+      <Input
+        v-model="credentials.email"
+        name="email"
+        lable="Email"
+        type="email"
+        placeholder="enter.your@email.com"
+      />
+      <div class="inputForm__inputWrapper-with-addons">
+        <div class="inputForm__password">
+          <Input
             v-if="passwordHidden"
+            v-model="credentials.password"
+            name="password"
+            lable="Password"
             type="password"
-            class="login__input"
-            name="password"
-            v-model="credentials.password"
+            placeholder="Enter your password"
           />
-          <input
-            v-else
-            type="text"
-            class="login__input"
-            name="password"
+          <Input
+            v-if="!passwordHidden"
             v-model="credentials.password"
+            name="password"
+            lable="Password"
+            placeholder="Enter your password"
           />
         </div>
-        <div class="login__password-security">
+        <div class="inputForm__password-security">
           <button class="btn__showPassword" @click.prevent="showPassword">
             <span class="btn__showPassword-small-right">
               <i
@@ -56,6 +42,13 @@
       </div>
 
       <Btn type="submit" :isLoading="isLoading">Login</Btn>
+      <a
+        class="modal__switcher"
+        href="#"
+        @click.prevent="modalStore.openModal('register')"
+      >
+        Not on LevelUp blog yet? Sign up</a
+      >
     </form>
   </Modal>
 </template>
@@ -63,14 +56,18 @@
 <script>
 import Modal from '../general/Modal.vue'
 import Btn from '../general/Btn.vue'
-import axios from 'axios'
+import Input from '../general/Input.vue'
+import Auth from '@/services/Auth.js'
+import { mapStores } from 'pinia'
+import { useModalStore } from '@/store/Modal.js'
+import { useErrorStore } from '@/store/Error.js'
+
 export default {
   name: 'Login',
-  components: { Modal, Btn },
+  components: { Modal, Btn, Input },
 
   data() {
     return {
-      modalIsOpened: false,
       invalidCredentials: false,
       isLoading: false,
       passwordHidden: true,
@@ -80,32 +77,55 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapStores(useModalStore, useErrorStore),
+
+    cridentialsComputed() {
+      return Object.assign({}, this.credentials)
+    }
+  },
+  watch: {
+    cridentialsComputed: {
+      handler(newValue, oldValue) {
+        if (!oldValue) {
+          return
+        }
+
+        Object.keys(newValue).forEach((key) => {
+          if (newValue[key] !== oldValue[key]) {
+            this.errorStore.deleteErrors(key)
+          }
+        })
+      },
+      deep: true
+    }
+  },
   methods: {
-    async loginUser() {
+    loginUser() {
+      this.errorStore.clearErrors()
       this.isLoading = true
       this.invalidCredentials = false
-      try {
-        const response = await axios.post(
-          'http://localhost:8000/api/authenticate',
-          this.credentials,
-          {
-            headers: {
-              accept: 'application/json'
-            }
+
+      Auth.loginUser(this.credentials)
+        .then((response) => {
+          localStorage.setItem('token', response.data)
+
+          setTimeout(() => {
+            this.isLoading = false
+            this.modalStore.closeModal()
+            this.$router.push({ name: `my-profile` })
+          }, 1000)
+        })
+        .catch((error) => {
+          if (error.response?.status === 403) {
+            this.errorStore.setErrors(error.response.data)
+          } else if (error.response?.status == 422) {
+            this.errorStore.setErrors(error.response.data.errors)
           }
-        )
-        localStorage.setItem('token', response.data)
-        this.$router.push({ name: `my-profile` })
-      } catch (error) {
-        if (error.response?.status === 403) {
-          this.invalidCredentials = true
-        }
-        console.log(error)
-      }
-      setTimeout(() => {
-        this.isLoading = false
-        this.modalIsOpened = false
-      }, 2000)
+          setTimeout(() => {
+            this.isLoading = false
+          }, 1000)
+        })
     },
     showPassword() {
       this.passwordHidden = !this.passwordHidden
