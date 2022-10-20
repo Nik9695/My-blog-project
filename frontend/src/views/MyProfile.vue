@@ -14,8 +14,14 @@
         </p>
 
         <p>
-          <RouterLink class="myProfile__editProfile-link" to="/edit-my-profile">
+          <RouterLink class="myProfile__link" to="/edit-my-profile">
             Edit profile</RouterLink
+          >
+        </p>
+
+        <p>
+          <RouterLink class="myProfile__link" to="/create-article">
+            Create Article</RouterLink
           >
         </p>
       </div>

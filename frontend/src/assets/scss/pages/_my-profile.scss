@@ -14,15 +14,14 @@
 .myProfile__section-heading {
   width: 100%;
   height: 10px;
-  left: 70px;
-  top: 1689px;
   font-family: 'Lora';
   font-style: normal;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 36px;
   line-height: 25px;
   color: #495057;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
+  text-align: center;
 }
 
 .section__inner--myProfile__page {
@@ -105,7 +104,7 @@
   align-items: center;
 }
 
-.myProfile__editProfile-link {
+.myProfile__link {
   font-family: 'Lora';
   font-style: normal;
   font-weight: 700;
