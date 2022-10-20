@@ -5,7 +5,7 @@ export default {
     return await Http.get('/articles')
   },
 
-  async bySlug(slug) {
-    return await Http.get(`/users/${slug}/articles`)
+  async byUserId(id) {
+    return await Http.get(`/users/${id}/articles`)
   }
 }

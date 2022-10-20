@@ -85,8 +85,8 @@ export default {
     },
     async getArticles() {
       try {
-        const response = await Article.bySlug(this.authStore.user.slug)
-        this.articles = response.data
+        const response = await Article.byUserId(this.authStore.user.id)
+        this.articles = response.data.data
       } catch (error) {
         console.log(error)
       }
