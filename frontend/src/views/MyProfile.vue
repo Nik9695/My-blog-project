@@ -24,6 +24,12 @@
             Create Article</RouterLink
           >
         </p>
+
+        <p>
+          <RouterLink class="myProfile__link" to="/edit-article">
+            Edit Article</RouterLink
+          >
+        </p>
       </div>
     </div>
 

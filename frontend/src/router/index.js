@@ -4,6 +4,7 @@ import AboutView from '../views/AboutView.vue'
 import MyProfile from '../views/MyProfile.vue'
 import EditMyProfile from '../views/EditMyProfile.vue'
 import CreateArticle from '../views/CreateArticle.vue'
+import EditArticle from '../views/EditArticle.vue'
 import Auth from '@/services/Auth'
 import { useAuthStore } from '@/store/Auth.js'
 import { useModalStore } from '@/store/Modal.js'
@@ -41,6 +42,14 @@ const router = createRouter({
       path: '/create-article',
       name: 'create-article',
       component: CreateArticle,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/edit-article',
+      name: 'edit-article',
+      component: EditArticle,
       meta: {
         requiresAuth: true
       }
