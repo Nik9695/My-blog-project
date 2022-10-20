@@ -9,7 +9,7 @@ class Like extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['like_status', 'user_id', 'article_id'];
+    protected $fillable = ['like_status', 'user_id', 'article_id', 'comment_id'];
 
     public function article()
     {
@@ -20,6 +20,12 @@ class Like extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function comment()
+    {
+        return $this->belongsTo(Comment::class, 'comment_id');
+    }
+
     public function getRouteKeyName()
     {
         return 'id';

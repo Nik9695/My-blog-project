@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Article;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -53,6 +54,14 @@ class DatabaseSeeder extends Seeder
             ->set('slug', 'many-likes')
             ->set('user_id', 1)
             ->hasLikes(10)
+            ->create();
+
+
+        Comment::factory(4)
+            ->set('content', 'Many many many likes')
+            ->set('user_id', 1)
+            ->set('article_id', 1)
+            ->hasLikes(5)
             ->create();
 
 
