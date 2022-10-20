@@ -9,27 +9,9 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserArticleController;
 use App\Http\Controllers\UserCommentController;
 use App\Http\Controllers\UserController;
-use App\Http\Requests\StoreUserRequest;
-use App\Models\Article;
-use App\Models\Category;
-use App\Models\User;
-use App\Utils\StringUtils;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Validation\Rules\Password;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+
 
 $unauthenticatedRoutes = ['index', 'show'];
 
@@ -62,10 +44,3 @@ Route::post('/authenticate', [AuthController::class, 'authenticate']);
 Route::post('/registration', [UserController::class, 'store']);
 
 Route::apiResource('categories', CategoryController::class)->only($unauthenticatedRoutes);
-
-
-/* Route::get('/categories/{category}/articles', function (Category $category) {
-    $allArticles = Article::all();
-
-    return $allArticles;
-}); */
