@@ -1,7 +1,4 @@
 .myProfile {
-  //background: url('@/assets/images/my-profile.jpg') center no-repeat;
-  //background-size: cover;
-
   background-color: #3e3e3e;
   min-height: 600px;
   display: flex;
@@ -10,6 +7,9 @@
 }
 
 .myProfile__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   max-width: $width;
   text-align: center;
 }
@@ -110,7 +110,7 @@
   font-family: 'Lora';
   font-style: normal;
   font-weight: 700;
-  font-size: 12px;
+  font-size: 16px;
   line-height: 20px;
   color: white;
   text-decoration: none;
@@ -127,4 +127,9 @@
   border-radius: 50%;
   border: 5px solid;
   background-color: white;
+}
+.devider {
+  width: 50px;
+  border: solid 3px #d4a373;
+  height: 0px;
 }

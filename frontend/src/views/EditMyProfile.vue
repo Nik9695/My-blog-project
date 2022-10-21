@@ -9,6 +9,8 @@
         <h2 class="myProfile__heading">Test User</h2>
         <p class="myProfile__content">email</p>
 
+        <div class="devider"></div>
+
         <p>
           <RouterLink class="myProfile__link" to="/my-profile">
             Back to profile</RouterLink
@@ -18,16 +20,14 @@
     </div>
 
     <div class="section">
-      <div class="section__inner section__inner--editProfile__page">
-        <h2 class="editMyProfile__section-heading">Edit Profile</h2>
+      <div class="section__inner section__inner--editor">
+        <h2 class="editor__section-heading">Edit Profile</h2>
 
-        <form action="" class="editMyProfile__inputForm">
-          <div class="editMyProfile__inputForm-wrapper">
-            <label class="editMyProfile__inputForm-label" for="email"
-              >Email</label
-            >
+        <form action="" class="editor__inputForm">
+          <div class="editor__inputForm-wrapper">
+            <label class="editor__inputForm-label" for="email">Email</label>
             <input
-              class="editMyProfile__inputForm-input"
+              class="editor__inputForm-input"
               type="text"
               name="email"
               id="email"
@@ -36,12 +36,10 @@
             />
           </div>
 
-          <div class="editMyProfile__inputForm-wrapper">
-            <label class="editMyProfile__inputForm-label" for="name"
-              >Name</label
-            >
+          <div class="editor__inputForm-wrapper">
+            <label class="editor__inputForm-label" for="name">Name</label>
             <input
-              class="editMyProfile__inputForm-input"
+              class="editor__inputForm-input"
               type="text"
               name="name"
               id="name"
@@ -50,12 +48,10 @@
             />
           </div>
 
-          <div class="editMyProfile__inputForm-wrapper">
-            <label class="editMyProfile__inputForm-label" for="slug"
-              >Slug</label
-            >
+          <div class="editor__inputForm-wrapper">
+            <label class="editor__inputForm-label" for="slug">Slug</label>
             <input
-              class="editMyProfile__inputForm-input"
+              class="editor__inputForm-input"
               type="text"
               name="slug"
               id="slug"
@@ -64,12 +60,12 @@
             />
           </div>
 
-          <div class="editMyProfile__inputForm-wrapper">
-            <label class="editMyProfile__inputForm-label" for="password"
+          <div class="editor__inputForm-wrapper">
+            <label class="editor__inputForm-label" for="password"
               >Password</label
             >
             <input
-              class="editMyProfile__inputForm-input"
+              class="editor__inputForm-input"
               type="password"
               name="password"
               id="password"
@@ -78,12 +74,12 @@
             />
           </div>
 
-          <div class="editMyProfile__inputForm-wrapper">
-            <label class="editMyProfile__inputForm-label" for="password"
+          <div class="editor__inputForm-wrapper">
+            <label class="editor__inputForm-label" for="password"
               >Repeat password</label
             >
             <input
-              class="editMyProfile__inputForm-input"
+              class="editor__inputForm-input"
               type="password"
               name="password"
               id="password"
@@ -92,7 +88,7 @@
             />
           </div>
 
-          <button class="btn__update" @submit.prevent="updateUser">
+          <button class="btn__editor-page" @submit.prevent="updateUser">
             Update
           </button>
         </form>
