@@ -23,35 +23,82 @@
 
         <form action="" class="editMyProfile__inputForm">
           <div class="editMyProfile__inputForm-wrapper">
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email" required />
+            <label class="editMyProfile__inputForm-label" for="email"
+              >Email</label
+            >
+            <input
+              class="editMyProfile__inputForm-input"
+              type="text"
+              name="email"
+              id="email"
+              placeholder="your@email.com"
+              required
+            />
           </div>
 
           <div class="editMyProfile__inputForm-wrapper">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" required />
+            <label class="editMyProfile__inputForm-label" for="name"
+              >Name</label
+            >
+            <input
+              class="editMyProfile__inputForm-input"
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Name"
+              required
+            />
           </div>
 
           <div class="editMyProfile__inputForm-wrapper">
-            <label for="slug">Slug</label>
-            <input type="text" name="slug" id="slug" required />
+            <label class="editMyProfile__inputForm-label" for="slug"
+              >Slug</label
+            >
+            <input
+              class="editMyProfile__inputForm-input"
+              type="text"
+              name="slug"
+              id="slug"
+              placeholder="Slug"
+              required
+            />
           </div>
 
           <div class="editMyProfile__inputForm-wrapper">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" required />
+            <label class="editMyProfile__inputForm-label" for="password"
+              >Password</label
+            >
+            <input
+              class="editMyProfile__inputForm-input"
+              type="password"
+              name="password"
+              id="password"
+              placeholder="********"
+              required
+            />
           </div>
 
           <div class="editMyProfile__inputForm-wrapper">
-            <label for="password">Repeat password</label>
-            <input type="password" name="password" id="password" required />
+            <label class="editMyProfile__inputForm-label" for="password"
+              >Repeat password</label
+            >
+            <input
+              class="editMyProfile__inputForm-input"
+              type="password"
+              name="password"
+              id="password"
+              placeholder="********"
+              required
+            />
           </div>
 
-          <div class="btn__update">
-            <input type="submit" value="Update" />
-          </div>
+          <button class="btn__update" @submit.prevent="updateUser">
+            Update
+          </button>
         </form>
       </div>
     </div>
   </main>
 </template>
+
+<script></script>

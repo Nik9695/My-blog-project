@@ -11,12 +11,14 @@
   text-align: center;
 }
 .editMyProfile__inputForm {
+  width: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .editMyProfile__inputForm-wrapper {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,5 +36,36 @@
 }
 
 .btn__update {
-  margin: 20px;
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 25px;
+  color: $white;
+  background-color: #d4a373;
+  height: 30px;
+  margin-top: 20px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+}
+
+.editMyProfile__inputForm-label {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 25px;
+  color: #495057;
+  align-self: flex-start;
+  padding-bottom: 2px;
+}
+
+.editMyProfile__inputForm-input {
+  width: 100%;
+  height: 30px;
+  box-sizing: border-box;
+  border: solid 1px;
+  border-radius: 5px;
+  padding: 10px;
 }
