@@ -42,7 +42,6 @@ class AuthControllerTest extends TestCase
                 ]
             );
 
-        dd($response);
         $response->assertStatus(200);
     }
 }
