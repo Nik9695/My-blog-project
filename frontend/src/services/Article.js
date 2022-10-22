@@ -7,5 +7,9 @@ export default {
 
   async byUserId(id) {
     return await Http.get(`/users/${id}/articles`)
+  },
+
+  async show(id) {
+    return await Http.get(`/articles/${id}`)
   }
 }

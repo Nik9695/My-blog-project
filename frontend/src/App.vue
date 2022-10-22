@@ -1,7 +1,7 @@
 <template>
   <main>
     <AppHeader />
-    <RouterView />
+    <RouterView :key="$route.fullPath" />
     <AppFooter />
     <Login />
     <Register />

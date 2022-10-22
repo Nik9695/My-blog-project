@@ -1,6 +1,9 @@
 <template>
   <article class="article">
-    <RouterLink to="/" class="article__link">
+    <RouterLink
+      :to="{ name: 'article', params: { id: article.id } }"
+      class="article__link"
+    >
       <ul class="article__categories">
         <CategoryCard />
       </ul>

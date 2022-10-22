@@ -11,11 +11,6 @@
               >Home</RouterLink
             >
           </li>
-          <li class="header__nav-item">
-            <RouterLink :to="{ name: `about` }" class="header__nav-item-link"
-              >About</RouterLink
-            >
-          </li>
           <li class="header__nav-item" v-if="authStore.isLoggedIn">
             <RouterLink
               :to="{ name: `my-profile` }"

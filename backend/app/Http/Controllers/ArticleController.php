@@ -55,9 +55,9 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show($id)
     {
-        return $article;
+        return Article::findOrFail($id);
     }
 
     /**
