@@ -79,7 +79,6 @@ import Auth from '@/services/Auth.js'
 import Form from '@/components/general/Form.vue'
 import { mapStores } from 'pinia'
 import { useModalStore } from '@/store/Modal.js'
-import { useErrorStore } from '@/store/Error.js'
 
 export default {
   name: 'Register',

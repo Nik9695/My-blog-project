@@ -57,8 +57,9 @@ export default {
       } catch (error) {
         if (error.response?.status == 422) {
           this.errorStore.setErrors(error.response.data.errors)
+        } else if (error.response?.status === 403) {
+          this.errorStore.setErrors(error.response.data)
         }
-
         setTimeout(() => {
           this.isLoading = false
         }, 1000)
