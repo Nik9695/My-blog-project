@@ -20,12 +20,6 @@
         </p>
 
         <p>
-          <RouterLink class="myProfile__link" to="/create-article">
-            Create Article</RouterLink
-          >
-        </p>
-
-        <p>
           <RouterLink class="myProfile__link" to="/edit-article">
             Edit Article</RouterLink
           >
@@ -39,12 +33,21 @@
         v-if="hasArticles"
       >
         <h2 class="myProfile__section-heading">My articles:</h2>
-        <div class="section__articles">
+        <div class="section__articles section__articles--myProfile">
           <ArticleCard
             v-for="article in articles"
             :key="article.id"
             :article="article"
           />
+          <div class="addArticle">
+            <RouterLink
+              :to="{ name: 'create-article' }"
+              class="addArticle__btn"
+            >
+              +
+            </RouterLink>
+            <p class="addArticle__btn-text">Add new article</p>
+          </div>
         </div>
       </div>
       <div
@@ -72,7 +75,12 @@ export default {
     }
   },
   async created() {
-    this.getArticles()
+    try {
+      const response = await Article.byUserId(this.authStore.user.id)
+      this.articles = response.data.slice(0, 5)
+    } catch (error) {
+      console.log(error)
+    }
   },
   computed: {
     hasArticles() {
@@ -85,15 +93,6 @@ export default {
       return this.authStore.user
     }
   },
-  methods: {
-    async getArticles() {
-      try {
-        const response = await Article.byUserId(this.authStore.user.id)
-        this.articles = response.data.data
-      } catch (error) {
-        console.log(error)
-      }
-    }
-  }
+  methods: {}
 }
 </script>

@@ -21,7 +21,7 @@ class UserArticleController extends Controller
      */
     public function index(User $user)
     {
-        $articles = Article::where('user_id', $user->id)->paginate(3);
+        $articles = Article::all()->where('user_id', $user->id);
         return $articles;
     }
 
