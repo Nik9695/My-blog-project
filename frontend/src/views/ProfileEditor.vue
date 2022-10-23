@@ -60,7 +60,12 @@
             placeholder="Repeat password"
           /> -->
 
-          <Btn type="submit" :isLoading="slotProps.isLoading">Update</Btn>
+          <Btn
+            type="submit"
+            :isLoading="slotProps.isLoading"
+            class="btn__editor-page"
+            >Update</Btn
+          >
         </Form>
       </div>
     </div>

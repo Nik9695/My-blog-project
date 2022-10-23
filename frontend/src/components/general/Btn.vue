@@ -1,5 +1,5 @@
 <template>
-  <button class="btn" :type="type" :disabled="isLoading">
+  <button :class="buttonClass" :type="type" :disabled="isLoading">
     <slot></slot>
     <span v-if="isLoading" class="btn__loader"></span>
   </button>
@@ -16,6 +16,10 @@ export default {
     isLoading: {
       type: Boolean,
       default: false
+    },
+    buttonClass: {
+      type: String,
+      default: ''
     }
   }
 }

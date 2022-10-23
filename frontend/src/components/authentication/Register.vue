@@ -58,7 +58,9 @@
           </div>
         </div>
 
-        <Btn type="submit" :isLoading="slotProps.isLoading">Sign up</Btn>
+        <Btn type="submit" :isLoading="slotProps.isLoading" class="btn"
+          >Sign up</Btn
+        >
         <a
           class="modal__switcher"
           href="#"

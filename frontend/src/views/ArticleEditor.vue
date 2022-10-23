@@ -40,7 +40,12 @@
                 placeholder="Enter content of article here"
                 :isTextArea="true"
               />
-              <Btn type="submit" :isLoading="slotProps.isLoading">Create</Btn>
+              <Btn
+                type="submit"
+                :isLoading="slotProps.isLoading"
+                class="btn__editor-page"
+                >Create</Btn
+              >
             </div>
 
             <div class="category">
@@ -97,7 +102,12 @@
                 placeholder="Enter content of article here"
                 :isTextArea="true"
               />
-              <Btn type="submit" :isLoading="slotProps.isLoading">Update</Btn>
+              <Btn
+                type="submit"
+                :isLoading="slotProps.isLoading"
+                class="btn__editor-page"
+                >Update</Btn
+              >
             </div>
 
             <div class="category">

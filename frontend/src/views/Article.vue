@@ -130,7 +130,6 @@ export default {
     articleLifeTime() {
       const created = parseISO(this.article.created_at)
       const now = Date.now()
-      //return parseISO(new Date().now)
       return differenceInMinutes(now, created)
     }
   }
