@@ -40,6 +40,10 @@ export default {
     placeholder: {
       type: String,
       default: 'text'
+    },
+    className: {
+      type: String,
+      required: true
     }
   },
   computed: {
