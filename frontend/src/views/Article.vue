@@ -111,7 +111,6 @@ export default {
   async created() {
     try {
       const response = await Article.show(this.$route.params.id)
-      console.log(response)
       this.article = response.data
     } catch (error) {
       console.log(error)

@@ -19,12 +19,6 @@
             Edit profile</RouterLink
           >
         </p>
-
-        <p>
-          <RouterLink class="myProfile__link" to="/edit-article">
-            Edit Article</RouterLink
-          >
-        </p>
       </div>
     </div>
 

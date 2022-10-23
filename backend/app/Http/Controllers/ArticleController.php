@@ -70,6 +70,7 @@ class ArticleController extends Controller
     public function update(UpdateArticleRequest $request, Article $article)
     {
         $article->update($request->validated());
+        $article->slug = StringUtils::slugify($request->title);
         return $article;
     }
 

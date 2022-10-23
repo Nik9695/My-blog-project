@@ -15,5 +15,9 @@ export default {
 
   async create(articleData) {
     return await Http.post(`/articles`, articleData)
+  },
+
+  async update(articleData, articleId) {
+    return await Http.put(`/articles/${articleId}`, articleData)
   }
 }

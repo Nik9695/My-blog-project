@@ -25,6 +25,7 @@ class UpdateArticleRequest extends FormRequest
     {
         return [
             'content' => ['required'],
+            'title' => ['required'],
         ];
     }
 }
