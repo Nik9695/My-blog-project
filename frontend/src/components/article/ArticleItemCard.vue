@@ -33,7 +33,9 @@
             <div class="article__area-author-name">
               {{ article.author.name }}
             </div>
-            <div class="article__area-author-title">Thinker & Designer</div>
+            <div class="article__area-author-title">
+              {{ article.author.slug }}
+            </div>
           </div>
         </div>
       </div>
