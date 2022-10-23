@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             ->set('slug', 'test-user')
             ->set('email', 'test@example.com')
             ->set('password', Hash::make('password'))
-            ->hasArticles(8)
+            ->hasArticles(4)
             ->hasComments(3)
             ->create();
 

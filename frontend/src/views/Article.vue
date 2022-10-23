@@ -12,7 +12,9 @@
           {{ article.title }}
         </h2>
 
-        <p class="aboutArticle__content-author">{{ article.author.name }}</p>
+        <p class="aboutArticle__content-author">
+          {{ article.author.name }}
+        </p>
       </div>
     </article>
     <div class="section">

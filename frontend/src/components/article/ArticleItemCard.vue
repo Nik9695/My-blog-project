@@ -30,7 +30,9 @@
             class="article__area-author-photo"
           />
           <div class="article__area-author-content">
-            <div class="article__area-author-name">By Jennifer Lawrence</div>
+            <div class="article__area-author-name">
+              {{ article.author.name }}
+            </div>
             <div class="article__area-author-title">Thinker & Designer</div>
           </div>
         </div>

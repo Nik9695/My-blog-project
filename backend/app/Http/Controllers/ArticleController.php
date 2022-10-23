@@ -57,7 +57,7 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        return Article::findOrFail($id);
+        return Article::with('author')->findOrFail($id);
     }
 
     /**
