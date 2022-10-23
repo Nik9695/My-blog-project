@@ -18,3 +18,12 @@
   border: none;
   border-radius: 5px;
 }
+.editArticle__link {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  & :hover {
+    transition: 1s;
+    transform: rotate(720deg);
+  }
+}

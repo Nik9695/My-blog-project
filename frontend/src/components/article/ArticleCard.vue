@@ -20,6 +20,18 @@
         <p class="article__text">{{ article.content.substring(0, 100) }} ...</p>
       </div>
     </RouterLink>
+    <div class="edit__option" v-if="currentRouteName === 'my-profile'">
+      <RouterLink
+        :to="{ name: 'edit-article', params: { id: article.id } }"
+        class="editArticle__link"
+      >
+        <img
+          src="@/assets/images/edit-article-button.png"
+          alt="Title"
+          class="editArticle__btn"
+        />
+      </RouterLink>
+    </div>
   </article>
 </template>
 
@@ -35,6 +47,11 @@ export default {
     article: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    currentRouteName() {
+      return this.$route.name
     }
   }
 }
