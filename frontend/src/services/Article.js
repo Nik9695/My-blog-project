@@ -19,5 +19,9 @@ export default {
 
   async update(articleData, articleId) {
     return await Http.put(`/articles/${articleId}`, articleData)
+  },
+
+  async delete(article, articleId) {
+    return await Http.delete(`/articles/${articleId}`, article)
   }
 }

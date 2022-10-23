@@ -31,6 +31,9 @@
           class="editArticle__btn"
         />
       </RouterLink>
+      <form @submit.prevent="deleteArticle" class="delete__option">
+        <button type="submit" class="deleteArticle__btn"></button>
+      </form>
     </div>
   </article>
 </template>
@@ -38,6 +41,7 @@
 <script>
 import CategoryCard from './CategoryCard.vue'
 import ArticleCardMixin from '@/mixins/ArticleCardMixin'
+import Article from '@/services/Article.js'
 export default {
   name: 'ArticleCard',
   components: { CategoryCard },
@@ -47,6 +51,14 @@ export default {
     article: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    async deleteArticle() {
+      const response = await Article.delete(this.article, this.article.id)
+      if (response?.status === 200) {
+        this.$router.go({ name: 'my-profile' })
+      }
     }
   },
   computed: {

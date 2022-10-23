@@ -27,3 +27,14 @@
     transform: rotate(720deg);
   }
 }
+
+.deleteArticle__btn {
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: url('@/assets/images/delete-article-button.png') center no-repeat;
+  background-size: cover;
+}
