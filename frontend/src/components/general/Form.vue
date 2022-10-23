@@ -1,5 +1,5 @@
 <template>
-  <form class="form" @submit.prevent="handleRequest">
+  <form :class="class" @submit.prevent="handleRequest">
     <slot :Loading="Loading"></slot>
   </form>
 </template>
@@ -22,6 +22,10 @@ export default {
     data: {
       type: Object,
       required: true
+    },
+    class: {
+      type: String,
+      default: 'form'
     }
   },
   computed: {

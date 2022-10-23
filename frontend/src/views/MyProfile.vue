@@ -12,6 +12,7 @@
         <p class="myProfile__content">
           {{ user.email }}
         </p>
+        <div class="devider"></div>
 
         <p>
           <RouterLink class="myProfile__link" to="/edit-my-profile">
@@ -77,7 +78,8 @@ export default {
   async created() {
     try {
       const response = await Article.byUserId(this.authStore.user.id)
-      this.articles = response.data.slice(0, 5)
+      console.log(response)
+      this.articles = response.data.data.slice(0, 5)
     } catch (error) {
       console.log(error)
     }

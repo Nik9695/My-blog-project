@@ -97,7 +97,7 @@ export default {
         this.userData,
         this.authStore.user.id
       )
-      this.$router.go({ name: 'my-profile' })
+      this.$router.push({ name: 'my-profile' })
     }
   }
 }

@@ -11,5 +11,9 @@ export default {
 
   async show(id) {
     return await Http.get(`/articles/${id}`)
+  },
+
+  async create(articleData) {
+    return await Http.post(`/articles`, articleData)
   }
 }

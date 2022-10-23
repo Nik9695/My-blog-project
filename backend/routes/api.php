@@ -40,10 +40,9 @@ Route::apiResource('articles', ArticleController::class)->only($unauthenticatedR
 
 Route::apiResource('users', UserController::class)->only($unauthenticatedRoutes);
 
-Route::apiResource('users.articles', UserArticleController::class)->shallow()->only($unauthenticatedRoutes);
+Route::apiResource('users.articles', UserArticleController::class)->only($unauthenticatedRoutes);
 Route::apiResource('users.comments', UserCommentController::class)->shallow()->only($unauthenticatedRoutes);
-
-Route::apiResource('articles.comments', ArticleCommentController::class)->shallow()->only($unauthenticatedRoutes);
+Route::apiResource('articles.comments', ArticleCommentController::class)->only($unauthenticatedRoutes);
 
 
 Route::post('/authenticate', [AuthController::class, 'authenticate']);

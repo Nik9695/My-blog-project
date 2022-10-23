@@ -18,38 +18,27 @@
       <div class="section__inner section__inner--editor">
         <h2 class="editor__section-heading">Add content</h2>
 
-        <form action="" class="editor__inputForm editor__inputForm--article">
+        <Form
+          :handleCallback="createArticle"
+          :data="articleData"
+          v-slot="slotProps"
+          class="editor__inputForm editor__inputForm--article"
+        >
           <div class="inputForm__column">
-            <div class="editor__inputForm-wrapper">
-              <label class="editor__inputForm-label" for="title">Title</label>
-              <input
-                class="editor__inputForm-input"
-                type="text"
-                name="title"
-                id="title"
-                placeholder="Enter title here"
-                required
-              />
-            </div>
+            <EditorInput
+              v-model="articleData.title"
+              name="title"
+              lable="Title"
+              placeholder="Enter title here"
+            />
 
-            <div class="editor__inputForm-wrapper">
-              <label class="editor__inputForm-label" for="content"
-                >Content</label
-              >
-              <textarea
-                class="editor__inputForm-input editor__inputForm-input--article-content"
-                type="text"
-                name="content"
-                id="content"
-                rows="5"
-                cols="10"
-                placeholder="Enter content of your article here"
-                required
-              />
-            </div>
-            <button class="btn__editor-page" @submit.prevent="updateUser">
-              Create
-            </button>
+            <EditorInput
+              v-model="articleData.content"
+              name="content"
+              lable="Content"
+              placeholder="Enter content of article here"
+            />
+            <Btn type="submit" :isLoading="slotProps.isLoading">Create</Btn>
           </div>
 
           <div class="category">
@@ -58,10 +47,38 @@
               ADD TAG
             </button>
           </div>
-        </form>
+        </Form>
       </div>
     </div>
   </main>
 </template>
 
-<script></script>
+<script>
+import Article from '@/services/Article.js'
+import EditorInput from '@/components/general/EditorInput.vue'
+import Btn from '@/components/general/Btn.vue'
+import Form from '@/components/general/Form.vue'
+
+export default {
+  components: { EditorInput, Btn, Form },
+  data() {
+    return {
+      articleData: {
+        title: '',
+        content: ''
+      },
+      isLoading: false,
+      isTextArea: true
+    }
+  },
+  computed: {},
+  methods: {
+    async createArticle() {
+      const response = await Article.create(this.articleData)
+      if (response?.status === 201) {
+        this.$router.push({ name: 'my-profile' })
+      }
+    }
+  }
+}
+</script>
