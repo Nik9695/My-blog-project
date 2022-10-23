@@ -22,7 +22,7 @@
         <div class="aboutArticle__timeline">
           <div class="aboutArticle__date">{{ formatDate }}</div>
           <div class="aboutArticle__timeline-divider"></div>
-          <div class="aboutArticle__time">4 minutes</div>
+          <div class="aboutArticle__time">{{ articleLifeTime }} minutes</div>
         </div>
         <div class="aboutArticle__area">
           <div class="aboutArticle__area-content">
@@ -95,6 +95,8 @@
 import ArticleCard from '../components/article/ArticleCard.vue'
 import AboutArticleCard from '../components/article/AboutArticleCard.vue'
 import ArticleCardMixin from '@/mixins/ArticleCardMixin'
+import { format, parse, parseISO } from 'date-fns'
+import { differenceInMinutes } from 'date-fns'
 import Article from '@/services/Article.js'
 
 export default {
@@ -123,6 +125,14 @@ export default {
       .catch((error) => {
         console.log(error)
       })
+  },
+  computed: {
+    articleLifeTime() {
+      const created = parseISO(this.article.created_at)
+      const now = Date.now()
+      //return parseISO(new Date().now)
+      return differenceInMinutes(now, created)
+    }
   }
 }
 </script>
