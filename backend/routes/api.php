@@ -28,6 +28,8 @@ Route::middleware('auth:sanctum')->group(function () use ($unauthenticatedRoutes
 
     Route::apiResource('comments', CommentController::class)->except($unauthenticatedRoutes);
 
+    Route::apiResource('users', UserController::class)->except($unauthenticatedRoutes);
+
     Route::apiResource('articles.comments', ArticleCommentController::class)->shallow()->except($unauthenticatedRoutes);
 });
 

@@ -1,16 +1,15 @@
 <template>
-  <div class="inputForm__inputWrapper">
-    <div class="inputForm__error" v-if="errorStore.errors[name]">
+  <div class="editor__inputForm-wrapper">
+    <!--     <div class="inputForm__error" v-if="errorStore.errors[name]">
       {{ errorStore.errors[name][0] }}
-    </div>
-    <label :for="name" class="inputForm__label">{{ lable }}</label>
+    </div> -->
+    <label :for="name" class="editor__inputForm-label">{{ lable }}</label>
     <input
       v-model="inputValue"
-      class="inputForm__input"
+      class="editor__inputForm-input"
       :type="type"
       :name="name"
       :placeholder="placeholder"
-      :class="{ 'inputForm__input--error': errorStore.errors[name] }"
     />
   </div>
 </template>
@@ -40,10 +39,6 @@ export default {
     placeholder: {
       type: String,
       default: 'text'
-    },
-    className: {
-      type: String,
-      required: true
     }
   },
   computed: {

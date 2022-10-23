@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import Article from '@/views/Article.vue'
 import MyProfile from '../views/MyProfile.vue'
-import EditMyProfile from '../views/EditMyProfile.vue'
+import ProfileEditor from '../views/ProfileEditor.vue'
 import ArticleEditor from '../views/ArticleEditor.vue'
 import Auth from '@/services/Auth'
 import { useAuthStore } from '@/store/Auth.js'
@@ -32,7 +32,7 @@ const router = createRouter({
     {
       path: '/edit-my-profile',
       name: 'edit-my-profile',
-      component: EditMyProfile,
+      component: ProfileEditor,
       meta: {
         requiresAuth: true
       }
