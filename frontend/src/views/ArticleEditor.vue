@@ -37,6 +37,7 @@
               name="content"
               lable="Content"
               placeholder="Enter content of article here"
+              :isTextArea="true"
             />
             <Btn type="submit" :isLoading="slotProps.isLoading">Create</Btn>
           </div>

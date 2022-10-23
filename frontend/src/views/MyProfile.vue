@@ -78,7 +78,6 @@ export default {
   async created() {
     try {
       const response = await Article.byUserId(this.authStore.user.id)
-      console.log(response)
       this.articles = response.data.data.slice(0, 5)
     } catch (error) {
       console.log(error)
