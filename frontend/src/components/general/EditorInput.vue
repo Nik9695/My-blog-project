@@ -1,8 +1,8 @@
 <template>
   <div class="editor__inputForm-wrapper">
-    <!--     <div class="inputForm__error" v-if="errorStore.errors[name]">
+    <div class="inputForm__error" v-if="errorStore.errors[name]">
       {{ errorStore.errors[name][0] }}
-    </div> -->
+    </div>
     <label :for="name" class="editor__inputForm-label">{{ lable }}</label>
     <input
       v-model="inputValue"
