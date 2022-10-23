@@ -54,7 +54,7 @@
             placeholder="Enter new password"
           />
           <!--           <EditorInput
-            v-model="userData.email"
+            v-model="userData.repeatedPassword"
             name="Repeat password"
             lable="Repeat password"
             placeholder="Repeat password"
@@ -89,6 +89,7 @@ export default {
         name: '',
         slug: '',
         password: ''
+        //repeatedPassword: ''
       },
       isLoading: false
     }
@@ -98,11 +99,17 @@ export default {
   },
   methods: {
     async updateProfile() {
+      /*       if (this.userData.password != this.userData.repeatedPassword) {
+        response = error.status(403)
+        console.log(response)
+        return response
+      } */
+      this.isLoading = true
       const response = await Auth.updateUser(
         this.userData,
         this.authStore.user.id
       )
-      this.$router.push({ name: 'my-profile' })
+      this.$router.go({ name: 'my-profile' })
     }
   }
 }

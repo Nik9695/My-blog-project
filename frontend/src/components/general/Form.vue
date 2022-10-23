@@ -1,6 +1,6 @@
 <template>
   <form :class="class" @submit.prevent="handleRequest">
-    <slot :Loading="Loading"></slot>
+    <slot :isLoading="isLoading"></slot>
   </form>
 </template>
 
@@ -11,7 +11,7 @@ import { useErrorStore } from '@/store/Error.js'
 export default {
   data() {
     return {
-      Loading: false
+      isLoading: false
     }
   },
   props: {
