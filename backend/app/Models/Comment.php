@@ -22,6 +22,11 @@ class Comment extends Model
     }
 
 
+    public function reactions()
+    {
+        return $this->morphMany(Reaction::class, 'reactable');
+    }
+
     public function getRouteKeyName()
     {
         return 'id';
