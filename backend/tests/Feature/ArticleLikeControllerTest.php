@@ -3,13 +3,12 @@
 namespace Tests\Feature;
 
 use App\Models\Article;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class ArticleLikeControllerTest extends TestCase
 {
-    use DatabaseTransactions;
-
+    use DatabaseMigrations;
     /**
      * A basic feature test example.
      *

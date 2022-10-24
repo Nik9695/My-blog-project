@@ -5,12 +5,12 @@ namespace Tests\Feature;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class CommentControllerTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
 
     /**
      * A basic feature test example.

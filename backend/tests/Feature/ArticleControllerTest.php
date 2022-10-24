@@ -5,18 +5,14 @@ namespace Tests\Feature;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ArticleControllerTest extends TestCase
 {
-    //use DatabaseMigrations;
 
-    //use RefreshDatabase;
+    use RefreshDatabase;
 
-    use DatabaseTransactions;
 
     public function test_any_user_can_view_all_articles()
     {
