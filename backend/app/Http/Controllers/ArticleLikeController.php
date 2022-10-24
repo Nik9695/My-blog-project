@@ -34,20 +34,13 @@ class ArticleLikeController extends Controller
      */
     public function store(Article $article)
     {
-
-        $likes = Like::all();
-
-        if ($likes->contains('article_id', $article->id) && $likes->contains('user_id', auth()->id())) {
-            return 'you have already put like on this article';
+        if ((Like::where('article_id', $article->id)->first()) != null) {
+            return response()->json(['message' => 'You have already put like on this article'], 403);
         } else {
             $like = new Like(['like_status' => true]);
-
-            $like->like_status = true;
             $like->user_id = auth()->id();
-
             $like->article_id = $article->id;
             $like->save();
-
             return $like;
         }
     }

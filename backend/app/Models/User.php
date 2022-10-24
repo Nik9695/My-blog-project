@@ -62,7 +62,7 @@ class User extends Authenticatable
 
     public function likes()
     {
-        return $this->hasOne(Like::class);
+        return $this->hasMany(Like::class);
     }
 
     public function getRouteKeyName()

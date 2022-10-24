@@ -5,10 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
-use App\Models\Comment;
 use App\Utils\StringUtils;
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Database\Eloquent\Collection;
 
 class ArticleController extends Controller
 {
@@ -81,14 +78,3 @@ class ArticleController extends Controller
         }
     }
 }
-//Et sit aut enim necessitatibus cum consequuntur.
-//Dolor neque harum sequi ullam quam voluptatum.
-
-
-
-//Qui repellat iste quia ut mollitia.
-//Unde non rerum suscipit ut tenetur.
-
-
-//Dolorem omnis praesentium vel quae tempora.
-//Vero sed voluptatibus fuga dolor distinctio.

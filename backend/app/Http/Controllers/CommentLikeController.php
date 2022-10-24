@@ -33,20 +33,13 @@ class CommentLikeController extends Controller
      */
     public function store(Comment $comment)
     {
-
-        $likes = Like::all();
-
-        if ($likes->contains('comment_id', $comment->id) && $likes->contains('user_id', auth()->id())) {
-            return 'you have already put like on this comment';
+        if ((Like::where('comment_id', $comment->id)->first()) != null) {
+            return response()->json(['message' => 'You have already put like on this comment'], 403);
         } else {
             $like = new Like(['like_status' => true]);
-
-            $like->like_status = true;
             $like->user_id = auth()->id();
-
             $like->comment_id = $comment->id;
             $like->save();
-
             return $like;
         }
     }

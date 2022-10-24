@@ -20,7 +20,7 @@ return new class extends Migration
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
             $table->boolean('like_status')->default(false);
-            $table->foreignIdFor(User::class)->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Article::class)->nullable()->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Comment::class)->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
