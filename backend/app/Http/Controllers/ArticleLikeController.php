@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreLikeRequest;
 use App\Models\Article;
 use App\Models\Like;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ArticleLikeController extends Controller
@@ -73,8 +74,13 @@ class ArticleLikeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Article $article, Like $like)
     {
-        dd($id);
+        if ($like) {
+            $like->delete();
+            return response()->json(['message' => 'Like was delted'], 200);
+        } else {
+            return response()->json(['message' => 'You do not have like on this article'], 404);
+        }
     }
 }

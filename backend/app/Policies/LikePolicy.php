@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Article;
 use App\Models\Like;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -63,9 +64,9 @@ class LikePolicy
      * @param  \App\Models\Like  $like
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete($id)
+    public function delete(User $user, Like $like)
     {
-        return true;
+        return $user->id === $like->user_id;
     }
 
     /**
@@ -87,8 +88,9 @@ class LikePolicy
      * @param  \App\Models\Like  $like
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete($id)
+    public function forceDelete(User $user, Like $like)
     {
+        dd();
         return true;
     }
 }
