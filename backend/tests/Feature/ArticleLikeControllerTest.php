@@ -22,9 +22,13 @@ class ArticleLikeControllerTest extends TestCase
             ->set('content', 'Testing comments')
             ->set('slug', 'testing comments')
             ->set('user_id', 1)
+            ->hasLikes(3)
             ->create()[0];
 
         $response = $this->get("/api/articles/{$article->id}/likes");
+
+
+        $response->assertJsonCount(3);
 
         $response->assertStatus(200);
     }

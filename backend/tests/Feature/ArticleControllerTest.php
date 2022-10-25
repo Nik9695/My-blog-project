@@ -27,12 +27,19 @@ class ArticleControllerTest extends TestCase
     {
 
         $article = Article::factory(1)
+            ->set('user_id', 1)
             ->set('title', 'Article created for testing')
-            ->set('content', 'Testing update article by owner only')
-            ->set('slug', 'testing update')
+            ->set('content', 'Testing')
+            ->set('slug', 'testing-article')
             ->create()[0];
 
         $response = $this->get("/api/articles/{$article->id}");
+        $response->assertJson([
+            'user_id' => $article->user_id,
+            'title' => $article->title,
+            'content' => $article->content,
+            'slug' => $article->slug,
+        ]);
 
         $response->assertStatus(200);
     }
