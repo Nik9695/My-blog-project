@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
-use App\Models\Category;
+use App\Models\Comment;
+use App\Models\User;
 use App\Utils\StringUtils;
 
 class ArticleController extends Controller
@@ -21,9 +22,25 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user = null)
     {
+        return Article::query()
+            ->category(request('category'))
+            ->newest()
+            ->get();
+
         $articles = Article::with('author')->paginate(5);
+
+        /*         $articlesQueryBuilder = Article::with('author');
+
+        if ($user !== null) {
+            $articlesQueryBuilder = $articlesQueryBuilder->where('user_id', $user->id);
+        }
+
+        $perPage = request()->query('perPage') != null ? request()->query('perPage') : 5; */
+
+
+
         return $articles;
     }
 
