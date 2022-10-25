@@ -63,9 +63,9 @@ class LikePolicy
      * @param  \App\Models\Like  $like
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Like $like)
+    public function delete($id)
     {
-        return ($user->id === $like->user_id || $user->admin_identifier == true);
+        return true;
     }
 
     /**
@@ -87,8 +87,8 @@ class LikePolicy
      * @param  \App\Models\Like  $like
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Like $like)
+    public function forceDelete($id)
     {
-        //
+        return true;
     }
 }

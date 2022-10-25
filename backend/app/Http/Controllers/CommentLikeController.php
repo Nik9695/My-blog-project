@@ -73,10 +73,8 @@ class CommentLikeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Like $like)
+    public function destroy($id)
     {
-        if ($like->delete()) {
-            return 'like has been removed';
-        }
+        dd($id);
     }
 }

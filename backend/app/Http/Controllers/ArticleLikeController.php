@@ -14,7 +14,6 @@ class ArticleLikeController extends Controller
     {
         $this->authorizeResource(Like::class, options: ['except' => ['index', 'show']]);
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -74,10 +73,8 @@ class ArticleLikeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Like $like)
+    public function destroy($id)
     {
-        if ($like->delete()) {
-            return 'like has been removed';
-        }
+        dd($id);
     }
 }
