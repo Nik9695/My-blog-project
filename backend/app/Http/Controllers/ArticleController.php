@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
+use App\Models\Category;
 use App\Utils\StringUtils;
 
 class ArticleController extends Controller
@@ -38,6 +39,7 @@ class ArticleController extends Controller
         $article->user_id = auth()->id();
         $article->slug = StringUtils::slugify($article->title);
         $article->save();
+        $article->categories()->attach($request->category_id);
         return $article;
     }
 
