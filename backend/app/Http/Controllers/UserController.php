@@ -28,8 +28,8 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $user = new User($request->validated());
-        $user['password'] = Hash::make($user['password']);
+        $validated = $request->validated();
+        $validated['password'] = Hash::make($validated['password']);
 
         if ($request->avatar) {
             $path = $request->file('avatar')->store('public/images');
@@ -37,8 +37,11 @@ class UserController extends Controller
                 return response()->json(['msg' => 'avatar could not be saved'], 500);
             }
             $validated['avatar_path'] = $path;
-            $user->avatar_path = $path;
+        } else {
+            $path = 'public/images/default-user-image.jpg';
+            $validated['avatar_path'] = $path;
         }
+        $user = new User($validated);
         $user->save();
 
         return $user;
