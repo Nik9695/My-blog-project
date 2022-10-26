@@ -30,6 +30,15 @@ class UserController extends Controller
     {
         $user = new User($request->validated());
         $user['password'] = Hash::make($user['password']);
+
+        if ($request->avatar) {
+            $path = $request->file('avatar')->store('public/images');
+            if (!$path) {
+                return response()->json(['msg' => 'avatar could not be saved'], 500);
+            }
+            $validated['avatar_path'] = $path;
+            $user->avatar_path = $path;
+        }
         $user->save();
 
         return $user;
