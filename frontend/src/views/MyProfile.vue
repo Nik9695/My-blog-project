@@ -1,26 +1,11 @@
 <template>
   <main>
-    <div class="myProfile">
-      <div class="myProfile__inner">
-        <img
-          src="@/assets/images/default-user-icon.png"
-          class="myProfile__image"
-        />
-        <h2 class="myProfile__heading">
-          {{ user.name }}
-        </h2>
-        <p class="myProfile__content">
-          {{ user.email }}
-        </p>
-        <div class="devider"></div>
-
-        <p>
-          <RouterLink class="myProfile__link" to="/edit-my-profile">
-            Edit profile</RouterLink
-          >
-        </p>
-      </div>
-    </div>
+    <ProfileCard
+      :name="user.name"
+      :email="user.email"
+      :link="'/edit-my-profile'"
+      :linkLabel="'Edit profile'"
+    />
 
     <div class="section">
       <div
@@ -58,12 +43,14 @@
 
 <script>
 import ArticleCard from '../components/article/ArticleCard.vue'
+import ProfileCard from '@/components/general/ProfileCard.vue'
+
 import Article from '@/services/Article.js'
 import { mapStores } from 'pinia'
 import { useAuthStore } from '@/store/Auth.js'
 
 export default {
-  components: { ArticleCard },
+  components: { ArticleCard, ProfileCard },
   data() {
     return {
       articles: []

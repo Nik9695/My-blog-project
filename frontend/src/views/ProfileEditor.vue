@@ -1,23 +1,11 @@
 <template>
   <main>
-    <div class="myProfile">
-      <div class="myProfile__inner">
-        <img
-          src="@/assets/images/default-user-icon.png"
-          class="myProfile__image"
-        />
-        <h2 class="myProfile__heading">{{ authStore.user.name }}</h2>
-        <p class="myProfile__content">{{ authStore.user.email }}</p>
-
-        <div class="devider"></div>
-
-        <p>
-          <RouterLink class="myProfile__link" to="/my-profile">
-            Back to profile</RouterLink
-          >
-        </p>
-      </div>
-    </div>
+    <ProfileCard
+      :name="authStore.user.name"
+      :email="authStore.user.email"
+      :link="'/my-profile'"
+      :linkLabel="'Back to profile'"
+    />
 
     <div class="section">
       <div class="section__inner section__inner--editor">
@@ -53,13 +41,6 @@
             lable="Password"
             placeholder="Enter new password"
           />
-          <!--           <EditorInput
-            v-model="userData.repeatedPassword"
-            name="Repeat password"
-            lable="Repeat password"
-            placeholder="Repeat password"
-          /> -->
-
           <Btn
             type="submit"
             :isLoading="slotProps.isLoading"
@@ -76,12 +57,14 @@
 import EditorInput from '@/components/general/EditorInput.vue'
 import Btn from '@/components/general/Btn.vue'
 import Form from '@/components/general/Form.vue'
+import ProfileCard from '@/components/general/ProfileCard.vue'
+
 import Auth from '@/services/Auth.js'
 import { mapStores } from 'pinia'
 import { useAuthStore } from '@/store/Auth.js'
 
 export default {
-  components: { EditorInput, Btn, Form },
+  components: { EditorInput, Btn, Form, ProfileCard },
   data() {
     return {
       userData: {
