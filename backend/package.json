@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "date-fns": "^2.29.3",
+        "easy-yandex-s3": "^1.1.8",
         "is-odd": "^3.0.1"
     }
 }

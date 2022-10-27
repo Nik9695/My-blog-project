@@ -32,7 +32,7 @@ class UserController extends Controller
         $validated['password'] = Hash::make($validated['password']);
 
         if ($request->avatar) {
-            $path = $request->file('avatar')->store('public/images');
+            $path = $request->file('avatar')->store('images/pictures', 's3');
             if (!$path) {
                 return response()->json(['msg' => 'avatar could not be saved'], 500);
             }

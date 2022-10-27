@@ -30,17 +30,6 @@ class ArticleController extends Controller
             ->get();
 
         $articles = Article::with('author')->paginate(5);
-
-        /*         $articlesQueryBuilder = Article::with('author');
-
-        if ($user !== null) {
-            $articlesQueryBuilder = $articlesQueryBuilder->where('user_id', $user->id);
-        }
-
-        $perPage = request()->query('perPage') != null ? request()->query('perPage') : 5; */
-
-
-
         return $articles;
     }
 
