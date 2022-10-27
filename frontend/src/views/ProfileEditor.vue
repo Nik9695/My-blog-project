@@ -67,13 +67,7 @@ export default {
   components: { EditorInput, Btn, Form, ProfileCard },
   data() {
     return {
-      userData: {
-        email: '',
-        name: '',
-        slug: '',
-        password: ''
-        //repeatedPassword: ''
-      },
+      userData: {},
       isLoading: false
     }
   },
@@ -82,11 +76,6 @@ export default {
   },
   methods: {
     async updateProfile() {
-      /*       if (this.userData.password != this.userData.repeatedPassword) {
-        response = error.status(403)
-        console.log(response)
-        return response
-      } */
       this.isLoading = true
       const response = await Auth.updateUser(
         this.userData,
