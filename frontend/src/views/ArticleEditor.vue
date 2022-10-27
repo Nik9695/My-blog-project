@@ -1,20 +1,7 @@
 <template>
   <main>
     <div class="create__article" v-if="currentRouteName === 'create-article'">
-      <div class="myProfile">
-        <div class="myProfile__inner">
-          <h2 class="myProfile__heading">Create new article</h2>
-
-          <div class="devider"></div>
-
-          <p>
-            <RouterLink class="myProfile__link" to="/my-profile">
-              Back to profile</RouterLink
-            >
-          </p>
-        </div>
-      </div>
-
+      <ArticleEditorCard :heading="'Create new article'" />
       <div class="section">
         <div class="section__inner section__inner--editor">
           <h2 class="editor__section-heading">Add content</h2>
@@ -63,19 +50,7 @@
     </div>
 
     <div class="create__article" v-if="currentRouteName === 'edit-article'">
-      <div class="myProfile">
-        <div class="myProfile__inner">
-          <h2 class="myProfile__heading">Edit article</h2>
-
-          <div class="devider"></div>
-
-          <p>
-            <RouterLink class="myProfile__link" to="/my-profile">
-              Back to profile</RouterLink
-            >
-          </p>
-        </div>
-      </div>
+      <ArticleEditorCard :heading="'Edit article'" />
 
       <div class="section">
         <div class="section__inner section__inner--editor">
@@ -131,9 +106,10 @@ import Article from '@/services/Article.js'
 import EditorInput from '@/components/general/EditorInput.vue'
 import Btn from '@/components/general/Btn.vue'
 import Form from '@/components/general/Form.vue'
+import ArticleEditorCard from '@/components/general/ArticleEditorCard.vue'
 
 export default {
-  components: { EditorInput, Btn, Form },
+  components: { EditorInput, Btn, Form, ArticleEditorCard },
   data() {
     return {
       articleData: {
