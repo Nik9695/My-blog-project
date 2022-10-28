@@ -76,11 +76,9 @@ class ArticleLikeController extends Controller
      */
     public function destroy(Article $article, Like $like)
     {
-        if ($like) {
-            $like->delete();
-            return response()->json(['message' => 'Like was delted'], 200);
-        } else {
-            return response()->json(['message' => 'You do not have like on this article'], 404);
+        if (!($like->delete())) {
+            return response()->json(['message' => 'Like can not be deleted'], 500);
         }
+        return response()->json(['message' => 'Like was delted'], 200);
     }
 }

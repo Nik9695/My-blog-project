@@ -75,8 +75,9 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        if ($article->delete()) {
-            return 'Article was deleted';
+        if (!($article->delete())) {
+            return response()->json(['message' => 'Article can not be deleted'], 500);
         }
+        return response()->json(['message' => 'Article was delted'], 200);
     }
 }
