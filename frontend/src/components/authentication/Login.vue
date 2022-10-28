@@ -1,5 +1,5 @@
 <template>
-  <Modal v-if="modalStore.activeModal === 'login'" title="Login">
+  <Modal v-if="modalStore.activeModal === 'login'" title="Log in">
     <Form :handleCallback="loginUser" :data="credentials" v-slot="slotProps">
       <Input
         v-model="credentials.email"
@@ -42,7 +42,7 @@
       </div>
 
       <Btn type="submit" :isLoading="slotProps.isLoading" class="btn"
-        >Login</Btn
+        >Log in</Btn
       >
       <a
         class="modal__switcher"
