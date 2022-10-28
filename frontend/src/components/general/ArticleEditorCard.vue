@@ -1,7 +1,7 @@
 <template>
   <div class="myProfile">
     <div class="myProfile__inner">
-      <h2 class="myProfile__heading">{{ heading }}</h2>
+      <h2 class="myProfile__heading">{{ title }}</h2>
 
       <div class="devider"></div>
 
@@ -17,7 +17,7 @@
 <script>
 export default {
   props: {
-    heading: {
+    title: {
       type: String,
       required: true
     }
