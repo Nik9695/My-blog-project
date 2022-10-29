@@ -68,6 +68,10 @@ export default {
     buttonLabel: {
       type: String,
       required: true
+    },
+    methodKey: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -86,7 +90,7 @@ export default {
     }
   },
   methods: {
-    /*     async createArticle() {
+    async createArticle() {
       const response = await Article.create(this.articleData)
       if (response?.status === 201) {
         this.$router.push({ name: 'my-profile' })
@@ -100,22 +104,13 @@ export default {
       if (response?.status === 200) {
         this.$router.push({ name: 'my-profile' })
       }
-    }, */
+    },
 
     async handleArticleMethod() {
-      if (this.buttonLabel === 'Create') {
-        const response = await Article.create(this.articleData)
-        if (response?.status === 201) {
-          this.$router.push({ name: 'my-profile' })
-        }
-      } else if (this.buttonLabel === 'Update') {
-        const response = await Article.update(
-          this.articleData,
-          this.articleData.id
-        )
-        if (response?.status === 200) {
-          this.$router.push({ name: 'my-profile' })
-        }
+      if (this.methodKey === 'create') {
+        this.createArticle()
+      } else if (this.methodKey === 'update') {
+        this.updateArticle()
       }
     }
   }
