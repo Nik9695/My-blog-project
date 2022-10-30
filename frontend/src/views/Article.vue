@@ -95,9 +95,10 @@
 import ArticleCard from '../components/article/ArticleCard.vue'
 import AboutArticleCard from '../components/article/AboutArticleCard.vue'
 import ArticleCardMixin from '@/mixins/ArticleCardMixin'
-import { format, parse, parseISO } from 'date-fns'
+import { parseISO } from 'date-fns'
 import { differenceInMinutes } from 'date-fns'
 import Article from '@/services/Article.js'
+import handleError from '@/helpers/handleError.js'
 
 export default {
   name: 'Article',
@@ -115,7 +116,7 @@ export default {
       const response = await Article.show(this.$route.params.id)
       this.article = response.data
     } catch (error) {
-      console.log(error)
+      handleError(error)
     }
 
     Article.getAll()
@@ -123,7 +124,7 @@ export default {
         this.articlesRelated = response.data.data.slice(0, 3)
       })
       .catch((error) => {
-        console.log(error)
+        handleError(error)
       })
   },
   computed: {

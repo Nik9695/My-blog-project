@@ -5,8 +5,7 @@
 </template>
 
 <script>
-import { mapStores } from 'pinia'
-import { useErrorStore } from '@/store/Error.js'
+import handleError from '@/helpers/handleError.js'
 
 export default {
   data() {
@@ -29,7 +28,6 @@ export default {
     }
   },
   computed: {
-    ...mapStores(useErrorStore),
     dataComputed() {
       return Object.assign({}, this.data)
     }
@@ -53,17 +51,12 @@ export default {
 
   methods: {
     async handleRequest() {
-      this.errorStore.clearErrors()
       this.isLoading = true
 
       try {
         await this.handleCallback()
       } catch (error) {
-        if (error.response?.status == 422) {
-          this.errorStore.setErrors(error.response.data.errors)
-        } else if (error.response?.status === 403) {
-          this.errorStore.setErrors(error.response.data)
-        }
+        handleError(error)
         setTimeout(() => {
           this.isLoading = false
         }, 1000)

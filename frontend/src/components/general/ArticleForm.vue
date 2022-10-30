@@ -50,6 +50,8 @@ import EditorInput from '@/components/general/EditorInput.vue'
 import Btn from '@/components/general/Btn.vue'
 import Form from '@/components/general/Form.vue'
 import ArticleEditorCard from '@/components/general/ArticleEditorCard.vue'
+import handleError from '@/helpers/handleError.js'
+
 export default {
   components: { EditorInput, Btn, Form, ArticleEditorCard },
   props: {
@@ -86,7 +88,7 @@ export default {
       const response = await Article.show(this.$route.params.id)
       this.articleData = response.data
     } catch (error) {
-      console.log(error)
+      handleError(error)
     }
   },
   methods: {

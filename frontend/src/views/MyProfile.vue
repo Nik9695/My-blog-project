@@ -44,10 +44,10 @@
 <script>
 import ArticleCard from '../components/article/ArticleCard.vue'
 import ProfileCard from '@/components/general/ProfileCard.vue'
-
 import Article from '@/services/Article.js'
 import { mapStores } from 'pinia'
 import { useAuthStore } from '@/store/Auth.js'
+import handleError from '@/helpers/handleError.js'
 
 export default {
   components: { ArticleCard, ProfileCard },
@@ -61,7 +61,7 @@ export default {
       const response = await Article.byUserId(this.authStore.user.id)
       this.articles = response.data.data.slice(0, 5)
     } catch (error) {
-      console.log(error)
+      handleError(error)
     }
   },
   computed: {
