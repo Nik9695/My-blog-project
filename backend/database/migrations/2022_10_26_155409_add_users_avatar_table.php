@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_avatar');
+        Schema::dropIfExists('avatar_path');
     }
 };

@@ -22,7 +22,7 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user = null)
+    public function index()
     {
         return Article::query()
             ->category(request('category'))
