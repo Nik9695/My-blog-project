@@ -87,7 +87,6 @@ export default {
   components: { Modal, Btn, Input, Form },
   data() {
     return {
-      registrationPassed: false,
       isLoading: false,
       passwordHidden: true,
       userData: {
@@ -107,7 +106,11 @@ export default {
       const response = await Auth.registerUser(this.userData)
       localStorage.setItem('token', response.data.token)
       this.$router.push({ name: 'my-profile' })
-      this.modalStore.closeModal
+      this.$notify({
+        type: 'success',
+        text: 'Registration passed successfully!'
+      })
+      this.modalStore.closeModal()
     },
     showPassword() {
       this.passwordHidden = !this.passwordHidden

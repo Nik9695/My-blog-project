@@ -51,7 +51,10 @@ class UserController extends Controller
         $user = new User($validated);
         $user->save();
 
-        return $user;
+        return [
+            'user' => $user,
+            'token' => $user->createToken('auth_token')->plainTextToken
+        ];
     }
 
     /**

@@ -20,8 +20,8 @@ $unauthenticatedRoutes = ['index', 'show'];
 
 Route::middleware('auth:sanctum')->group(function () use ($unauthenticatedRoutes) {
 
-    Route::get('/user', function () {
-        return auth()->user();
+    Route::get('/user', function (Request $request) {
+        return $request->user();
     });
 
     Route::apiResource('articles', ArticleController::class)->except($unauthenticatedRoutes);
