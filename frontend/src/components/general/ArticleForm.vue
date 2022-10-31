@@ -55,10 +55,6 @@ import handleError from '@/helpers/handleError.js'
 export default {
   components: { EditorInput, Btn, Form, ArticleEditorCard },
   props: {
-    articleData: {
-      type: Object,
-      required: true
-    },
     title: {
       type: String,
       required: true
@@ -78,17 +74,22 @@ export default {
   },
   data() {
     return {
+      articleData: {
+        title: '',
+        content: ''
+      },
       isLoading: false,
-      isTextArea: true,
-      articleData: {}
+      isTextArea: true
     }
   },
   async created() {
-    try {
-      const response = await Article.show(this.$route.params.id)
-      this.articleData = response.data
-    } catch (error) {
-      handleError(error)
+    if (this.$route.name === 'edit-article') {
+      try {
+        const response = await Article.show(this.$route.params.id)
+        this.articleData = response.data
+      } catch (error) {
+        handleError(error)
+      }
     }
   },
   methods: {

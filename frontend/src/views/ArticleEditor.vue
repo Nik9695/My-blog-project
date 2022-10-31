@@ -2,7 +2,6 @@
   <main>
     <div class="create__article" v-if="currentRouteName === 'create-article'">
       <ArticleForm
-        :articleData="articleData"
         title="Create new article"
         sectionHeading="Add content"
         buttonLabel="Create"
@@ -12,7 +11,6 @@
 
     <div class="create__article" v-if="currentRouteName === 'edit-article'">
       <ArticleForm
-        :articleData="articleData"
         title="Edit article"
         sectionHeading="Edit content"
         buttonLabel="Update"
@@ -27,11 +25,7 @@ import ArticleForm from '@/components/general/ArticleForm.vue'
 
 export default {
   components: { ArticleForm },
-  data() {
-    return {
-      articleData: {}
-    }
-  },
+
   computed: {
     currentRouteName() {
       return this.$route.name

@@ -6,11 +6,11 @@
     <label :for="name" class="editor__inputForm-label">{{ lable }}</label>
     <input
       v-model="inputValue"
-      class="editor__inputForm-input"
       :type="type"
       :name="name"
       :placeholder="placeholder"
       :isTextArea="isTextArea"
+      class="editor__inputForm-input"
     />
   </div>
 
@@ -21,11 +21,11 @@
     <label :for="name" class="editor__inputForm-label">{{ lable }}</label>
     <textarea
       v-model="inputValue"
-      class="editor__inputForm-input editor__inputForm-input--article-content"
       :type="type"
       :name="name"
       :placeholder="placeholder"
       :isTextArea="isTextArea"
+      class="editor__inputForm-input editor__inputForm-input--article-content"
     />
   </div>
 </template>
