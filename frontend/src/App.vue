@@ -5,6 +5,7 @@
     <AppFooter />
     <Login />
     <Register />
+    <notifications position="bottom right" />
   </main>
 </template>
 

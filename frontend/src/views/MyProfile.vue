@@ -58,7 +58,7 @@ export default {
   },
   async created() {
     try {
-      const response = await Article.byUserId(this.authStore.user.id)
+      const response = await Article.byUserId(this.user.id)
       this.articles = response.data.data.slice(0, 5)
     } catch (error) {
       handleError(error)
