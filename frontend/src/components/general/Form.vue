@@ -6,6 +6,8 @@
 
 <script>
 import handleError from '@/helpers/handleError.js'
+import { mapStores } from 'pinia'
+import { useErrorStore } from '@/store/Error.js'
 
 export default {
   data() {
@@ -30,7 +32,8 @@ export default {
   computed: {
     dataComputed() {
       return Object.assign({}, this.data)
-    }
+    },
+    ...mapStores(useErrorStore)
   },
   watch: {
     dataComputed: {
