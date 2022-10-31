@@ -7,13 +7,9 @@ export default (error) => {
   if (error.response?.status == 422) {
     errorStore.setErrors(error.response.data.errors)
     notify({ type: 'error', text: error.response.data.message })
+    //notify({ type: 'error', text: 'Please fix all validation errors' })
   } else if (error.response?.status === 403) {
     errorStore.setErrors(error.response.data)
     notify({ type: 'error', text: error.response.data.message })
-  } else {
-    notify({
-      type: 'error',
-      text: 'Unexpected error occured, please try later.'
-    })
   }
 }
