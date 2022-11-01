@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Article;
 use App\Models\Comment;
 use Illuminate\Http\Request;
@@ -48,9 +49,10 @@ class ArticleCommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCommentRequest $request, Comment $comment)
     {
-        //
+        $comment->update($request->validated());
+        return $comment;
     }
 
     /**

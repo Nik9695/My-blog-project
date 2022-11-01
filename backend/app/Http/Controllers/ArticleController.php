@@ -23,7 +23,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::paginate(5);
+        $articles = Article::with('author')->paginate(5);
         return $articles;
     }
 

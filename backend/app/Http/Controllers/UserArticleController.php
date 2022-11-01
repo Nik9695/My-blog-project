@@ -52,8 +52,10 @@ class UserArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show($id)
     {
+        $article = Article::findOrFail($id);
+        return $article;
     }
 
     /**

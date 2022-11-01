@@ -21,8 +21,9 @@ class Comment extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function likes()
+
+    public function getRouteKeyName()
     {
-        return $this->HasMany(Like::class);
+        return 'id';
     }
 }

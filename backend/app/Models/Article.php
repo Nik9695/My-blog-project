@@ -37,10 +37,6 @@ class Article extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function likes()
-    {
-        return $this->hasMany(Like::class);
-    }
 
     protected function setTitleAttribute(string $title)
     {
