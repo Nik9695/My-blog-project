@@ -59,12 +59,6 @@ class User extends Authenticatable
         return 'id';
     }
 
-
-    public function likes()
-    {
-        return $this->hasMany(Like::class);
-    }
-
     public function getRouteKeyName()
     {
         return 'id';
