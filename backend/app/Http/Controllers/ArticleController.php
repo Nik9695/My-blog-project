@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
-use App\Models\Comment;
-use App\Models\User;
 use App\Utils\StringUtils;
 
 class ArticleController extends Controller
@@ -24,12 +22,12 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return Article::query()
+        /*     return Article::query()
             ->category(request('category'))
             ->newest()
-            ->get();
+            ->get(); */
 
-        $articles = Article::with('author')->paginate(5);
+        $articles = Article::with('author')->paginate(8);
         return $articles;
     }
 
