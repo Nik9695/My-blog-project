@@ -3,10 +3,12 @@
 use App\Http\Controllers\ArticleCommentController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ArticleLikeController;
+use App\Http\Controllers\ArticleReactionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommentLikeController;
+use App\Http\Controllers\CommentReactionController;
 use App\Http\Controllers\UserArticleController;
 use App\Http\Controllers\UserCommentController;
 use App\Http\Controllers\UserController;
@@ -46,3 +48,9 @@ Route::post('/authenticate', [AuthController::class, 'authenticate']);
 Route::post('/registration', [UserController::class, 'store']);
 
 Route::apiResource('categories', CategoryController::class)->only($unauthenticatedRoutes);
+
+Route::post('/articles/{article}/reactions', [ArticleReactionController::class, 'store'])->middleware('auth:sanctum');
+Route::get('/articles/{article}/reactions', [ArticleReactionController::class, 'index']);
+
+Route::post('/comments/{comment}/reactions', [CommentReactionController::class, 'store'])->middleware('auth:sanctum');
+Route::get('/comments/{comment}/reactions', [CommentReactionController::class, 'index']);
