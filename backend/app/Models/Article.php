@@ -43,9 +43,30 @@ class Article extends Model
         return $this->morphMany(Reaction::class, 'reactable');
     }
 
+    public function reactions()
+    {
+        return $this->morphMany(Reaction::class, 'reactable');
+    }
+
     protected function setTitleAttribute(string $title)
     {
         $this->attributes['title'] = $title;
         $this->attributes['slug'] = StringUtils::slugify($title);
+    }
+
+    public function scopeCategory($builder, $category)
+    {
+        if ($category === null) {
+            return $builder;
+        }
+
+        return $builder->with('categories')->whereHas('categories', function ($currentQuery) use ($category) {
+            $currentQuery->where('slug', $category);
+        });
+    }
+
+    public function scopeNewest($builder)
+    {
+        return $builder->orderBy('created_at', 'desc');
     }
 }

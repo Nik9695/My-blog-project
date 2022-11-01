@@ -41,7 +41,9 @@ class ArticleControllerTest extends TestCase
             'slug' => $article->slug,
         ]);
 
-        $response->assertStatus(200);
+        $responseAll->assertStatus(200);
+
+        $responseAll->assertJson(['per_page' => 5]);
     }
 
     public function test_only_authenticated_user_can_create_article()

@@ -27,7 +27,8 @@ class StoreUserRequest extends FormRequest
             'name' => ['required'],
             'email' => ['required'],
             'slug' => ['required'],
-            'password' => ['required']
+            'password' => ['required'],
+            'avatar' => ['nullable', 'image']
         ];
     }
 }
