@@ -17,7 +17,7 @@
         <h3 class="article__heading">
           {{ article.title }}
         </h3>
-        <p class="article__text">{{ article.content.substring(0, 100) }} ...</p>
+        <p class="article__text">{{ shortContent }}</p>
       </div>
     </RouterLink>
     <div class="edit__option" v-if="currentRouteName === 'my-profile'">

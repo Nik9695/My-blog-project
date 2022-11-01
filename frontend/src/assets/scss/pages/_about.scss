@@ -34,6 +34,9 @@
 
   .aboutArticle__area {
     max-width: 860px;
+    br {
+      display: none;
+    }
   }
   @include for-phone-only {
     display: flex;

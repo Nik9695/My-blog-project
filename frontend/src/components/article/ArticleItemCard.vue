@@ -22,7 +22,7 @@
           </div>
         </h3>
         <p class="article__item-bottom-text">
-          {{ article.content.substring(0, 70) }}
+          {{ shortContent }}
         </p>
         <div class="article__area-author-info">
           <img

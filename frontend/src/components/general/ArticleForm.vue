@@ -17,13 +17,11 @@
             lable="Title"
             placeholder="Enter title here"
           />
-
-          <EditorInput
-            v-model="articleData.content"
-            name="content"
-            lable="Content"
-            placeholder="Enter content of article here"
-            :isTextArea="true"
+          <QuillEditor
+            v-if="articleData.content"
+            v-model:content="articleData.content"
+            contentType="html"
+            theme="snow"
           />
           <Btn
             type="submit"
@@ -51,9 +49,11 @@ import Btn from '@/components/general/Btn.vue'
 import Form from '@/components/general/Form.vue'
 import ArticleEditorCard from '@/components/general/ArticleEditorCard.vue'
 import handleError from '@/helpers/handleError.js'
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
 export default {
-  components: { EditorInput, Btn, Form, ArticleEditorCard },
+  components: { EditorInput, Btn, Form, ArticleEditorCard, QuillEditor },
   props: {
     title: {
       type: String,
@@ -78,8 +78,7 @@ export default {
         title: '',
         content: ''
       },
-      isLoading: false,
-      isTextArea: true
+      isLoading: false
     }
   },
   async created() {

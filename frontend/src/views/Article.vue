@@ -26,9 +26,7 @@
         </div>
         <div class="aboutArticle__area">
           <div class="aboutArticle__area-content">
-            <div class="aboutArticle__area-text">
-              {{ article.content }}
-            </div>
+            <div class="aboutArticle__area-text" v-html="article.content"></div>
           </div>
           <div class="aboutArticle__area-tags">
             <ul class="section__categories-list">

@@ -19,14 +19,6 @@
       {{ errorStore.errors[name][0] }}
     </div>
     <label :for="name" class="editor__inputForm-label">{{ lable }}</label>
-    <textarea
-      v-model="inputValue"
-      :type="type"
-      :name="name"
-      :placeholder="placeholder"
-      :isTextArea="isTextArea"
-      class="editor__inputForm-input editor__inputForm-input--article-content"
-    />
   </div>
 </template>
 
@@ -55,10 +47,6 @@ export default {
     placeholder: {
       type: String,
       default: 'text'
-    },
-    isTextArea: {
-      type: Boolean,
-      default: false
     }
   },
   data() {
