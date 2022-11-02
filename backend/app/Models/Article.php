@@ -49,7 +49,7 @@ class Article extends Model
         $this->attributes['slug'] = StringUtils::slugify($title);
     }
 
-    public function scopeCategory($builder, $category)
+    public function scopeInCategory($builder, $category)
     {
         if ($category === null) {
             return $builder;
@@ -63,5 +63,14 @@ class Article extends Model
     public function scopeNewest($builder)
     {
         return $builder->orderBy('created_at', 'desc');
+    }
+
+    public function scopeFromUser($builder, $user_id)
+    {
+        if ($user_id === null) {
+            return $builder;
+        }
+
+        return $builder->where('user_id', $user_id);
     }
 }

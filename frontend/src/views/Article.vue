@@ -117,9 +117,9 @@ export default {
       handleError(error)
     }
 
-    Article.getAll()
+    Article.getAll('created_at', 'desc', 3)
       .then((response) => {
-        this.articlesRelated = response.data.data.slice(0, 3)
+        this.articlesRelated = response.data.data
       })
       .catch((error) => {
         handleError(error)

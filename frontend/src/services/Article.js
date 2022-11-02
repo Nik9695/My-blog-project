@@ -1,8 +1,15 @@
 import Http from './Http'
 
 export default {
-  async getAll() {
-    return await Http.get('/articles')
+  async getAll(
+    orderBy = 'created_at',
+    sortedBy = 'desc',
+    perPage = 10,
+    page = 1
+  ) {
+    return await Http.get(
+      `/articles?direction=${sortedBy}&ordering=${orderBy}&per_page=${perPage}&page=${page}`
+    )
   },
 
   async byUserId(id) {

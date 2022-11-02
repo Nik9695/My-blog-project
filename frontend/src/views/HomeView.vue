@@ -82,13 +82,22 @@ export default {
   components: { MainArticle, ArticleItemCard, ArticleCard },
   data() {
     return {
-      articles: []
+      articlesPopular: [],
+      articlesEditorsPick: []
     }
   },
   created() {
-    Article.getAll()
+    Article.getAll('created_at', 'desc', 8)
       .then((response) => {
-        this.articles = response.data.data
+        this.articlesPopular = response.data.data
+      })
+      .catch((error) => {
+        handleError(error)
+      })
+
+    Article.getAll('created_at', 'desc', 3)
+      .then((response) => {
+        this.articlesEditorsPick = response.data.data
       })
       .catch((error) => {
         handleError(error)
@@ -96,17 +105,11 @@ export default {
   },
   computed: {
     featuredArticle() {
-      if (this.articles.length) {
-        return this.articles[0]
+      if (this.articlesPopular.length) {
+        return this.articlesPopular[0]
       } else {
         return {}
       }
-    },
-    articlesPopular() {
-      return this.articles.slice(0, 8)
-    },
-    articlesEditorsPick() {
-      return this.articles.slice(0, 3)
     }
   }
 }
