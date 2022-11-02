@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isTextArea" class="editor__inputForm-wrapper">
+  <div class="editor__inputForm-wrapper">
     <div class="inputForm__error" v-if="errorStore.errors[name]">
       {{ errorStore.errors[name][0] }}
     </div>
@@ -9,16 +9,8 @@
       :type="type"
       :name="name"
       :placeholder="placeholder"
-      :isTextArea="isTextArea"
       class="editor__inputForm-input"
     />
-  </div>
-
-  <div v-else="isTextArea" class="editor__inputForm-wrapper">
-    <div class="inputForm__error" v-if="errorStore.errors[name]">
-      {{ errorStore.errors[name][0] }}
-    </div>
-    <label :for="name" class="editor__inputForm-label">{{ lable }}</label>
   </div>
 </template>
 

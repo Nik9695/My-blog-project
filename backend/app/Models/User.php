@@ -22,7 +22,7 @@ class User extends Authenticatable
         'password',
         'slug',
         'admin_identifier',
-        'avatar_path'
+        'avatar_path',
     ];
 
     /**
@@ -63,5 +63,10 @@ class User extends Authenticatable
     public function getRouteKeyName()
     {
         return 'id';
+    }
+
+    public function getAvatarPathAttribute($value)
+    {
+        return asset($value ? asset('storage/' . $value) : 'http://localhost:8000/storage/images/default-user-icon.png');
     }
 }

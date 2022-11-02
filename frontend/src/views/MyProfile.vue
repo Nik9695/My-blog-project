@@ -1,8 +1,7 @@
 <template>
   <main>
     <ProfileCard
-      :name="user.name"
-      :email="user.email"
+      :user="user"
       :link="'/edit-my-profile'"
       :linkLabel="'Edit profile'"
     />
@@ -28,13 +27,6 @@
             </RouterLink>
             <p class="addArticle__btn-text">Add new article</p>
           </div>
-        </div>
-        <div class="section__articles">
-          <ArticleCard
-            v-for="article in articles"
-            :key="article.id"
-            :article="article"
-          />
         </div>
       </div>
       <div

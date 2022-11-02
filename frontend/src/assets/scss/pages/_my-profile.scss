@@ -137,8 +137,12 @@
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  border: 5px solid;
+  border: 2px solid;
   background-color: white;
+}
+
+.myProfile__image--uploadImage {
+  cursor: pointer;
 }
 .devider {
   width: 50px;

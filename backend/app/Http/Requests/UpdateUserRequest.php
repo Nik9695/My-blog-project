@@ -24,10 +24,10 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['nullable'],
-            'email' => ['email'],
-            'slug' => ['nullable'],
-            'password' => ['nullable']
+            'name' => ['nullable', 'string'],
+            'password' => ['min:8', 'string'],
+            'avatar' => ['nullable'],
+
         ];
     }
 }

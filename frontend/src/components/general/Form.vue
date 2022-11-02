@@ -55,15 +55,13 @@ export default {
   methods: {
     async handleRequest() {
       this.isLoading = true
-
       try {
         await this.handleCallback()
       } catch (error) {
         handleError(error)
-        setTimeout(() => {
-          this.isLoading = false
-        }, 1000)
+        this.isLoading = false
       }
+      this.isLoading = false
     },
     showPassword() {
       this.passwordHidden = !this.passwordHidden

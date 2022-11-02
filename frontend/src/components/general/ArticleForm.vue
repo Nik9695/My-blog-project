@@ -23,6 +23,12 @@
             contentType="html"
             theme="snow"
           />
+          <QuillEditor
+            v-else
+            v-model:content="articleData.content"
+            contentType="html"
+            theme="snow"
+          />
           <Btn
             type="submit"
             :isLoading="slotProps.isLoading"
