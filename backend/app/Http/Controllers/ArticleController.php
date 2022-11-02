@@ -23,14 +23,6 @@ class ArticleController extends Controller
      */
     public function index(User $user = null)
     {
-        /*     return Article::query()
-            ->category(request('category'))
-            ->newest()
-            ->get(); */
-
-        /*         $articles = Article::with('author')->paginate(8);
-        return $articles; */
-
         return Article::query()
             ->with('author')
             ->limit(request('limit'))
