@@ -37,26 +37,11 @@
             </div>
           </Form>
 
-          <div class="articleComments">
-            <img
-              :src="article.author.avatar_path"
-              class="comment__author-photo"
-            />
-
-            <div class="comment">
-              <div class="comment__author">
-                {{ article.comments[0].user_id }}
-              </div>
-
-              <div class="comment__createdAt">
-                {{ article.comments[0].created_at }}
-              </div>
-
-              <div class="comment__content">
-                {{ article.comments[0].content }}
-              </div>
-            </div>
-          </div>
+          <CommentCard
+            v-for="comment in comments"
+            :key="comment.id"
+            :comment="comment"
+          />
         </div>
       </div>
     </div>
@@ -81,6 +66,7 @@ import ArticleBigCard from '@/components/article/ArticleBigCard.vue'
 import CategoryCard from '@/components/article/CategoryCard.vue'
 import AboutArticleCard from '@/components/article/AboutArticleCard.vue'
 import ArticleCard from '@/components/article/ArticleCard.vue'
+import CommentCard from '@/components/comment/CommentCard.vue'
 import Form from '@/components/general/Form.vue'
 import Btn from '@/components/general/Btn.vue'
 
@@ -97,7 +83,8 @@ export default {
     CategoryCard,
     ArticleCard,
     Btn,
-    Form
+    Form,
+    CommentCard
   },
   mixins: [ArticleCardMixin],
   data() {
@@ -108,7 +95,8 @@ export default {
           name: ''
         }
       },
-      comment: {}
+      comment: {},
+      user: {}
     }
   },
   async created() {
@@ -127,8 +115,11 @@ export default {
         handleError(error)
       })
   },
+
   computed: {
-    getUserById(userId) {}
+    comments() {
+      return this.article.comments
+    }
   },
 
   methods: {

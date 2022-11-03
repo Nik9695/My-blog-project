@@ -92,7 +92,11 @@
 }
 
 .comment__author {
-  color: red;
+  font-family: 'Lora', serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 20px;
+  color: black;
 }
 
 .comment__content {
