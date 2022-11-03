@@ -1,27 +1,7 @@
 <template>
   <main>
-    <!--   <AboutArticleCard /> -->
-    <article class="aboutArticle">
-      <div class="aboutArticle__inner">
-        <ul class="aboutArticle__categories">
-          <!--         <li class="aboutArticle__category">
-            <a href="#" class="aboutArticle__category-link">Category</a>
-          </li> -->
-          <CategoryCard
-            v-for="category in article.categories"
-            :key="category.id"
-            :category="category"
-          />
-        </ul>
-        <h2 class="aboutArticle__heading">
-          {{ article.title }}
-        </h2>
+    <AboutArticleCard :article="article" />
 
-        <p class="aboutArticle__content-author">
-          {{ article.author.name }}
-        </p>
-      </div>
-    </article>
     <div class="section">
       <div class="section__inner section__inner--aboutArticle__page">
         <div class="aboutArticle__timeline">
@@ -96,8 +76,7 @@
 
 <script>
 import ArticleCard from '../components/article/ArticleCard.vue'
-import AboutArticleCard from '../components/article/AboutArticleCard.vue'
-import CategoryCard from '@/components/article/CategoryCard.vue'
+import AboutArticleCard from '@/components/article/AboutArticleCard.vue'
 import ArticleCardMixin from '@/mixins/ArticleCardMixin'
 
 import { parseISO } from 'date-fns'
@@ -107,7 +86,7 @@ import handleError from '@/helpers/handleError.js'
 
 export default {
   name: 'Article',
-  components: { ArticleCard, AboutArticleCard, CategoryCard },
+  components: { ArticleCard, AboutArticleCard },
   mixins: [ArticleCardMixin],
   data() {
     return {
