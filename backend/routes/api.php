@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->group(function () use ($unauthenticatedRoutes
     Route::apiResource('comments', CommentController::class)->except($unauthenticatedRoutes);
     Route::apiResource('users', UserController::class)->except($unauthenticatedRoutes);
 
-    Route::apiResource('articles.comments', ArticleCommentController::class)->shallow()->except($unauthenticatedRoutes);
+    //Route::apiResource('articles.comments', ArticleCommentController::class)->shallow()->except($unauthenticatedRoutes);
     Route::post('/comments/{comment}/reactions', [CommentReactionController::class, 'store']);
     Route::post('/articles/{article}/reactions', [ArticleReactionController::class, 'store']);
 });
@@ -42,7 +42,7 @@ Route::apiResource('users', UserController::class)->only($unauthenticatedRoutes)
 
 Route::apiResource('users.articles', UserArticleController::class)->only($unauthenticatedRoutes);
 Route::apiResource('users.comments', UserCommentController::class)->shallow()->only($unauthenticatedRoutes);
-Route::apiResource('articles.comments', ArticleCommentController::class)->only($unauthenticatedRoutes);
+//Route::apiResource('articles.comments', ArticleCommentController::class)->only($unauthenticatedRoutes);
 
 Route::apiResource('categories', CategoryController::class)->only($unauthenticatedRoutes);
 Route::get('/articles/{article}/reactions', [ArticleReactionController::class, 'index']);
