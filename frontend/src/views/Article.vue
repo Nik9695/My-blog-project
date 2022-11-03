@@ -29,7 +29,7 @@
           <div class="aboutArticle__area-author">
             <div class="aboutArticle__area-author-info">
               <img
-                src="@/assets/images/authorImage.jpg"
+                :src="article.author.avatar_path"
                 class="aboutArticle__area-author-photo"
               />
               <div class="aboutArticle__area-author-content">

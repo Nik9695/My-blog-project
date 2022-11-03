@@ -30,7 +30,7 @@
         </p>
         <div class="article__area-author-info">
           <img
-            src="@/assets/images/authorImage.jpg"
+            :src="article.author.avatar_path"
             class="article__area-author-photo"
           />
           <div class="article__area-author-content">
