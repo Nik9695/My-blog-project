@@ -5,45 +5,7 @@
       <div class="section__inner">
         <h2 class="section__heading">Popular topics</h2>
 
-        <div class="section__categories">
-          <ul class="section__categories-list">
-            <li class="section__categories-item">
-              <RouterLink to="/" class="section__categories-link--active"
-                >All</RouterLink
-              >
-            </li>
-            <li class="section__categories-item">
-              <RouterLink to="/" class="section__categories-link"
-                >Adventure</RouterLink
-              >
-            </li>
-            <li class="section__categories-item">
-              <RouterLink to="/" class="section__categories-link"
-                >Travel</RouterLink
-              >
-            </li>
-            <li class="section__categories-item">
-              <RouterLink to="/" class="section__categories-link"
-                >Fashion</RouterLink
-              >
-            </li>
-            <li class="section__categories-item">
-              <RouterLink to="/" class="section__categories-link"
-                >Technology</RouterLink
-              >
-            </li>
-            <li class="section__categories-item">
-              <RouterLink to="/" class="section__categories-link"
-                >Branding</RouterLink
-              >
-            </li>
-            <li class="section__categories-item section__categories-item--last">
-              <RouterLink to="/" class="section__categories-link--last"
-                >View all</RouterLink
-              >
-            </li>
-          </ul>
-        </div>
+        <CategoriesList />
 
         <div class="section__articles-cascade">
           <ArticleItemCard
@@ -72,14 +34,16 @@
 </template>
 
 <script>
-import MainArticle from '../components/article/MainArticle.vue'
-import ArticleItemCard from '../components/article/ArticleItemCard.vue'
-import ArticleCard from '../components/article/ArticleCard.vue'
+import MainArticle from '@/components/article/MainArticle.vue'
+import ArticleItemCard from '@/components/article/ArticleItemCard.vue'
+import ArticleCard from '@/components/article/ArticleCard.vue'
+import CategoriesList from '@/components/general/CategoriesList.vue'
+
 import Article from '@/services/Article.js'
 import handleError from '@/helpers/handleError.js'
 
 export default {
-  components: { MainArticle, ArticleItemCard, ArticleCard },
+  components: { MainArticle, ArticleItemCard, ArticleCard, CategoriesList },
   data() {
     return {
       articlesPopular: [],

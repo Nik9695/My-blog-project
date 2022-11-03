@@ -4,7 +4,8 @@
       <ul class="mainArticle__categories">
         <CategoryCard />
       </ul>
-      <h2 class="mainArticle__heading">
+
+      <h2 v-if="article.title" class="mainArticle__heading">
         <RouterLink
           :to="{ name: 'article', params: { id: article.id } }"
           class="mainArticle__heading-link"
@@ -12,12 +13,10 @@
           {{ article.title }}
         </RouterLink>
       </h2>
-      <p class="mainArticle__content">
+      <p v-if="article.content" class="mainArticle__content">
         <time class="marinArticle__content-time">{{ formatDate }}</time>
         <span class="mainArticle__content-divider"></span>
-        <span class="mainArticle__content-text">{{
-          article.content.substring(0, 100)
-        }}</span>
+        <span class="mainArticle__content-text">{{ shortContent }}</span>
       </p>
     </div>
   </article>

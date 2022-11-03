@@ -5,79 +5,53 @@
       <div class="section__inner">
         <h2 class="section__heading">Popular topics</h2>
 
-        <div class="section__categories">
-          <ul class="section__categories-list">
-            <li class="section__categories-item">
-              <RouterLink to="/" class="section__categories-link--active"
-                >All</RouterLink
-              >
-            </li>
-            <li class="section__categories-item">
-              <RouterLink to="/" class="section__categories-link"
-                >Adventure</RouterLink
-              >
-            </li>
-            <li class="section__categories-item">
-              <RouterLink to="/" class="section__categories-link"
-                >Travel</RouterLink
-              >
-            </li>
-            <li class="section__categories-item">
-              <RouterLink to="/" class="section__categories-link"
-                >Fashion</RouterLink
-              >
-            </li>
-            <li class="section__categories-item">
-              <RouterLink to="/" class="section__categories-link"
-                >Technology</RouterLink
-              >
-            </li>
-            <li class="section__categories-item">
-              <RouterLink to="/" class="section__categories-link"
-                >Branding</RouterLink
-              >
-            </li>
-            <li class="section__categories-item section__categories-item--last">
-              <RouterLink to="/" class="section__categories-link--last"
-                >View all</RouterLink
-              >
-            </li>
-          </ul>
-        </div>
-
-        <div class="section__articles-cascade">
+        <CategoriesList />
+        <div class="section__articles-cascade" v-if="articles.data.length">
           <ArticleItemCard
             v-for="article in articles.data"
             :key="article.id"
             :article="article"
           />
-          <InfiniteLoading
-            v-if="this.isLastPage === false"
-            @infinite="loadArticles"
-          />
         </div>
+
+        <div
+          class="section__articles-cascade section__articles-cascade--noArticles"
+          v-else
+        >
+          <p>No articles found.</p>
+        </div>
+
+        <InfiniteLoading
+          v-if="this.isLastPage === false"
+          @infinite="loadArticles"
+        />
       </div>
     </div>
   </main>
 </template>
 
 <script>
-import MainArticle from '../components/article/MainArticle.vue'
-import ArticleItemCard from '../components/article/ArticleItemCard.vue'
-import ArticleCard from '../components/article/ArticleCard.vue'
+import MainArticle from '@/components/article/MainArticle.vue'
+import ArticleItemCard from '@/components/article/ArticleItemCard.vue'
+import CategoriesList from '@/components/general/CategoriesList.vue'
+import InfiniteLoading from 'v3-infinite-loading'
+
 import Article from '@/services/Article.js'
 import handleError from '@/helpers/handleError.js'
-import InfiniteLoading from 'v3-infinite-loading'
 import 'v3-infinite-loading/lib/style.css'
 
 export default {
-  components: { MainArticle, ArticleItemCard, ArticleCard, InfiniteLoading },
+  components: {
+    MainArticle,
+    ArticleItemCard,
+    CategoriesList,
+    InfiniteLoading
+  },
   data() {
     return {
       articles: {
         data: []
       },
-      articlesPopular: [],
       isLoading: false
     }
   },
@@ -95,13 +69,26 @@ export default {
   },
   async created() {
     this.isLoading = true
+
+    let categorySlug = this.$route.params.slug
+    if (this.$route.params.slug === 'all') {
+      categorySlug = null
+    }
+
     try {
-      const response = await Article.getAll('created_at', 'desc', 8)
+      const response = await Article.getAll(
+        'created_at',
+        'desc',
+        8,
+        1,
+        categorySlug
+      )
       this.articles = response.data
       this.isLoading = false
     } catch (error) {
       handleError(error)
     }
+    this.isLoading = false
   },
   methods: {
     async loadArticles() {
@@ -111,21 +98,37 @@ export default {
         return
       }
 
+      let categorySlug = this.$route.params.slug
+      if (this.$route.params.slug === 'all') {
+        categorySlug = null
+      }
+
       try {
         const response = await Article.getAll(
           'created_at',
           'desc',
           8,
-          this.articles.current_page + 1
+          this.articles.current_page + 1,
+          categorySlug
         )
 
         this.articles.data = this.articles.data.concat(response.data.data)
         this.articles.current_page = response.data.current_page
         this.articles.last_page = response.data.last_page
-      } catch (error) {}
+      } catch (error) {
+        handleError(error)
+      }
 
       this.isLoading = false
     }
+    /*     getCategorySlug() {
+      let categorySlug = this.$route.params.slug
+      if (this.$route.params.slug === 'all') {
+        categorySlug = null
+      }
+
+      return categorySlug
+    } */
   }
 }
 </script>

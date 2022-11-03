@@ -5,11 +5,18 @@ export default {
     orderBy = 'created_at',
     sortedBy = 'desc',
     perPage = 10,
-    page = 1
+    page = 1,
+    categorySlug = null
   ) {
-    return await Http.get(
-      `/articles?direction=${sortedBy}&ordering=${orderBy}&per_page=${perPage}&page=${page}`
-    )
+    let query = `/articles?direction=${sortedBy}&ordering=${orderBy}&per_page=${perPage}&page=${page}`
+
+    console.log(categorySlug)
+
+    if (categorySlug) {
+      query += `&category=${categorySlug}`
+    }
+
+    return await Http.get(query)
   },
 
   async byUserId(id) {

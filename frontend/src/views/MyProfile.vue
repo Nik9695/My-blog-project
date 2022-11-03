@@ -35,6 +35,12 @@
         v-else
       >
         <h2 class="myProfile__section-heading">You don't have any articles</h2>
+        <div class="addArticle">
+          <RouterLink :to="{ name: 'create-article' }" class="addArticle__btn">
+            +
+          </RouterLink>
+          <p class="addArticle__btn-text">Add new article</p>
+        </div>
       </div>
     </div>
   </main>
