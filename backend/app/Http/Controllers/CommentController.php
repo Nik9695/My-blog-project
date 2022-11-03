@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
+use App\Models\Article;
 use App\Models\Comment;
 use Clockwork\Request\Request;
 
@@ -22,7 +23,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::paginate(5);
+        $comments = Comment::with('author')->paginate();
         return $comments;
     }
 

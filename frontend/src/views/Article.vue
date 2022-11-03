@@ -5,7 +5,7 @@
 
     <div class="section">
       <div class="section__inner">
-        <div class="comments">
+        <div class="commentsArea">
           <div class="comments__heading">Comments:</div>
 
           <Form
@@ -17,7 +17,7 @@
             <div class="comments__inputWrapper">
               <img
                 :src="article.author.avatar_path"
-                class="comment__area-author-photo"
+                class="comment__author-photo"
               />
               <div class="comments__input">
                 <input
@@ -36,6 +36,27 @@
               </div>
             </div>
           </Form>
+
+          <div class="articleComments">
+            <img
+              :src="article.author.avatar_path"
+              class="comment__author-photo"
+            />
+
+            <div class="comment">
+              <div class="comment__author">
+                {{ article.comments[0].user_id }}
+              </div>
+
+              <div class="comment__createdAt">
+                {{ article.comments[0].created_at }}
+              </div>
+
+              <div class="comment__content">
+                {{ article.comments[0].content }}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -105,6 +126,9 @@ export default {
       .catch((error) => {
         handleError(error)
       })
+  },
+  computed: {
+    getUserById(userId) {}
   },
 
   methods: {

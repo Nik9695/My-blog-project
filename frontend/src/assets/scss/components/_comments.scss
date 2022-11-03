@@ -1,4 +1,4 @@
-.comments {
+.commentsArea {
   max-width: 1330px;
   background: #e5e5e5;
   font-family: 'Lora', serif;
@@ -31,7 +31,7 @@
 .comments__input {
   position: relative;
   padding-right: 50px;
-  padding-left: 50px;
+  padding-left: 15px;
   width: 100%;
 }
 .comment__inputForm {
@@ -42,15 +42,15 @@
   border: 0px;
 }
 
-.comment__area-author-photo {
+.comment__author-photo {
   position: relative;
   max-width: 50px;
   max-height: 50px;
   border-radius: 50%;
-  overflow: hidden;
-  margin-right: 10px;
+  margin-right: 30px;
+
   display: flex;
-  left: 35px;
+  left: 15px;
 }
 
 .btn__send-comment {
@@ -69,4 +69,32 @@
   font-size: 12px;
   line-height: 25px;
   width: 50px;
+}
+
+.articleComments {
+  background-color: grey;
+  margin: 20px 0px;
+  padding-top: 20px;
+  display: flex;
+  border-radius: 20px;
+}
+.comment {
+  font-family: 'Lora', serif;
+  color: $white;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 25px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 15px;
+  max-width: 1180px;
+  word-wrap: break-word;
+}
+
+.comment__author {
+  color: red;
+}
+
+.comment__content {
+  padding-bottom: 15px;
 }

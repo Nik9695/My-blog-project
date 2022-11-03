@@ -41,7 +41,7 @@ Route::apiResource('articles', ArticleController::class)->only($unauthenticatedR
 Route::apiResource('users', UserController::class)->only($unauthenticatedRoutes);
 
 Route::apiResource('users.articles', UserArticleController::class)->only($unauthenticatedRoutes);
-Route::apiResource('users.comments', UserCommentController::class)->shallow()->only($unauthenticatedRoutes);
+//Route::apiResource('users.comments', UserCommentController::class)->shallow()->only($unauthenticatedRoutes);
 //Route::apiResource('articles.comments', ArticleCommentController::class)->only($unauthenticatedRoutes);
 
 Route::apiResource('categories', CategoryController::class)->only($unauthenticatedRoutes);
