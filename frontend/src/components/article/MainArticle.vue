@@ -28,7 +28,8 @@
 
 <script>
 import CategoryCard from '@/components/article/CategoryCard.vue'
-import ArticleCardMixin from '@/mixins/ArticleCardMixin'
+
+import ArticleCardMixin from '@/mixins/ArticleCardMixin.js'
 
 export default {
   name: 'MainArticle',
