@@ -25,6 +25,7 @@ class ArticleController extends Controller
     {
         return Article::query()
             ->with('author')
+            ->with('categories')
             ->limit(request('limit'))
             ->inCategory(request('category'))
             ->fromUser(request('user_id') ?? $user?->id)
@@ -56,7 +57,7 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        return Article::with('author')->findOrFail($id);
+        return Article::with('author')->with('categories')->findOrFail($id);
     }
 
     /**

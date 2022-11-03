@@ -2,7 +2,11 @@
   <article class="mainArticle">
     <div class="mainArticle__inner">
       <ul class="mainArticle__categories">
-        <CategoryCard />
+        <CategoryCard
+          v-for="category in article.categories"
+          :key="category.id"
+          :category="category"
+        />
       </ul>
 
       <h2 v-if="article.title" class="mainArticle__heading">
@@ -25,6 +29,7 @@
 <script>
 import CategoryCard from './CategoryCard.vue'
 import ArticleCardMixin from '@/mixins/ArticleCardMixin'
+
 export default {
   name: 'MainArticle',
   components: { CategoryCard },

@@ -4,9 +4,14 @@
     <article class="aboutArticle">
       <div class="aboutArticle__inner">
         <ul class="aboutArticle__categories">
-          <li class="aboutArticle__category">
+          <!--         <li class="aboutArticle__category">
             <a href="#" class="aboutArticle__category-link">Category</a>
-          </li>
+          </li> -->
+          <CategoryCard
+            v-for="category in article.categories"
+            :key="category.id"
+            :category="category"
+          />
         </ul>
         <h2 class="aboutArticle__heading">
           {{ article.title }}
@@ -92,7 +97,9 @@
 <script>
 import ArticleCard from '../components/article/ArticleCard.vue'
 import AboutArticleCard from '../components/article/AboutArticleCard.vue'
+import CategoryCard from '@/components/article/CategoryCard.vue'
 import ArticleCardMixin from '@/mixins/ArticleCardMixin'
+
 import { parseISO } from 'date-fns'
 import { differenceInMinutes } from 'date-fns'
 import Article from '@/services/Article.js'
@@ -100,7 +107,7 @@ import handleError from '@/helpers/handleError.js'
 
 export default {
   name: 'Article',
-  components: { ArticleCard, AboutArticleCard },
+  components: { ArticleCard, AboutArticleCard, CategoryCard },
   mixins: [ArticleCardMixin],
   data() {
     return {

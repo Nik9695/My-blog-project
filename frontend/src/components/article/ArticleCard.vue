@@ -5,7 +5,11 @@
       class="article__link"
     >
       <ul class="article__categories">
-        <CategoryCard />
+        <CategoryCard
+          v-for="category in article.categories"
+          :key="category.id"
+          :category="category"
+        />
       </ul>
       <img
         src="https://loremflickr.com/420/350"

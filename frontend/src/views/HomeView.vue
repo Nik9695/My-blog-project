@@ -5,8 +5,6 @@
       <div class="section__inner">
         <h2 class="section__heading">Popular topics</h2>
 
-        <CategoriesList />
-
         <div class="section__articles-cascade">
           <ArticleItemCard
             v-for="article in articlesPopular"

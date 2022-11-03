@@ -10,8 +10,6 @@ export default {
   ) {
     let query = `/articles?direction=${sortedBy}&ordering=${orderBy}&per_page=${perPage}&page=${page}`
 
-    console.log(categorySlug)
-
     if (categorySlug) {
       query += `&category=${categorySlug}`
     }

@@ -11,7 +11,11 @@
           class="article__item-image"
         />
         <ul class="article__categories">
-          <CategoryCard />
+          <CategoryCard
+            v-for="category in article.categories"
+            :key="category.id"
+            :category="category"
+          />
         </ul>
       </div>
       <div class="article__item-bottom">

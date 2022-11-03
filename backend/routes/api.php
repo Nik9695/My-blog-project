@@ -10,6 +10,7 @@ use App\Http\Controllers\CommentReactionController;
 use App\Http\Controllers\UserArticleController;
 use App\Http\Controllers\UserCommentController;
 use App\Http\Controllers\UserController;
+use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,3 +47,8 @@ Route::apiResource('articles.comments', ArticleCommentController::class)->only($
 Route::apiResource('categories', CategoryController::class)->only($unauthenticatedRoutes);
 Route::get('/articles/{article}/reactions', [ArticleReactionController::class, 'index']);
 Route::get('/comments/{comment}/reactions', [CommentReactionController::class, 'index']);
+
+
+Route::get('/articles/{article}/categories', function (Request $request, Article $article) {
+    return $article->categories;
+});

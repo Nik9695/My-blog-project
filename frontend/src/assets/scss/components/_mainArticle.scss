@@ -37,7 +37,6 @@
   font-size: 14px;
   line-height: 20px;
   color: $white;
-  max-width: 530px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -55,6 +54,7 @@
 }
 
 .mainArticle__categories {
+  display: flex;
   list-style: none;
   padding: 0;
 }
