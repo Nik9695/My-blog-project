@@ -28,6 +28,7 @@
               <img
                 :src="article.author.avatar_path"
                 class="aboutArticle__area-author-photo"
+                alt=""
               />
               <div class="aboutArticle__area-author-content">
                 <div class="aboutArticle__area-author-name">
@@ -60,7 +61,7 @@
       <div class="section__inner">
         <h2 class="aboutArticle__section-heading">Related Posts</h2>
         <div class="section__articles">
-          <ArticleCard
+          <ArticleBigCard
             v-for="article in articlesRelated"
             :key="article.id"
             :article="article"
@@ -72,7 +73,7 @@
 </template>
 
 <script>
-import ArticleCard from '@/components/article/ArticleCard.vue'
+import ArticleBigCard from '@/components/article/ArticleBigCard.vue'
 import CategoryCard from '@/components/article/CategoryCard.vue'
 import AboutArticleCard from '@/components/article/AboutArticleCard.vue'
 
@@ -82,7 +83,7 @@ import ArticleCardMixin from '@/mixins/ArticleCardMixin.js'
 
 export default {
   name: 'Article',
-  components: { ArticleCard, AboutArticleCard, CategoryCard },
+  components: { ArticleBigCard, AboutArticleCard, CategoryCard },
   mixins: [ArticleCardMixin],
   data() {
     return {

@@ -7,7 +7,7 @@
 
         <CategoriesList />
         <div class="section__articles-cascade" v-if="articles.data.length">
-          <ArticleItemCard
+          <ArticleSmallCard
             v-for="article in articles.data"
             :key="article.id"
             :article="article"
@@ -32,7 +32,7 @@
 
 <script>
 import MainArticle from '@/components/article/MainArticle.vue'
-import ArticleItemCard from '@/components/article/ArticleItemCard.vue'
+import ArticleSmallCard from '@/components/article/ArticleSmallCard.vue'
 import CategoriesList from '@/components/general/CategoriesList.vue'
 import InfiniteLoading from 'v3-infinite-loading'
 
@@ -43,7 +43,7 @@ import 'v3-infinite-loading/lib/style.css'
 export default {
   components: {
     MainArticle,
-    ArticleItemCard,
+    ArticleSmallCard,
     CategoriesList,
     InfiniteLoading
   },

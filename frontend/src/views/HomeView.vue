@@ -6,7 +6,7 @@
         <h2 class="section__heading">Popular topics</h2>
 
         <div class="section__articles-cascade">
-          <ArticleItemCard
+          <ArticleSmallCard
             v-for="article in articlesPopular"
             :key="article.id"
             :article="article"
@@ -20,7 +20,7 @@
         <h2 class="section__heading">Editor's pick</h2>
 
         <div class="section__articles">
-          <ArticleCard
+          <ArticleBigCard
             v-for="article in articlesEditorsPick"
             :key="article.id"
             :article="article"
@@ -33,15 +33,15 @@
 
 <script>
 import MainArticle from '@/components/article/MainArticle.vue'
-import ArticleItemCard from '@/components/article/ArticleItemCard.vue'
-import ArticleCard from '@/components/article/ArticleCard.vue'
+import ArticleSmallCard from '@/components/article/ArticleSmallCard.vue'
+import ArticleBigCard from '@/components/article/ArticleBigCard.vue'
 import CategoriesList from '@/components/general/CategoriesList.vue'
 
 import Article from '@/services/Article.js'
 import handleError from '@/helpers/handleError.js'
 
 export default {
-  components: { MainArticle, ArticleItemCard, ArticleCard, CategoriesList },
+  components: { MainArticle, ArticleSmallCard, ArticleBigCard, CategoriesList },
   data() {
     return {
       articlesPopular: [],

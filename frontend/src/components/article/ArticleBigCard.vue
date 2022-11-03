@@ -47,7 +47,7 @@ import CategoryCard from './CategoryCard.vue'
 import ArticleCardMixin from '@/mixins/ArticleCardMixin'
 import Article from '@/services/Article.js'
 export default {
-  name: 'ArticleCard',
+  name: 'ArticleBigCard',
   components: { CategoryCard },
   mixins: [ArticleCardMixin],
 
