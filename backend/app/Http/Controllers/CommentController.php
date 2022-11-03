@@ -51,6 +51,9 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
+        $articleId = request('article_id');
+
+        dd($articleId);
         return $comment;
     }
 

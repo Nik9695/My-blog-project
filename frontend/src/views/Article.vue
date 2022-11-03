@@ -15,10 +15,7 @@
             class="form__comments"
           >
             <div class="comments__inputWrapper">
-              <img
-                :src="article.author.avatar_path"
-                class="comment__author-photo"
-              />
+              <img :src="user.avatar_path" class="comment__author-photo" />
               <div class="comments__input">
                 <input
                   v-model="comment.content"
@@ -38,7 +35,7 @@
           </Form>
 
           <CommentCard
-            v-for="comment in comments"
+            v-for="comment in article.comments"
             :key="comment.id"
             :comment="comment"
           />
@@ -75,6 +72,9 @@ import Comment from '@/services/Comment.js'
 import handleError from '@/helpers/handleError.js'
 import ArticleCardMixin from '@/mixins/ArticleCardMixin.js'
 
+import { mapStores } from 'pinia'
+import { useAuthStore } from '@/store/Auth.js'
+
 export default {
   name: 'Article',
   components: {
@@ -89,14 +89,14 @@ export default {
   mixins: [ArticleCardMixin],
   data() {
     return {
-      articlesRelated: [],
-      article: {
-        author: {
-          name: ''
-        }
+      comments: {
+        data: []
       },
+      articlesRelated: [],
       comment: {},
-      user: {}
+      article: {
+        author: {}
+      }
     }
   },
   async created() {
@@ -106,30 +106,38 @@ export default {
     } catch (error) {
       handleError(error)
     }
+    try {
+      const response = await Comment.getAll(this.$route.params.id)
+      this.comments = response.data
+    } catch (error) {
+      handleError(error)
+    }
 
-    Article.getAll('created_at', 'desc', 3)
-      .then((response) => {
-        this.articlesRelated = response.data.data
-      })
-      .catch((error) => {
-        handleError(error)
-      })
+    try {
+      const response = await Article.getAll('created_at', 'desc', 3)
+      this.articlesRelated = response.data.data
+    } catch (error) {
+      handleError(error)
+    }
   },
 
   computed: {
-    comments() {
-      return this.article.comments
+    ...mapStores(useAuthStore),
+    user() {
+      return this.authStore.user
     }
   },
 
   methods: {
     async storeComment() {
-      const response = await Comment.create(
-        this.article.id,
-        this.comment.content
-      )
+      await Comment.create(this.article.id, this.comment.content)
       this.resetInputForm()
+      this.reloadArticleData()
       this.isLoading = false
+    },
+    async reloadArticleData() {
+      const response = await Article.show(this.$route.params.id)
+      this.article = response.data
     },
     resetInputForm() {
       this.comment = Object.assign({}, '')
