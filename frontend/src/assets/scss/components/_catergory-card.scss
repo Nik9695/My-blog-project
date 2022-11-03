@@ -5,6 +5,7 @@
 
 .category__link {
   background: rgba(255, 255, 255, 0.5);
+  //background: grey;
   border-radius: 8px;
   font-family: 'Roboto', serif;
   font-style: normal;
@@ -14,4 +15,8 @@
   color: $white;
   text-decoration: none;
   padding: 5px 10px;
+}
+
+.category__link--article-page {
+  background: grey;
 }

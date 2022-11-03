@@ -1,7 +1,7 @@
 <template>
   <div>
     <li class="category">
-      <a href="#" class="category__link">{{ category.name }}</a>
+      <a href="#" :class="class">{{ category.name }}</a>
     </li>
   </div>
 </template>
@@ -13,6 +13,10 @@ export default {
     category: {
       type: Object,
       required: false
+    },
+    class: {
+      type: String,
+      default: 'category__link'
     }
   }
 }

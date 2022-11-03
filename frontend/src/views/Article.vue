@@ -15,15 +15,12 @@
           </div>
           <div class="aboutArticle__area-tags">
             <ul class="section__categories-list">
-              <RouterLink to="/" class="aboutArticle__area-tag-item"
-                >adventure</RouterLink
-              >
-              <RouterLink to="/" class="aboutArticle__area-tag-item"
-                >photo</RouterLink
-              >
-              <RouterLink to="/" class="aboutArticle__area-tag-item"
-                >design</RouterLink
-              >
+              <CategoryCard
+                v-for="category in this.article.categories"
+                :key="category.id"
+                :category="category"
+                class="category__link category__link--article-page"
+              />
             </ul>
           </div>
           <div class="aboutArticle__area-author">
@@ -78,10 +75,10 @@
 import ArticleCard from '@/components/article/ArticleCard.vue'
 import CategoryCard from '@/components/article/CategoryCard.vue'
 import AboutArticleCard from '@/components/article/AboutArticleCard.vue'
-import ArticleCardMixin from '@/mixins/ArticleCardMixin.js'
 
 import Article from '@/services/Article.js'
 import handleError from '@/helpers/handleError.js'
+import ArticleCardMixin from '@/mixins/ArticleCardMixin.js'
 
 export default {
   name: 'Article',
