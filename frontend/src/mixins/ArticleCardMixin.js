@@ -1,4 +1,4 @@
-import { format, parseISO } from 'date-fns'
+import { format, parseISO, differenceInMinutes } from 'date-fns'
 
 export default {
   computed: {
@@ -10,6 +10,11 @@ export default {
       return `${this.article.content
         .replace(/(<([^>]+)>)/gi, '')
         .slice(0, 100)}`
+    },
+    articleLifeTime() {
+      const created = parseISO(this.article.created_at)
+      const now = Date.now()
+      return differenceInMinutes(now, created)
     }
   }
 }

@@ -75,18 +75,17 @@
 </template>
 
 <script>
-import ArticleCard from '../components/article/ArticleCard.vue'
+import ArticleCard from '@/components/article/ArticleCard.vue'
+import CategoryCard from '@/components/article/CategoryCard.vue'
 import AboutArticleCard from '@/components/article/AboutArticleCard.vue'
-import ArticleCardMixin from '@/mixins/ArticleCardMixin'
+import ArticleCardMixin from '@/mixins/ArticleCardMixin.js'
 
-import { parseISO } from 'date-fns'
-import { differenceInMinutes } from 'date-fns'
 import Article from '@/services/Article.js'
 import handleError from '@/helpers/handleError.js'
 
 export default {
   name: 'Article',
-  components: { ArticleCard, AboutArticleCard },
+  components: { ArticleCard, AboutArticleCard, CategoryCard },
   mixins: [ArticleCardMixin],
   data() {
     return {
@@ -110,13 +109,6 @@ export default {
       .catch((error) => {
         handleError(error)
       })
-  },
-  computed: {
-    articleLifeTime() {
-      const created = parseISO(this.article.created_at)
-      const now = Date.now()
-      return differenceInMinutes(now, created)
-    }
   }
 }
 </script>

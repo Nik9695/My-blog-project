@@ -1,7 +1,7 @@
 <template>
   <div>
     <li class="category">
-      <a href="#" class="category__link">{{ getCategoryName }}</a>
+      <a href="#" class="category__link">{{ category.name }}</a>
     </li>
   </div>
 </template>
@@ -13,17 +13,6 @@ export default {
     category: {
       type: Object,
       required: false
-    }
-  },
-  /*   methods: {
-    getCategoryName() {
-      return this.category.name
-    }
-  }, */
-
-  computed: {
-    getCategoryName() {
-      return this.category.name
     }
   }
 }

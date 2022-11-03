@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import CategoryCard from './CategoryCard.vue'
+import CategoryCard from '@/components/article/CategoryCard.vue'
 import ArticleCardMixin from '@/mixins/ArticleCardMixin'
 
 export default {
