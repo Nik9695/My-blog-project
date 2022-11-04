@@ -45,8 +45,9 @@ class ArticleController extends Controller
         $article = new Article($request->validated());
         $article->user_id = auth()->id();
         $article->slug = StringUtils::slugify($article->title);
-        $article->save();
         $article->categories()->attach($request->category_id);
+        $article->save();
+
         return $article;
     }
 

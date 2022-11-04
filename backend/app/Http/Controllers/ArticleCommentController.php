@@ -23,10 +23,10 @@ class ArticleCommentController extends Controller
     public function index(Article $article)
     {
 
-        $comments = Comment::where('article_id', $article->id)
+        /*   $comments = Comment::where('article_id', $article->id)
             ->with('author')
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(5); */
 
         /*         $comments = Comment::where('article_id', $article->id)
             ->with('author')
@@ -34,7 +34,10 @@ class ArticleCommentController extends Controller
             ->get(); */
 
 
-        return $comments;
+        return Comment::where('article_id', $article->id)
+            ->with('author')
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
 
         /*         return Comment::query()
             ->with('author')

@@ -10,7 +10,7 @@
 
           <Form
             :handleCallback="storeComment"
-            :data="comment"
+            :data="newComment"
             v-slot="slotProps"
             class="form__comments"
           >
@@ -18,7 +18,7 @@
               <img :src="user.avatar_path" class="comment__author-photo" />
               <div class="comments__input">
                 <input
-                  v-model="comment.content"
+                  v-model="newComment.content"
                   class="comment__inputForm"
                   name="comment"
                   placeholder="Write comment"
@@ -93,7 +93,7 @@ export default {
         data: []
       },
       articlesRelated: [],
-      comment: {},
+      newComment: {},
       article: {
         author: {}
       }
@@ -130,9 +130,9 @@ export default {
 
   methods: {
     async storeComment() {
-      await Comment.create(this.article.id, this.comment.content)
+      await Comment.create(this.article.id, this.newComment.content)
+      await this.reloadArticleData()
       this.resetInputForm()
-      this.reloadArticleData()
       this.isLoading = false
     },
     async reloadArticleData() {

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@kyvg/vue3-notification": "^2.6.1",
+    "@vueform/multiselect": "^2.5.6",
     "@vueup/vue-quill": "^1.0.0",
     "date-fns": "^2.29.3",
     "normalize.css": "^8.0.1",

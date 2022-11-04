@@ -55,6 +55,7 @@ export default {
   methods: {
     async handleRequest() {
       this.isLoading = true
+      this.errorStore.clearErrors()
       try {
         await this.handleCallback()
       } catch (error) {

@@ -44,22 +44,42 @@
           </button>
         </div>
       </Form>
+      <Multiselect
+        v-model="value"
+        :options="options"
+        mode="tags"
+        loading="true"
+        :searchable="true"
+        :createTag="true"
+        placeholder="Select categories for your article"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import Article from '@/services/Article.js'
 import EditorInput from '@/components/general/EditorInput.vue'
 import Btn from '@/components/general/Btn.vue'
 import Form from '@/components/general/Form.vue'
 import ArticleEditorCard from '@/components/general/ArticleEditorCard.vue'
+
+import Article from '@/services/Article.js'
 import handleError from '@/helpers/handleError.js'
+
 import { QuillEditor } from '@vueup/vue-quill'
+import Multiselect from '@vueform/multiselect'
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
+import '@vueform/multiselect/themes/default.css'
 
 export default {
-  components: { EditorInput, Btn, Form, ArticleEditorCard, QuillEditor },
+  components: {
+    EditorInput,
+    Btn,
+    Form,
+    ArticleEditorCard,
+    QuillEditor,
+    Multiselect
+  },
   props: {
     title: {
       type: String,
@@ -84,7 +104,9 @@ export default {
         title: '',
         content: ''
       },
-      isLoading: false
+      value: null,
+      options: ['Batman', 'Robin', 'Joker'],
+      isLoading: true
     }
   },
   async created() {
@@ -116,9 +138,9 @@ export default {
 
     async handleArticleMethod() {
       if (this.methodKey === 'create') {
-        this.createArticle()
+        await this.createArticle()
       } else if (this.methodKey === 'update') {
-        this.updateArticle()
+        await this.updateArticle()
       }
     }
   }
