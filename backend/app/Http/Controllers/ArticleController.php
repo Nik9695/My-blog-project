@@ -26,7 +26,6 @@ class ArticleController extends Controller
         return Article::query()
             ->with('author')
             ->with('categories')
-            ->with('comments')
             ->limit(request('limit'))
             ->inCategory(request('category'))
             ->fromUser(request('user_id') ?? $user?->id)
@@ -61,8 +60,6 @@ class ArticleController extends Controller
     {
         return Article::with('author')
             ->with('categories')
-            ->with('comments.author')
-            ->orderBy('created_at')
             ->findOrFail($id);
     }
 

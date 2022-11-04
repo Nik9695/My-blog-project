@@ -10,5 +10,8 @@ export default (errorResponse) => {
   } else if (errorResponse.response?.status === 403) {
     errorStore.setErrors(errorResponse.response.data)
     notify({ type: 'error', text: errorResponse.response.data.message })
+  } else if (errorResponse.response?.status === 401) {
+    errorStore.setErrors(errorResponse.response.data)
+    notify({ type: 'error', text: 'Please log in, you are unauthorized.' })
   }
 }

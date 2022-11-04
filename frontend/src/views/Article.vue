@@ -35,11 +35,12 @@
           </Form>
 
           <CommentCard
-            v-for="comment in article.comments"
+            v-for="comment in comments.data"
             :key="comment.id"
             :comment="comment"
           />
         </div>
+        <InfiniteLoading v-if="isLastPage === false" @infinite="loadComments" />
       </div>
     </div>
 
@@ -66,6 +67,7 @@ import ArticleCard from '@/components/article/ArticleCard.vue'
 import CommentCard from '@/components/comment/CommentCard.vue'
 import Form from '@/components/general/Form.vue'
 import Btn from '@/components/general/Btn.vue'
+import InfiniteLoading from 'v3-infinite-loading'
 
 import Article from '@/services/Article.js'
 import Comment from '@/services/Comment.js'
@@ -74,6 +76,8 @@ import ArticleCardMixin from '@/mixins/ArticleCardMixin.js'
 
 import { mapStores } from 'pinia'
 import { useAuthStore } from '@/store/Auth.js'
+
+import 'v3-infinite-loading/lib/style.css'
 
 export default {
   name: 'Article',
@@ -84,7 +88,8 @@ export default {
     ArticleCard,
     Btn,
     Form,
-    CommentCard
+    CommentCard,
+    InfiniteLoading
   },
   mixins: [ArticleCardMixin],
   data() {
@@ -125,22 +130,57 @@ export default {
     ...mapStores(useAuthStore),
     user() {
       return this.authStore.user
+    },
+    isLastPage() {
+      console.log(this.comments.current_page)
+      return this.comments.current_page === this.comments.last_page
     }
   },
 
   methods: {
     async storeComment() {
       await Comment.create(this.article.id, this.newComment.content)
-      await this.reloadArticleData()
+      await this.reloadComments()
       this.resetInputForm()
       this.isLoading = false
     },
-    async reloadArticleData() {
-      const response = await Article.show(this.$route.params.id)
-      this.article = response.data
+
+    async loadComments() {
+      this.isLoading = true
+
+      if (this.isLastPage) {
+        return
+      }
+
+      let articleId = this.$route.params.id
+
+      try {
+        const response = await Comment.getAll(
+          articleId,
+          5,
+          this.comments.current_page + 1
+        )
+        console.log(response)
+
+        this.comments.data = this.comments.data.concat(response.data.data)
+        this.comments.current_page = response.data.current_page
+        this.comments.last_page = response.data.last_page
+      } catch (error) {
+        handleError(error)
+      }
+
+      this.isLoading = false
+    },
+    async reloadComments() {
+      try {
+        const response = await Comment.getAll(this.$route.params.id)
+        this.comments = response.data
+      } catch (error) {
+        handleError(error)
+      }
     },
     resetInputForm() {
-      this.comment = Object.assign({}, '')
+      this.newComment = Object.assign({}, '')
     }
   }
 }

@@ -20,29 +20,14 @@ class ArticleCommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Article $article)
+    public function index(Article $article = null)
     {
-
-        /*   $comments = Comment::where('article_id', $article->id)
+        return Comment::query()
             ->with('author')
+            ->limit(request('limit'))
+            ->fromArticle(request('article_id') ?? $article?->id)
             ->orderBy('created_at', 'desc')
-            ->paginate(5); */
-
-        /*         $comments = Comment::where('article_id', $article->id)
-            ->with('author')
-            ->orderBy('created_at', 'desc')
-            ->get(); */
-
-
-        return Comment::where('article_id', $article->id)
-            ->with('author')
-            ->orderBy('created_at', 'desc')
-            ->paginate(5);
-
-        /*         return Comment::query()
-            ->with('author')
-            ->orderBy('created_at', 'desc')
-            ->paginate(5); */
+            ->paginate(request('per_page'))->appends(request()->all());
     }
 
 

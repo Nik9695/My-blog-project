@@ -1,12 +1,13 @@
 import Http from './Http'
 
 export default {
-  async getAll(articleId) {
-    await Http.get(`/articles/${articleId}/comments`)
+  async getAll(articleId = null, perPage = 5, page = 1) {
+    let query = `/articles/${articleId}/comments?per_page=${perPage}&page=${page}`
+    return await Http.get(query)
   },
 
   async create(articleId, commentContent) {
-    await Http.post(`/comments`, {
+    return await Http.post(`/comments`, {
       article_id: articleId,
       content: commentContent
     })
