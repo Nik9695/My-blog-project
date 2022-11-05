@@ -1,6 +1,8 @@
 .category {
   padding-right: 10px;
   padding-bottom: 10px;
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 .category__link {

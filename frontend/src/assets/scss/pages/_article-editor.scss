@@ -14,9 +14,11 @@
   color: $white;
   background-color: #d4a373;
   height: 30px;
-  width: 100%;
+  width: 90px;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
 }
 .editArticle__link {
   position: absolute;
@@ -38,4 +40,29 @@
   background: url('@/assets/images/delete-article-button.png') center no-repeat;
   background-size: cover;
   cursor: pointer;
+}
+
+.category__link-articleForm {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 12px;
+
+  color: #6c757d;
+  text-decoration: none;
+  width: 70px;
+  height: 25px;
+  background: #ffffff;
+  border: 1px solid black;
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tags__area {
+  display: flex;
+  flex-direction: column;
 }

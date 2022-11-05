@@ -35,15 +35,17 @@
           class="editArticle__btn"
         />
       </RouterLink>
-      <form @submit.prevent="deleteArticle" class="delete__option">
-        <button type="submit" class="deleteArticle__btn"></button>
-      </form>
+      <button
+        type="submit"
+        class="deleteArticle__btn"
+        @click.prevent="deleteArticle"
+      ></button>
     </div>
   </article>
 </template>
 
 <script>
-import CategoryCard from './CategoryCard.vue'
+import CategoryCard from '@/components/article/CategoryCard.vue'
 import ArticleCardMixin from '@/mixins/ArticleCardMixin'
 import Article from '@/services/Article.js'
 export default {
