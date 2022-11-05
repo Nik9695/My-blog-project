@@ -16,24 +16,27 @@ class ArticleSeeder extends Seeder
      */
     public function run()
     {
-        $categories = Category::factory(2)->create();
+        /*   $category = Category::factory(1)
+            ->set('name', 'adventure')
+            ->create(); */
 
-        Article::factory(2)
+        /*       Article::factory(2)
             ->hasComments(1)
-            ->afterCreating(function (Article $article) use ($categories) {
-                $article->categories()->attach($categories);
+            ->afterCreating(function (Article $article) {
+
+                $category = Category::where('name', 'adventure');
+                $article->categories()->attach($category);
             })
-            ->create();
+            ->create(); */
 
 
-        $article = new Article([
+        /*         $article = new Article([
             'title' => 'manually created',
             'content' => 'manual content',
             'slug' => 'manual slug',
             'user_id' => User::factory(1)->createOne()->id,
-        ]);
+        ]); */
 
-        $article->save();
+        //$article->save();
     }
 }
-

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Article;
+use App\Models\Category;
 use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -30,22 +31,12 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         User::factory(1)
-            ->set('name', 'nik')
-            ->set('slug', 'nik-user')
-            ->set('email', 'nik@mail.com')
-            ->set('password', Hash::make('12345678'))
-            ->hasArticles(3)
-            ->hasComments(3)
-            ->create();
-
-        User::factory(1)
             ->set('name', 'Admin user')
             ->set('slug', 'admin-user')
             ->set('email', 'admin@user.com')
             ->set('password', Hash::make('admin_user'))
             ->set('admin_identifier', true)
             ->create();
-
 
         $this->call([
             ArticleSeeder::class,

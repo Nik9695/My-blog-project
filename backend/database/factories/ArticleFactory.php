@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,8 +21,6 @@ class ArticleFactory extends Factory
     {
         $title = fake()->sentence();
         $slug = StringUtils::slugify($title);
-        $content = fake()->realText();
-        $summary = StringUtils::summarize($content);
 
         return [
             'title' => $title,

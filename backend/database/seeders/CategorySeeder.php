@@ -15,6 +15,20 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        Category::factory(5)->create();
+        Category::factory(1)
+            ->set('name', 'adventure')
+            ->create();
+
+        Category::factory(1)
+            ->set('name', 'fashion')
+            ->create();
+
+        Category::factory(1)
+            ->set('name', 'brand')
+            ->create();
+
+        Category::factory(1)
+            ->set('name', 'science')
+            ->create();
     }
 }
