@@ -12,10 +12,6 @@ class Article extends Model
 
     protected $fillable = ['title', 'content', 'slug', 'user_id'];
 
-    public function getRouteKeyName()
-    {
-        return 'id';
-    }
 
     public function user()
     {

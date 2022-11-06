@@ -1,5 +1,4 @@
 import Http from './Http'
-
 export default {
   async getAll(
     orderBy = 'created_at',
@@ -16,7 +15,6 @@ export default {
 
     return await Http.get(query)
   },
-
   async byUserId(id) {
     return await Http.get(`/users/${id}/articles`)
   },

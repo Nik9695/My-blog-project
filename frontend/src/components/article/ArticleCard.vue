@@ -16,7 +16,7 @@
               v-for="category in this.article.categories"
               :key="category.id"
               :category="category"
-              class="category__link category__link--article-page"
+              class="category__link-articleForm"
             />
           </ul>
         </div>

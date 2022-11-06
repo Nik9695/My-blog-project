@@ -36,9 +36,4 @@ class Comment extends Model
 
         return $builder->where('article_id', $article_id);
     }
-
-    public function getRouteKeyName()
-    {
-        return 'id';
-    }
 }

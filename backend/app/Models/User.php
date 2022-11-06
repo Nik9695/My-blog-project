@@ -60,11 +60,6 @@ class User extends Authenticatable
         return 'id';
     }
 
-    public function getRouteKeyName()
-    {
-        return 'id';
-    }
-
     public function getAvatarPathAttribute($value)
     {
         return asset($value ? asset('storage/' . $value) : 'http://localhost:8000/storage/images/default-user-icon.png');
