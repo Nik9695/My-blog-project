@@ -1,6 +1,6 @@
 .commentsArea {
   max-width: 1330px;
-  background: #e5e5e5;
+  background: #f8f9fa;
   font-family: 'Lora', serif;
   font-weight: 700;
   font-size: 18px;
@@ -20,7 +20,7 @@
 }
 
 .comments__inputWrapper {
-  background-color: grey;
+  background-color: #e7e7e7;
   display: flex;
   align-content: center;
   align-items: center;
@@ -59,7 +59,7 @@
   z-index: 2;
   border: none;
   top: 10px;
-  right: 60px;
+  right: 40px;
   border-radius: 20px;
   cursor: pointer;
 
@@ -73,7 +73,7 @@
 }
 
 .articleComments {
-  background-color: grey;
+  background-color: #e7e7e7;
   margin: 20px 0px;
   padding-top: 20px;
   display: flex;
@@ -90,6 +90,7 @@
   padding-left: 15px;
   max-width: 1180px;
   word-wrap: break-word;
+  color: #495057;
 }
 
 .comment__author {
@@ -97,7 +98,7 @@
   font-weight: 700;
   font-size: 12px;
   line-height: 20px;
-  color: black;
+  color: #343a40;
 }
 
 .comment__content {

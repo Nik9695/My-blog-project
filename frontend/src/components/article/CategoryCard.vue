@@ -14,7 +14,7 @@ export default {
     },
     class: {
       type: String,
-      default: 'category__link'
+      default: 'category__link-onCard'
     }
   }
 }
