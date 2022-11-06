@@ -97,11 +97,17 @@ export default {
   },
   data() {
     return {
-      articleData: {},
+      articleData: {
+        title: '',
+        content: '',
+        categories: [],
+        category_id: []
+      },
       categoryList: {
         data: []
       },
       selectedCategories: [],
+
       isLoading: false,
       multiSelectHidden: false
     }
@@ -109,7 +115,8 @@ export default {
   async created() {
     try {
       const response = await Article.show(this.$route.params.id)
-      this.articleData = response.data
+      this.articleData.title = response.data.title
+      this.articleData.content = response.data.content
     } catch (error) {
       handleError(error)
     }
@@ -134,7 +141,7 @@ export default {
     async updateArticle() {
       const response = await Article.update(
         this.articleData,
-        this.articleData.id
+        this.$route.params.id
       )
       if (response?.status === 200) {
         this.$router.push({ name: 'my-profile' })
@@ -148,6 +155,7 @@ export default {
       try {
         const response = await Category.bySlug(slug)
         this.articleData.categories.push(response.data)
+        this.articleData.category_id.push(response.data.id)
       } catch (error) {
         handleError(error)
       }
@@ -155,6 +163,7 @@ export default {
 
     async updateCategoriesOnArticle() {
       this.articleData.categories.length = 0
+      this.articleData.category_id.length = 0
       this.selectedCategories.forEach(
         async (slug) => await this.findCategoriesBySlug(slug)
       )
