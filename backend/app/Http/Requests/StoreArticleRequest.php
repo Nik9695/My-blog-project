@@ -27,7 +27,7 @@ class StoreArticleRequest extends FormRequest
             'title' => ['required', 'max:255'],
             'content' => ['required'],
             'category_id' => ['nullable', 'array', 'max:3'],
-
+            'avatar' => ['nullable', 'image']
         ];
     }
 }

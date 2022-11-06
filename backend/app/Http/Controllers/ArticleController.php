@@ -42,12 +42,21 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        $article = new Article($request->validated());
+        $validated = $request->validated();
+
+
+        if ($request->background_image) {
+            $path = $request->file('background_image')->store('images', ['disk' => 'public']);
+            if (!$path) {
+                return response()->json(['msg' => 'Background image could not be saved'], 500);
+            }
+            $validated['background_image_path'] = $path;
+        }
+        $article = new Article($validated);
         $article->user_id = auth()->id();
         $article->slug = StringUtils::slugify($article->title);
         $article->save();
         $article->categories()->attach($request->category_id);
-
         return $article;
     }
 

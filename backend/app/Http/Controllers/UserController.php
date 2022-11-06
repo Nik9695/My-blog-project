@@ -45,9 +45,6 @@ class UserController extends Controller
                 return response()->json(['msg' => 'avatar could not be saved'], 500);
             }
             $validated['avatar_path'] = $path;
-        } else {
-            $path = 'public/images/default-user-icon.png';
-            $validated['avatar_path'] = $path;
         }
         $user = new User($validated);
         $user->save();

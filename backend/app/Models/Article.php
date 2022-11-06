@@ -10,7 +10,7 @@ class Article extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'content', 'slug', 'user_id'];
+    protected $fillable = ['title', 'content', 'slug', 'user_id', 'background_image_path'];
 
 
     public function user()
@@ -68,5 +68,10 @@ class Article extends Model
         }
 
         return $builder->where('user_id', $user_id);
+    }
+
+    public function getBackgroundImagePathAttribute($value)
+    {
+        return asset($value ? asset('storage/' . $value) : 'http://localhost:8000/storage/images/default-article-background.jpg');
     }
 }

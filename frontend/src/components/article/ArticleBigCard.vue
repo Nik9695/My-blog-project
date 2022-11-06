@@ -11,11 +11,7 @@
           :category="category"
         />
       </ul>
-      <img
-        src="https://loremflickr.com/420/350"
-        alt="Title"
-        class="article__image"
-      />
+      <img :src="article.background_image_path" alt="" class="article__image" />
       <div class="article__content">
         <time class="article__time">{{ formatDate }}</time>
         <h3 class="article__heading">
