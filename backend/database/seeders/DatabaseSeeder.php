@@ -25,8 +25,7 @@ class DatabaseSeeder extends Seeder
             ->set('slug', 'test-user')
             ->set('email', 'test@example.com')
             ->set('password', Hash::make('password'))
-            ->hasArticles(3)
-            ->hasLikes(3)
+            ->hasArticles(4)
             ->hasComments(3)
             ->create();
 
@@ -37,7 +36,6 @@ class DatabaseSeeder extends Seeder
             ->set('password', Hash::make('12345678'))
             ->hasArticles(3)
             ->hasComments(3)
-            ->hasLikes(3)
             ->create();
 
         User::factory(1)
@@ -48,28 +46,11 @@ class DatabaseSeeder extends Seeder
             ->set('admin_identifier', true)
             ->create();
 
-        Article::factory(1)
-            ->set('title', 'There many likes')
-            ->set('content', 'Many many many likes')
-            ->set('slug', 'many-likes')
-            ->set('user_id', 1)
-            ->hasLikes(10)
-            ->create();
-
-
-        Comment::factory(4)
-            ->set('content', 'Many many many likes')
-            ->set('user_id', 1)
-            ->set('article_id', 1)
-            ->hasLikes(5)
-            ->create();
-
 
         $this->call([
             ArticleSeeder::class,
             CommentSeeder::class,
             CategorySeeder::class,
-            LikeSeeder::class
         ]);
     }
 }

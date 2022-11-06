@@ -58,3 +58,11 @@
   list-style: none;
   padding: 0;
 }
+.mainArticle__heading-link {
+  text-decoration: none;
+  color: $white;
+
+  &:hover {
+    color: goldenrod;
+  }
+}

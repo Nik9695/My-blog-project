@@ -1,7 +1,7 @@
 <template>
   <div>
     <Modal v-if="modalStore.activeModal === 'register'" title="Sign up">
-      <form @submit.prevent="registerUser" class="inputForm">
+      <Form :handleCallback="registerUser" :data="userData" v-slot="slotProps">
         <Input
           v-model="userData.name"
           name="name"
@@ -58,7 +58,9 @@
           </div>
         </div>
 
-        <Btn type="submit" :isLoading="isLoading">Sign up</Btn>
+        <Btn type="submit" :isLoading="slotProps.isLoading" class="btn"
+          >Sign up</Btn
+        >
         <a
           class="modal__switcher"
           href="#"
@@ -66,7 +68,7 @@
         >
           Already a member? Log in</a
         >
-      </form>
+      </Form>
     </Modal>
   </div>
 </template>
@@ -76,16 +78,15 @@ import Modal from '../general/Modal.vue'
 import Btn from '../general/Btn.vue'
 import Input from '../general/Input.vue'
 import Auth from '@/services/Auth.js'
+import Form from '@/components/general/Form.vue'
 import { mapStores } from 'pinia'
 import { useModalStore } from '@/store/Modal.js'
-import { useErrorStore } from '@/store/Error.js'
 
 export default {
   name: 'Register',
-  components: { Modal, Btn, Input },
+  components: { Modal, Btn, Input, Form },
   data() {
     return {
-      registrationPassed: false,
       isLoading: false,
       passwordHidden: true,
       userData: {
@@ -97,55 +98,19 @@ export default {
     }
   },
   computed: {
-    hasErrors() {
-      return Object.keys(this.errors).length
-    },
-    userDataComputed() {
-      return Object.assign({}, this.userData)
-    },
-    ...mapStores(useModalStore, useErrorStore)
+    ...mapStores(useModalStore)
   },
-  watch: {
-    userDataComputed: {
-      handler(newValue, oldValue) {
-        if (!oldValue) {
-          return
-        }
 
-        Object.keys(newValue).forEach((key) => {
-          if (newValue[key] !== oldValue[key]) {
-            this.errorStore.deleteErrors(key)
-          }
-        })
-      },
-      deep: true
-    }
-  },
   methods: {
     async registerUser() {
-      this.errorStore.clearErrors()
-      this.isLoading = true
-
-      Auth.registerUser(this.userData)
-        .then((response) => {
-          this.registrationPassed = true
-          localStorage.setItem('token', response.data.token)
-          this.$router.push({ name: `my-profile` })
-
-          setTimeout(() => {
-            this.isLoading = false
-            this.modalStore.closeModal()
-          }, 1000)
-        })
-        .catch((error) => {
-          if (error.response?.status == 422) {
-            this.errorStore.setErrors(error.response.data.errors)
-          }
-
-          setTimeout(() => {
-            this.isLoading = false
-          }, 1000)
-        })
+      const response = await Auth.registerUser(this.userData)
+      localStorage.setItem('token', response.data.token)
+      this.$router.push({ name: 'my-profile' })
+      this.$notify({
+        type: 'success',
+        text: 'Registration passed successfully!'
+      })
+      this.modalStore.closeModal()
     },
     showPassword() {
       this.passwordHidden = !this.passwordHidden

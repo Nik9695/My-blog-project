@@ -1,16 +1,11 @@
 <template>
   <main>
-    <article class="myProfile">
-      <div class="myProfile__inner">
-        <ul class="myProfile__categories"></ul>
-        <h2 class="myProfile__heading">
-          {{ user.name }}
-        </h2>
-        <p class="myProfile__content">
-          {{ user.email }}
-        </p>
-      </div>
-    </article>
+    <ProfileCard
+      :name="user.name"
+      :email="user.email"
+      :link="'/edit-my-profile'"
+      :linkLabel="'Edit profile'"
+    />
 
     <div class="section">
       <div
@@ -18,12 +13,21 @@
         v-if="hasArticles"
       >
         <h2 class="myProfile__section-heading">My articles:</h2>
-        <div class="section__articles">
+        <div class="section__articles section__articles--myProfile">
           <ArticleCard
             v-for="article in articles"
             :key="article.id"
             :article="article"
           />
+          <div class="addArticle">
+            <RouterLink
+              :to="{ name: 'create-article' }"
+              class="addArticle__btn"
+            >
+              +
+            </RouterLink>
+            <p class="addArticle__btn-text">Add new article</p>
+          </div>
         </div>
       </div>
       <div
@@ -39,20 +43,26 @@
 
 <script>
 import ArticleCard from '../components/article/ArticleCard.vue'
-import Auth from '@/services/Auth.js'
+import ProfileCard from '@/components/general/ProfileCard.vue'
 import Article from '@/services/Article.js'
 import { mapStores } from 'pinia'
 import { useAuthStore } from '@/store/Auth.js'
+import handleError from '@/helpers/handleError.js'
 
 export default {
-  components: { ArticleCard },
+  components: { ArticleCard, ProfileCard },
   data() {
     return {
       articles: []
     }
   },
   async created() {
-    this.getArticles()
+    try {
+      const response = await Article.byUserId(this.user.id)
+      this.articles = response.data.data.slice(0, 5)
+    } catch (error) {
+      handleError(error)
+    }
   },
   computed: {
     hasArticles() {
@@ -65,15 +75,6 @@ export default {
       return this.authStore.user
     }
   },
-  methods: {
-    async getArticles() {
-      try {
-        const response = await Article.byUserId(this.authStore.user.id)
-        this.articles = response.data.data
-      } catch (error) {
-        console.log(error)
-      }
-    }
-  }
+  methods: {}
 }
 </script>

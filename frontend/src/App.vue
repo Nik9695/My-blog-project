@@ -1,10 +1,11 @@
 <template>
   <main>
     <AppHeader />
-    <RouterView />
+    <RouterView :key="$route.fullPath" />
     <AppFooter />
     <Login />
     <Register />
+    <notifications position="bottom right" />
   </main>
 </template>
 

@@ -11,5 +11,9 @@ export default {
 
   async me() {
     return await Http.get('/user')
+  },
+
+  async updateUser(userData, userId) {
+    return await Http.put(`/users/${userId}`, userData)
   }
 }

@@ -76,6 +76,7 @@ import MainArticle from '../components/article/MainArticle.vue'
 import ArticleItemCard from '../components/article/ArticleItemCard.vue'
 import ArticleCard from '../components/article/ArticleCard.vue'
 import Article from '@/services/Article.js'
+import handleError from '@/helpers/handleError.js'
 
 export default {
   components: { MainArticle, ArticleItemCard, ArticleCard },
@@ -90,7 +91,7 @@ export default {
         this.articles = response.data.data
       })
       .catch((error) => {
-        console.log(error)
+        handleError(error)
       })
   },
   computed: {

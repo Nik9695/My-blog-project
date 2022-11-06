@@ -1,36 +1,45 @@
 <template>
   <div class="article__item">
-    <div class="article__item-top">
-      <img
-        src="https://loremflickr.com/420/350"
-        alt=""
-        class="article__item-image"
-      />
-      <ul class="article__categories">
-        <CategoryCard />
-      </ul>
-    </div>
-    <div class="article__item-bottom">
-      <time class="article__item-bottom-date">{{ formatDate }}</time>
-      <h3 class="article__item-bottom-title">
-        <RouterLink to="/" class="article__item-bottom-titleLink">{{
-          article.title.substring(0, 10)
-        }}</RouterLink>
-      </h3>
-      <p class="article__item-bottom-text">
-        {{ article.content.substring(0, 70) }}
-      </p>
-      <div class="article__area-author-info">
+    <RouterLink
+      :to="{ name: 'article', params: { id: article.id } }"
+      class="articleItem__link"
+    >
+      <div class="article__item-top">
         <img
-          src="@/assets/images/authorImage.jpg"
-          class="article__area-author-photo"
+          src="https://loremflickr.com/420/350"
+          alt=""
+          class="article__item-image"
         />
-        <div class="article__area-author-content">
-          <div class="article__area-author-name">By Jennifer Lawrence</div>
-          <div class="article__area-author-title">Thinker & Designer</div>
+        <ul class="article__categories">
+          <CategoryCard />
+        </ul>
+      </div>
+      <div class="article__item-bottom">
+        <time class="article__item-bottom-date">{{ formatDate }}</time>
+        <h3 class="article__item-bottom-title">
+          <div to="/" class="article__item-bottom-titleLink">
+            {{ article.title.substring(0, 10) }}
+          </div>
+        </h3>
+        <p class="article__item-bottom-text">
+          {{ article.content.substring(0, 70) }}
+        </p>
+        <div class="article__area-author-info">
+          <img
+            src="@/assets/images/authorImage.jpg"
+            class="article__area-author-photo"
+          />
+          <div class="article__area-author-content">
+            <div class="article__area-author-name">
+              {{ article.author.name }}
+            </div>
+            <div class="article__area-author-title">
+              {{ article.author.slug }}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </RouterLink>
   </div>
 </template>
 

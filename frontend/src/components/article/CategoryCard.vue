@@ -1,5 +1,5 @@
 <template>
-  <li class="ategory">
+  <li class="category">
     <a href="#" class="category__link">Category</a>
   </li>
 </template>

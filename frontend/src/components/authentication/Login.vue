@@ -1,6 +1,6 @@
 <template>
-  <Modal v-if="modalStore.activeModal === 'login'" title="Login">
-    <form @submit.prevent="loginUser" class="inputForm">
+  <Modal v-if="modalStore.activeModal === 'login'" title="Log in">
+    <Form :handleCallback="loginUser" :data="credentials" v-slot="slotProps">
       <Input
         v-model="credentials.email"
         name="email"
@@ -41,7 +41,9 @@
         </div>
       </div>
 
-      <Btn type="submit" :isLoading="isLoading">Login</Btn>
+      <Btn type="submit" :isLoading="slotProps.isLoading" class="btn"
+        >Log in</Btn
+      >
       <a
         class="modal__switcher"
         href="#"
@@ -49,7 +51,7 @@
       >
         Not on LevelUp blog yet? Sign up</a
       >
-    </form>
+    </Form>
   </Modal>
 </template>
 
@@ -58,13 +60,13 @@ import Modal from '../general/Modal.vue'
 import Btn from '../general/Btn.vue'
 import Input from '../general/Input.vue'
 import Auth from '@/services/Auth.js'
+import Form from '@/components/general/Form.vue'
 import { mapStores } from 'pinia'
 import { useModalStore } from '@/store/Modal.js'
-import { useErrorStore } from '@/store/Error.js'
 
 export default {
   name: 'Login',
-  components: { Modal, Btn, Input },
+  components: { Modal, Btn, Input, Form },
 
   data() {
     return {
@@ -78,54 +80,18 @@ export default {
     }
   },
   computed: {
-    ...mapStores(useModalStore, useErrorStore),
-
-    cridentialsComputed() {
-      return Object.assign({}, this.credentials)
-    }
+    ...mapStores(useModalStore)
   },
-  watch: {
-    cridentialsComputed: {
-      handler(newValue, oldValue) {
-        if (!oldValue) {
-          return
-        }
 
-        Object.keys(newValue).forEach((key) => {
-          if (newValue[key] !== oldValue[key]) {
-            this.errorStore.deleteErrors(key)
-          }
-        })
-      },
-      deep: true
-    }
-  },
   methods: {
-    loginUser() {
-      this.errorStore.clearErrors()
-      this.isLoading = true
+    async loginUser() {
       this.invalidCredentials = false
 
-      Auth.loginUser(this.credentials)
-        .then((response) => {
-          localStorage.setItem('token', response.data)
-
-          setTimeout(() => {
-            this.isLoading = false
-            this.modalStore.closeModal()
-            this.$router.push({ name: `my-profile` })
-          }, 1000)
-        })
-        .catch((error) => {
-          if (error.response?.status === 403) {
-            this.errorStore.setErrors(error.response.data)
-          } else if (error.response?.status == 422) {
-            this.errorStore.setErrors(error.response.data.errors)
-          }
-          setTimeout(() => {
-            this.isLoading = false
-          }, 1000)
-        })
+      const response = await Auth.loginUser(this.credentials)
+      localStorage.setItem('token', response.data)
+      this.isLoading = false
+      this.modalStore.closeModal()
+      this.$router.push({ name: `my-profile` })
     },
     showPassword() {
       this.passwordHidden = !this.passwordHidden

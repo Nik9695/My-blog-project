@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
-use App\Models\Comment;
-use App\Models\User;
 use App\Utils\StringUtils;
 
 class ArticleController extends Controller
@@ -24,12 +22,12 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return Article::query()
+        /*     return Article::query()
             ->category(request('category'))
             ->newest()
-            ->get();
+            ->get(); */
 
-        $articles = Article::with('author')->paginate(5);
+        $articles = Article::with('author')->paginate(8);
         return $articles;
     }
 
@@ -55,9 +53,9 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show($id)
     {
-        return $article;
+        return Article::with('author')->findOrFail($id);
     }
 
     /**
@@ -70,6 +68,7 @@ class ArticleController extends Controller
     public function update(UpdateArticleRequest $request, Article $article)
     {
         $article->update($request->validated());
+        $article->slug = StringUtils::slugify($request->title);
         return $article;
     }
 

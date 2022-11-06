@@ -1,5 +1,3 @@
-/* Taking width from grid */
-
 .article__item {
   max-width: 100%;
   padding-top: 30px;
@@ -114,4 +112,8 @@
 
 .article__area-author-content {
   padding-top: 5px;
+}
+
+.articleItem__link {
+  text-decoration: none;
 }

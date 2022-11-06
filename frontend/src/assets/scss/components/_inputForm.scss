@@ -8,18 +8,20 @@
 }
 
 .inputForm__inputWrapper {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Lora', serif;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 12px;
 }
 
 .inputForm__label {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Lora', serif;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 12px;
   display: block;
-  font-weight: 600;
+  font-weight: 400;
   margin-top: 10px;
+  margin-bottom: 5px;
+  color: #818181;
 }
 
 .inputForm__input {
@@ -28,6 +30,7 @@
   border: 1px solid goldenrod;
   box-sizing: border-box;
   padding: 10px;
+  color: #818181;
 }
 .inputForm__input--error {
   border: 1px solid red;
@@ -53,12 +56,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  font-size: 20px;
-  background: rgb(171, 89, 89);
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 14px;
+  background: rgb(198, 38, 38);
   margin-bottom: 10px;
-  border-radius: 5px;
   margin-top: 10px;
 }
 
@@ -90,7 +92,7 @@
   width: 100%;
 }
 .inputForm__password-security {
-  height: 55px;
+  height: 46px;
   align-self: flex-end;
 }
 .btn__showPassword {

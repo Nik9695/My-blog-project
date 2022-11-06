@@ -5,7 +5,12 @@
         <CategoryCard />
       </ul>
       <h2 class="mainArticle__heading">
-        {{ article.title }}
+        <RouterLink
+          :to="{ name: 'article', params: { id: article.id } }"
+          class="mainArticle__heading-link"
+        >
+          {{ article.title }}
+        </RouterLink>
       </h2>
       <p class="mainArticle__content">
         <time class="marinArticle__content-time">{{ formatDate }}</time>

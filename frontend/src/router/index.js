@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import AboutView from '../views/AboutView.vue'
+import HomeView from '@/views/HomeView.vue'
+import Article from '@/views/Article.vue'
 import MyProfile from '../views/MyProfile.vue'
+import ProfileEditor from '../views/ProfileEditor.vue'
+import ArticleEditor from '../views/ArticleEditor.vue'
 import Auth from '@/services/Auth'
 import { useAuthStore } from '@/store/Auth.js'
 import { useModalStore } from '@/store/Modal.js'
@@ -15,14 +17,38 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/about',
-      name: 'about',
-      component: AboutView
+      path: '/article/:id',
+      name: 'article',
+      component: Article
     },
     {
       path: '/my-profile',
       name: 'my-profile',
       component: MyProfile,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/edit-my-profile',
+      name: 'edit-my-profile',
+      component: ProfileEditor,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/create-article',
+      name: 'create-article',
+      component: ArticleEditor,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/edit-article/:id',
+      name: 'edit-article',
+      component: ArticleEditor,
       meta: {
         requiresAuth: true
       }

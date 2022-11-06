@@ -22,7 +22,7 @@ class AuthController extends Controller
         ]);
 
         if (!Auth::attempt($credentials)) {
-            return response()->json(['code' => 403, 'message' => 'invalid credentials'], 403);
+            return response()->json(['message' => 'Invalid credentials'], 403);
         }
 
         $user = User::where('email', $credentials['email'])->firstOrFail();

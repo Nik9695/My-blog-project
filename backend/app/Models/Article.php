@@ -43,11 +43,6 @@ class Article extends Model
         return $this->morphMany(Reaction::class, 'reactable');
     }
 
-    public function reactions()
-    {
-        return $this->morphMany(Reaction::class, 'reactable');
-    }
-
     protected function setTitleAttribute(string $title)
     {
         $this->attributes['title'] = $title;
