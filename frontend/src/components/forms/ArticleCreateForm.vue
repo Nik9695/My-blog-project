@@ -33,7 +33,7 @@
         </Form>
         <div class="tags__area">
           <label class="editor__inputForm-label" for="Tags">Tags</label>
-          <div class="category">
+          <div class="categories__area">
             <CategoryCard
               v-for="category in articleData.categories"
               :key="category.id"
@@ -99,6 +99,7 @@ export default {
       articleData: {
         title: '',
         content: '',
+        categories: [],
         category_id: []
       },
       categoryList: {
@@ -119,11 +120,11 @@ export default {
   },
   computed: {
     categoriesTagsComputed() {
-      const array = []
+      const categiesSlugs = []
       this.categoryList.data.forEach(function (category) {
-        array.push(category.slug)
+        categiesSlugs.push(category.slug)
       })
-      return array
+      return categiesSlugs
     }
   },
   methods: {
@@ -137,9 +138,10 @@ export default {
         text: 'Article created successfully!'
       })
     },
-    async findCategoriesIdBySlug(slug) {
+    async CategoryIdBySlug(slug) {
       try {
         const response = await Category.bySlug(slug)
+        this.articleData.categories.push(response.data)
         this.articleData.category_id.push(response.data.id)
       } catch (error) {
         handleError(error)
@@ -147,8 +149,10 @@ export default {
     },
 
     async addCategoriesToArticle() {
+      this.articleData.categories.length = 0
+      this.articleData.category_id.length = 0
       this.selectedCategories.forEach(
-        async (slug) => await this.findCategoriesIdBySlug(slug)
+        async (slug) => await this.CategoryIdBySlug(slug)
       )
       this.$notify({
         type: 'success',
