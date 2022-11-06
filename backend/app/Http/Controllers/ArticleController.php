@@ -8,6 +8,7 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
 use App\Utils\StringUtils;
+use Illuminate\Support\Facades\Request;
 
 class ArticleController extends Controller
 {
@@ -58,6 +59,10 @@ class ArticleController extends Controller
         $article->save();
         $article->categories()->attach($request->category_id);
         return $article;
+    }
+
+    public function storeBackgroundImage(Request $request)
+    {
     }
 
     /**

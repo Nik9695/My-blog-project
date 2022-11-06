@@ -75,8 +75,8 @@ import handleError from '@/helpers/handleError.js'
 
 import { QuillEditor } from '@vueup/vue-quill'
 import Multiselect from '@vueform/multiselect'
+
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
-import '@vueform/multiselect/themes/default.css'
 
 export default {
   components: {

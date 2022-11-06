@@ -6,7 +6,7 @@
     >
       <div class="article__item-top">
         <img
-          src="https://loremflickr.com/420/350"
+          :src="article.background_image_path"
           alt=""
           class="article__item-image"
         />
