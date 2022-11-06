@@ -4,7 +4,7 @@
     <div class="section">
       <h2 class="editor__section-heading">Add content</h2>
 
-      <div class="section__inner section__inner--editor">
+      <div class="section__inner section__inner--articleEditor">
         <Form
           :handleCallback="createArticle"
           :data="articleData"

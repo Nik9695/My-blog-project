@@ -4,7 +4,7 @@
     <div class="section">
       <h2 class="editor__section-heading">Edit content</h2>
 
-      <div class="section__inner section__inner--editor">
+      <div class="section__inner section__inner--articleEditor">
         <Form
           :handleCallback="updateArticle"
           :data="articleData"
@@ -103,6 +103,7 @@ export default {
         categories: [],
         category_id: []
       },
+
       categoryList: {
         data: []
       },
@@ -117,6 +118,7 @@ export default {
       const response = await Article.show(this.$route.params.id)
       this.articleData.title = response.data.title
       this.articleData.content = response.data.content
+      this.articleData.categories = response.data.categories
     } catch (error) {
       handleError(error)
     }
@@ -148,7 +150,7 @@ export default {
       }
       this.$notify({
         type: 'success',
-        text: 'Article created successfully!'
+        text: 'Article updated successfully!'
       })
     },
     async findCategoriesBySlug(slug) {
@@ -162,14 +164,14 @@ export default {
     },
 
     async updateCategoriesOnArticle() {
-      this.articleData.categories.length = 0
+      this.articleData.categories.length = []
       this.articleData.category_id.length = 0
       this.selectedCategories.forEach(
         async (slug) => await this.findCategoriesBySlug(slug)
       )
       this.$notify({
         type: 'success',
-        text: 'Categories were updated'
+        text: 'Categories were updated.'
       })
     }
   }

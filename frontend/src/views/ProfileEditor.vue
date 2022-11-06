@@ -2,7 +2,7 @@
   <main>
     <ProfileCard :user="user" link="/my-profile" linkLabel="Back to profile" />
     <div class="section">
-      <div class="section__inner section__inner--editor">
+      <div class="section__inner section__inner--profileEditor">
         <h2 class="editor__section-heading">Edit Profile</h2>
 
         <img

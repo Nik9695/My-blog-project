@@ -11,11 +11,17 @@
   text-align: center;
 }
 
-.section__inner--editor {
+.section__inner--profileEditor {
   display: flex;
-  //flex-direction: column;
+  flex-direction: column;
   justify-content: center;
-  //align-items: center;
+  align-items: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.section__inner--articleEditor {
+  display: flex;
+  justify-content: center;
   padding-top: 50px;
   padding-bottom: 50px;
 }

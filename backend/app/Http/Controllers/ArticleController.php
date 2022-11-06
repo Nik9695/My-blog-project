@@ -75,7 +75,7 @@ class ArticleController extends Controller
     {
         $article->update($request->validated());
         $article->slug = StringUtils::slugify($request->title);
-        $article->categories()->attach($request->category_id);
+        $article->categories()->sync($request->category_id);
         return $article;
     }
 

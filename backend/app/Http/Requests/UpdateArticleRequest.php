@@ -26,7 +26,7 @@ class UpdateArticleRequest extends FormRequest
         return [
             'content' => ['required'],
             'title' => ['required'],
-            'category_id' => ['required', 'array', 'min:1', 'max:3'],
+            'category_id' => ['nullable', 'array'],
         ];
     }
 }
