@@ -1,30 +1,21 @@
 <template>
   <main>
     <div class="create__article" v-if="currentRouteName === 'create-article'">
-      <ArticleForm
-        title="Create new article"
-        sectionHeading="Add content"
-        buttonLabel="Create"
-        methodKey="create"
-      />
+      <ArticleCreateForm title="Create new article" />
     </div>
 
     <div class="create__article" v-if="currentRouteName === 'edit-article'">
-      <ArticleForm
-        title="Edit article"
-        sectionHeading="Edit content"
-        buttonLabel="Update"
-        methodKey="update"
-      />
+      <ArticleUpdateForm title="Edit article" />
     </div>
   </main>
 </template>
 
 <script>
-import ArticleForm from '@/components/general/ArticleForm.vue'
+import ArticleCreateForm from '@/components/forms/ArticleCreateForm.vue'
+import ArticleUpdateForm from '@/components/forms/ArticleUpdateForm.vue'
 
 export default {
-  components: { ArticleForm },
+  components: { ArticleCreateForm, ArticleUpdateForm },
 
   computed: {
     currentRouteName() {
