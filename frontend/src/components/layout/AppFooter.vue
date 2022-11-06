@@ -3,7 +3,7 @@
     <div class="footer__upper">
       <div class="footer__inner footer__inner--grid">
         <div class="footer__section">
-          <h4 class="footer__section-title">Title</h4>
+          <h4 class="footer__section-title">Authorization</h4>
           <ul class="footer__section-list">
             <li class="footer__section-item">
               <a
@@ -23,62 +23,53 @@
                 Sign up</a
               >
             </li>
+          </ul>
+        </div>
+        <div class="footer__section">
+          <h4 class="footer__section-title">Explorate</h4>
+          <ul class="footer__section-list">
             <li class="footer__section-item">
-              <RouterLink to="/" class="footer__section-link">Link</RouterLink>
+              <RouterLink to="/" class="footer__section-link">About</RouterLink>
             </li>
             <li class="footer__section-item">
-              <RouterLink to="/" class="footer__section-link">Link</RouterLink>
+              <RouterLink to="/" class="footer__section-link"
+                >Partners</RouterLink
+              >
+            </li>
+            <li class="footer__section-item">
+              <RouterLink to="/" class="footer__section-link"
+                >Job Opportunities</RouterLink
+              >
+            </li>
+            <li class="footer__section-item">
+              <RouterLink to="/" class="footer__section-link"
+                >Advertise</RouterLink
+              >
+            </li>
+            <li class="footer__section-item">
+              <RouterLink to="/" class="footer__section-link"
+                >Membership</RouterLink
+              >
             </li>
           </ul>
         </div>
         <div class="footer__section">
-          <h4 class="footer__section-title">Title</h4>
+          <h4 class="footer__section-title">Headquarter</h4>
           <ul class="footer__section-list">
             <li class="footer__section-item">
-              <RouterLink to="/" class="footer__section-link">Link</RouterLink>
-            </li>
-            <li class="footer__section-item">
-              <RouterLink to="/" class="footer__section-link">Link</RouterLink>
-            </li>
-            <li class="footer__section-item">
-              <RouterLink to="/" class="footer__section-link">Link</RouterLink>
-            </li>
-            <li class="footer__section-item">
-              <RouterLink to="/" class="footer__section-link">Link</RouterLink>
+              <RouterLink to="/" class="footer__section-link"
+                >191 Middleville Road, NY 1001, Sydney Australia</RouterLink
+              >
             </li>
           </ul>
         </div>
         <div class="footer__section">
-          <h4 class="footer__section-title">Title</h4>
+          <h4 class="footer__section-title">Headquarter</h4>
           <ul class="footer__section-list">
             <li class="footer__section-item">
-              <RouterLink to="/" class="footer__section-link">Link</RouterLink>
-            </li>
-            <li class="footer__section-item">
-              <RouterLink to="/" class="footer__section-link">Link</RouterLink>
-            </li>
-            <li class="footer__section-item">
-              <RouterLink to="/" class="footer__section-link">Link</RouterLink>
-            </li>
-            <li class="footer__section-item">
-              <RouterLink to="/" class="footer__section-link">Link</RouterLink>
-            </li>
-          </ul>
-        </div>
-        <div class="footer__section">
-          <h4 class="footer__section-title">Title</h4>
-          <ul class="footer__section-list">
-            <li class="footer__section-item">
-              <RouterLink to="/" class="footer__section-link">Link</RouterLink>
-            </li>
-            <li class="footer__section-item">
-              <RouterLink to="/" class="footer__section-link">Link</RouterLink>
-            </li>
-            <li class="footer__section-item">
-              <RouterLink to="/" class="footer__section-link">Link</RouterLink>
-            </li>
-            <li class="footer__section-item">
-              <RouterLink to="/" class="footer__section-link">Link</RouterLink>
+              <RouterLink to="/" class="footer__section-link"
+                >191 Middleville Road, NY 1001, Sydney Australia</RouterLink
+              >
             </li>
           </ul>
         </div>

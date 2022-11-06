@@ -28,20 +28,7 @@
         <p class="article__item-bottom-text">
           {{ shortContent }}
         </p>
-        <div class="article__area-author-info">
-          <img
-            :src="article.author.avatar_path"
-            class="article__area-author-photo"
-          />
-          <div class="article__area-author-content">
-            <div class="article__area-author-name">
-              {{ article.author.name }}
-            </div>
-            <div class="article__area-author-title">
-              {{ article.author.slug }}
-            </div>
-          </div>
-        </div>
+        <AuthorCard :article="article" />
       </div>
     </RouterLink>
   </div>
@@ -49,10 +36,11 @@
 
 <script>
 import CategoryCard from '@/components/article/CategoryCard.vue'
+import AuthorCard from '@/components/general/AuthorCard.vue'
 import ArticleCardMixin from '@/mixins/ArticleCardMixin'
 export default {
   name: 'ArticleSmallCard',
-  components: { CategoryCard },
+  components: { CategoryCard, AuthorCard },
   mixins: [ArticleCardMixin],
   props: {
     article: {

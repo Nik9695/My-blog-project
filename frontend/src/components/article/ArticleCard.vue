@@ -21,35 +21,8 @@
           </ul>
         </div>
         <div class="aboutArticle__area-author">
-          <div class="aboutArticle__area-author-info">
-            <img
-              :src="article.author.avatar_path"
-              class="aboutArticle__area-author-photo"
-              alt=""
-            />
-            <div class="aboutArticle__area-author-content">
-              <div class="aboutArticle__area-author-name">
-                {{ article.author.name }}
-              </div>
-              <div class="aboutArticle__area-author-title">
-                {{ article.author.slug }}
-              </div>
-            </div>
-          </div>
-          <div class="aboutArticle__area-author-social-networks">
-            <a href="#" target="_blank">
-              <i class="fa-brands fa-twitter"></i>
-            </a>
-            <a href="#" target="_blank">
-              <i class="fa-brands fa-pinterest"></i>
-            </a>
-            <a href="#" target="_blank">
-              <i class="fa-brands fa-facebook"></i>
-            </a>
-            <a href="#" target="_blank">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-          </div>
+          <AuthorCard :article="article" />
+          <SocialNetworksCard />
         </div>
       </div>
     </div>
@@ -60,12 +33,20 @@
 import ArticleBigCard from '@/components/article/ArticleBigCard.vue'
 import CategoryCard from '@/components/article/CategoryCard.vue'
 import AboutArticleCard from '@/components/article/AboutArticleCard.vue'
+import SocialNetworksCard from '@/components/general/SocialNetworksCard.vue'
+import AuthorCard from '@/components/general/AuthorCard.vue'
 
 import ArticleCardMixin from '@/mixins/ArticleCardMixin.js'
 
 export default {
   name: 'ArticleCard',
-  components: { ArticleBigCard, AboutArticleCard, CategoryCard },
+  components: {
+    ArticleBigCard,
+    AboutArticleCard,
+    CategoryCard,
+    SocialNetworksCard,
+    AuthorCard
+  },
   mixins: [ArticleCardMixin],
 
   props: {

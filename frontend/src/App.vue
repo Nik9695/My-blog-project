@@ -11,8 +11,8 @@
 
 <script>
 import { RouterView } from 'vue-router'
-import AppHeader from './components/general/AppHeader.vue'
-import AppFooter from './components/general/AppFooter.vue'
+import AppHeader from '@/components/layout/AppHeader.vue'
+import AppFooter from '@/components/layout/AppFooter.vue'
 import Login from '@/components/authentication/Login.vue'
 import Register from '@/components/authentication/Register.vue'
 
