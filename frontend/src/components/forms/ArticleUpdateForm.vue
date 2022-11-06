@@ -34,7 +34,7 @@
         </Form>
         <div class="tags__area">
           <label class="editor__inputForm-label" for="Tags">Tags</label>
-          <div class="category">
+          <div class="categories__area">
             <CategoryCard
               v-for="category in articleData.categories"
               :key="category.id"
@@ -53,6 +53,7 @@
           <Multiselect
             v-model="selectedCategories"
             :options="categoriesTagsComputed"
+            class="multiselect"
             mode="tags"
             placeholder="Choose your stack"
           />

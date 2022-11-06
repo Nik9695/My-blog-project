@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <li class="category">
-      <a href="#" :class="class">{{ category.name }}</a>
-    </li>
-  </div>
+  <li class="category">
+    <a href="#" :class="class">{{ category.name }}</a>
+  </li>
 </template>
 
 <script>

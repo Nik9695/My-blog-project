@@ -1,13 +1,12 @@
 .category {
-  padding-right: 10px;
-  padding-bottom: 10px;
   display: flex;
   flex-direction: row-reverse;
+  height: 30px;
+  padding-right: 10px;
 }
 
 .category__link {
   background: rgba(255, 255, 255, 0.5);
-  //background: grey;
   border-radius: 8px;
   font-family: 'Roboto', serif;
   font-style: normal;
