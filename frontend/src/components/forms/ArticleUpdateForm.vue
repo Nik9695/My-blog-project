@@ -57,6 +57,28 @@
             mode="tags"
             placeholder="Choose your stack"
           />
+          <label
+            class="editor__inputForm-label editor__inputForm-label--articleBackground"
+            for="Tags"
+            >Click on image to update it:</label
+          >
+          <div class="article__image">
+            <img
+              class="article__backgroundImage"
+              @click="showAvatarUpload = !showAvatarUpload"
+              :src="articleData.background_image_path"
+              alt=""
+            />
+            <my-upload
+              field="img"
+              @crop-success="cropSuccess"
+              v-model="showAvatarUpload"
+              :width="300"
+              :height="300"
+              img-format="jpg"
+              lang-type="en"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -69,6 +91,7 @@ import Btn from '@/components/general/Btn.vue'
 import Form from '@/components/general/Form.vue'
 import ArticleEditorCard from '@/components/general/ArticleEditorCard.vue'
 import CategoryCard from '@/components/article/CategoryCard.vue'
+import myUpload from 'vue-image-crop-upload'
 
 import Article from '@/services/Article.js'
 import Category from '@/services/Category.js'
@@ -87,7 +110,8 @@ export default {
     ArticleEditorCard,
     QuillEditor,
     Multiselect,
-    CategoryCard
+    CategoryCard,
+    myUpload
   },
   props: {
     title: {
@@ -110,7 +134,8 @@ export default {
       selectedCategories: [],
 
       isLoading: false,
-      multiSelectHidden: false
+      multiSelectHidden: false,
+      showAvatarUpload: false
     }
   },
   async created() {
@@ -119,6 +144,8 @@ export default {
       this.articleData.title = response.data.title
       this.articleData.content = response.data.content
       this.articleData.categories = response.data.categories
+      this.articleData.background_image_path =
+        response.data.background_image_path
     } catch (error) {
       handleError(error)
     }
@@ -173,6 +200,31 @@ export default {
         type: 'success',
         text: 'Categories were updated.'
       })
+    },
+    async cropSuccess(imgDataUrl, field) {
+      this.articleData.background_image = this.dataUrlToFile(imgDataUrl, field)
+      const response = await Article.updateArticleBackground(
+        this.articleData,
+        this.$route.params.id
+      )
+      this.articleData.background_image_path =
+        response.data.background_image_path
+
+      this.$notify({
+        type: 'success',
+        text: 'Article background image updated successfully!'
+      })
+    },
+    dataUrlToFile(dataurl, filename) {
+      let arr = dataurl.split(','),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n)
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n)
+      }
+      return new File([u8arr], filename, { type: mime })
     }
   }
 }

@@ -22,7 +22,6 @@ export default {
   async show(id) {
     return await Http.get(`/articles/${id}`)
   },
-
   async create(articleData) {
     return await Http.post(`/articles`, articleData)
   },
@@ -33,5 +32,21 @@ export default {
 
   async delete(article, articleId) {
     return await Http.delete(`/articles/${articleId}`, article)
+  },
+
+  async updateArticleBackground(articleData, articleId) {
+    const formData = new FormData()
+
+    Object.keys(articleData).forEach((key) => {
+      formData.append(key, articleData[key])
+    })
+
+    formData.append('_method', 'PATCH')
+
+    return await Http.post(`/articles/${articleId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
   }
 }

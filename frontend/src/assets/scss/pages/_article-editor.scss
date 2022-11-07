@@ -74,3 +74,19 @@
   justify-content: flex-start;
   padding-bottom: 10px;
 }
+
+.article__image {
+  display: flex;
+  justify-content: center;
+}
+
+.article__backgroundImage {
+  background-color: grey;
+  margin-top: 20px;
+  border-radius: 20px;
+  box-shadow: 10px 5px 5px #afabab;
+}
+
+.editor__inputForm-label--articleBackground {
+  padding-top: 20px;
+}

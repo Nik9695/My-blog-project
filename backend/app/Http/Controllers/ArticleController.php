@@ -87,9 +87,24 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
-        $article->update($request->validated());
-        $article->slug = StringUtils::slugify($request->title);
+        $validated = $request->validated();
+
+        if ($request->background_image) {
+            $path = $request->file('background_image')->store('images', ['disk' => 'public']);
+
+            if (!$path) {
+                return response()->json(['msg' => 'background image could not be saved'], 500);
+            }
+
+            $validated['background_image_path'] = $path;
+        }
+        $validated['slug'] = StringUtils::slugify($request->title);
+
+        if (!$article->update($validated)) {
+            return response()->json(['msg' => 'could not update user'], 500);
+        }
         $article->categories()->sync($request->category_id);
+
         return $article;
     }
 
