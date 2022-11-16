@@ -41,20 +41,22 @@
               :category="category"
               class="category__link-articleForm"
             />
-            <Btn
+            <!--             <Btn
               @click="updateCategoriesOnArticle()"
               :isLoading="isLoading"
               type="submit"
               class="btn__add-category"
               >ADD TAG &#65291;</Btn
-            >
+            > -->
           </div>
 
           <Multiselect
-            v-model="selectedCategories"
-            :options="categoriesTagsComputed"
-            class="multiselect"
+            v-model="value"
             mode="tags"
+            :close-on-select="false"
+            :searchable="true"
+            :create-option="true"
+            :options="options"
             placeholder="Choose your stack"
           />
           <label
@@ -127,6 +129,8 @@ export default {
         categories: [],
         category_id: []
       },
+      options: [{}],
+      value: [],
 
       categoryList: {
         data: []
@@ -152,6 +156,9 @@ export default {
 
     try {
       const response = await Category.getAll()
+      response.data.forEach((category) => {
+        this.options.push({ value: category.id, label: category.slug })
+      })
       this.categoryList = response.data
     } catch (error) {
       handleError(error)
@@ -168,6 +175,7 @@ export default {
   },
   methods: {
     async updateArticle() {
+      this.articleData.category_id = this.value
       const response = await Article.update(
         this.articleData,
         this.$route.params.id
