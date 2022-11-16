@@ -1,6 +1,6 @@
 <template>
   <li class="category">
-    <a href="#" :class="class">{{ category.name }}</a>
+    <a href="#" :class="class">{{ category.slug }}</a>
   </li>
 </template>
 

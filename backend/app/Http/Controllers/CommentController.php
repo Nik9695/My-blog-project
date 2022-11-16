@@ -38,7 +38,9 @@ class CommentController extends Controller
 
         $comment = new Comment($request->validated());
         $comment->user_id = auth()->id();
-        $comment->save();
+        if (!$comment->save()) {
+            return response()->json(['msg' => 'Only authorized users can create comments.'], 500);
+        }
 
         return $comment;
     }
