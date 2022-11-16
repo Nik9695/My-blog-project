@@ -94,7 +94,6 @@ export default {
       articleData: {
         title: '',
         content: '',
-        //categories: [],
         category_id: []
       },
       categoryList: {
@@ -102,8 +101,7 @@ export default {
       },
       options: [{}],
       value: null,
-      isLoading: false,
-      multiSelectHidden: false
+      isLoading: false
     }
   },
   async created() {
@@ -112,20 +110,11 @@ export default {
       response.data.forEach((category) => {
         this.options.push({ value: category.id, label: category.slug })
       })
-      //this.categoryList = response.data
     } catch (error) {
       handleError(error)
     }
   },
-  computed: {
-    categoriesTagsComputed() {
-      const categiesSlugs = []
-      this.categoryList.data.forEach(function (category) {
-        categiesSlugs.push(category.slug)
-      })
-      return categiesSlugs
-    }
-  },
+
   methods: {
     async createArticle() {
       this.articleData.category_id = this.value
@@ -136,27 +125,6 @@ export default {
       this.$notify({
         type: 'success',
         text: 'Article created successfully!'
-      })
-    },
-    async CategoryIdBySlug(slug) {
-      try {
-        const response = await Category.bySlug(slug)
-        this.articleData.categories.push(response.data)
-        this.articleData.category_id.push(response.data.id)
-      } catch (error) {
-        handleError(error)
-      }
-    },
-
-    async addCategoriesToArticle() {
-      this.articleData.categories.length = 0
-      this.articleData.category_id.length = 0
-      this.selectedCategories.forEach(
-        async (slug) => await this.CategoryIdBySlug(slug)
-      )
-      this.$notify({
-        type: 'success',
-        text: 'Categories were added'
       })
     }
   }

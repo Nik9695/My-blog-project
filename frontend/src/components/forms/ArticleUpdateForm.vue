@@ -41,13 +41,6 @@
               :category="category"
               class="category__link-articleForm"
             />
-            <!--             <Btn
-              @click="updateCategoriesOnArticle()"
-              :isLoading="isLoading"
-              type="submit"
-              class="btn__add-category"
-              >ADD TAG &#65291;</Btn
-            > -->
           </div>
 
           <Multiselect
@@ -131,14 +124,7 @@ export default {
       },
       options: [{}],
       value: [],
-
-      categoryList: {
-        data: []
-      },
-      selectedCategories: [],
-
       isLoading: false,
-      multiSelectHidden: false,
       showAvatarUpload: false
     }
   },
@@ -164,15 +150,6 @@ export default {
       handleError(error)
     }
   },
-  computed: {
-    categoriesTagsComputed() {
-      const array = []
-      this.categoryList.data.forEach(function (category) {
-        array.push(category.slug)
-      })
-      return array
-    }
-  },
   methods: {
     async updateArticle() {
       this.articleData.category_id = this.value
@@ -186,27 +163,6 @@ export default {
       this.$notify({
         type: 'success',
         text: 'Article updated successfully!'
-      })
-    },
-    async findCategoriesBySlug(slug) {
-      try {
-        const response = await Category.bySlug(slug)
-        this.articleData.categories.push(response.data)
-        this.articleData.category_id.push(response.data.id)
-      } catch (error) {
-        handleError(error)
-      }
-    },
-
-    async updateCategoriesOnArticle() {
-      this.articleData.categories.length = []
-      this.articleData.category_id.length = 0
-      this.selectedCategories.forEach(
-        async (slug) => await this.findCategoriesBySlug(slug)
-      )
-      this.$notify({
-        type: 'success',
-        text: 'Categories were updated.'
       })
     },
     async cropSuccess(imgDataUrl, field) {
