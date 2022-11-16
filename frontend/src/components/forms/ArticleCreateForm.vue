@@ -40,20 +40,15 @@
               :category="category"
               class="category__link-articleForm"
             />
-
-            <Btn
-              @click="addCategoriesToArticle()"
-              :isLoading="isLoading"
-              type="submit"
-              class="btn__add-category"
-              >ADD TAG &#65291;</Btn
-            >
           </div>
 
           <Multiselect
-            v-model="selectedCategories"
-            :options="categoriesTagsComputed"
+            v-model="value"
             mode="tags"
+            :close-on-select="false"
+            :searchable="true"
+            :create-option="true"
+            :options="options"
             placeholder="Choose your stack"
           />
         </div>
@@ -99,13 +94,14 @@ export default {
       articleData: {
         title: '',
         content: '',
-        categories: [],
+        //categories: [],
         category_id: []
       },
       categoryList: {
         data: []
       },
-      selectedCategories: [],
+      options: [{}],
+      value: null,
       isLoading: false,
       multiSelectHidden: false
     }
@@ -113,7 +109,10 @@ export default {
   async created() {
     try {
       const response = await Category.getAll()
-      this.categoryList = response.data
+      response.data.forEach((category) => {
+        this.options.push({ value: category.id, label: category.slug })
+      })
+      //this.categoryList = response.data
     } catch (error) {
       handleError(error)
     }
@@ -129,6 +128,7 @@ export default {
   },
   methods: {
     async createArticle() {
+      this.articleData.category_id = this.value
       const response = await Article.create(this.articleData)
       if (response?.status === 201) {
         this.$router.push({ name: 'my-profile' })
