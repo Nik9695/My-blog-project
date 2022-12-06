@@ -6,12 +6,16 @@
     >
       <div class="article__item-top">
         <img
-          src="https://loremflickr.com/420/350"
+          :src="article.background_image_path"
           alt=""
           class="article__item-image"
         />
         <ul class="article__categories">
-          <CategoryCard />
+          <CategoryCard
+            v-for="category in article.categories"
+            :key="category.id"
+            :category="category"
+          />
         </ul>
       </div>
       <div class="article__item-bottom">
@@ -22,33 +26,21 @@
           </div>
         </h3>
         <p class="article__item-bottom-text">
-          {{ article.content.substring(0, 70) }}
+          {{ shortContent }}
         </p>
-        <div class="article__area-author-info">
-          <img
-            src="@/assets/images/authorImage.jpg"
-            class="article__area-author-photo"
-          />
-          <div class="article__area-author-content">
-            <div class="article__area-author-name">
-              {{ article.author.name }}
-            </div>
-            <div class="article__area-author-title">
-              {{ article.author.slug }}
-            </div>
-          </div>
-        </div>
+        <AuthorCard :article="article" />
       </div>
     </RouterLink>
   </div>
 </template>
 
 <script>
-import CategoryCard from './CategoryCard.vue'
+import CategoryCard from '@/components/article/CategoryCard.vue'
+import AuthorCard from '@/components/general/AuthorCard.vue'
 import ArticleCardMixin from '@/mixins/ArticleCardMixin'
 export default {
-  name: 'ArticleItemCard',
-  components: { CategoryCard },
+  name: 'ArticleSmallCard',
+  components: { CategoryCard, AuthorCard },
   mixins: [ArticleCardMixin],
   props: {
     article: {

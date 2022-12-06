@@ -4,6 +4,7 @@ import Article from '@/views/Article.vue'
 import MyProfile from '../views/MyProfile.vue'
 import ProfileEditor from '../views/ProfileEditor.vue'
 import ArticleEditor from '../views/ArticleEditor.vue'
+import CategoryArticlesView from '@/views/CategoryArticlesView.vue'
 import Auth from '@/services/Auth'
 import { useAuthStore } from '@/store/Auth.js'
 import { useModalStore } from '@/store/Modal.js'
@@ -52,6 +53,11 @@ const router = createRouter({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/category/:slug',
+      name: 'categoryArticles',
+      component: CategoryArticlesView
     }
   ]
 })

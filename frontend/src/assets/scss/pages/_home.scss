@@ -1,5 +1,5 @@
 .section {
-  background: #e5e5e5;
+  background: #f8f9fa;
 }
 
 .section__inner {
@@ -95,4 +95,14 @@
     flex-wrap: wrap;
     justify-content: center;
   }
+}
+.section__articles-cascade--noArticles {
+  font-family: 'Lora', serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 46px;
+  color: #495057;
+
+  display: flex;
+  justify-content: center;
 }

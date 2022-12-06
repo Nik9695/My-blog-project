@@ -1,15 +1,12 @@
 <template>
   <div class="myProfile">
     <div class="myProfile__inner">
-      <img
-        src="@/assets/images/default-user-icon.png"
-        class="myProfile__image"
-      />
+      <img :src="user.avatar_path" class="myProfile__image" alt="" />
       <h2 class="myProfile__heading">
-        {{ name }}
+        {{ user.name }}
       </h2>
       <p class="myProfile__content">
-        {{ email }}
+        {{ user.email }}
       </p>
       <div class="devider"></div>
       <p>
@@ -24,12 +21,8 @@
 <script>
 export default {
   props: {
-    name: {
-      type: String,
-      required: true
-    },
-    email: {
-      type: String,
+    user: {
+      type: Object,
       required: true
     },
     link: {

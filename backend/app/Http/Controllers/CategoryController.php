@@ -21,8 +21,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(5);
-        return $categories;
+        return Category::all();
     }
 
     /**
@@ -37,7 +36,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource.`
      *
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response

@@ -1,69 +1,58 @@
 <template>
-  <article class="article">
-    <RouterLink
-      :to="{ name: 'article', params: { id: article.id } }"
-      class="article__link"
-    >
-      <ul class="article__categories">
-        <CategoryCard />
-      </ul>
-      <img
-        src="https://loremflickr.com/420/350"
-        alt="Title"
-        class="article__image"
-      />
-      <div class="article__content">
-        <time class="article__time">{{ formatDate }}</time>
-        <h3 class="article__heading">
-          {{ article.title }}
-        </h3>
-        <p class="article__text">{{ article.content.substring(0, 100) }} ...</p>
+  <div class="section">
+    <div class="section__inner section__inner--aboutArticle__page">
+      <div class="aboutArticle__timeline">
+        <div class="aboutArticle__date">{{ formatDate }}</div>
+        <div class="aboutArticle__timeline-divider"></div>
+        <div class="aboutArticle__time">{{ articleLifeTime }} minutes</div>
       </div>
-    </RouterLink>
-    <div class="edit__option" v-if="currentRouteName === 'my-profile'">
-      <RouterLink
-        :to="{ name: 'edit-article', params: { id: article.id } }"
-        class="editArticle__link"
-      >
-        <img
-          src="@/assets/images/edit-article-button.png"
-          alt="Title"
-          class="editArticle__btn"
-        />
-      </RouterLink>
-      <form @submit.prevent="deleteArticle" class="delete__option">
-        <button type="submit" class="deleteArticle__btn"></button>
-      </form>
+      <div class="aboutArticle__area">
+        <div class="aboutArticle__area-content">
+          <div class="aboutArticle__area-text" v-html="article.content"></div>
+        </div>
+        <div class="aboutArticle__area-tags">
+          <ul class="section__categories-list">
+            <CategoryCard
+              v-for="category in this.article.categories"
+              :key="category.id"
+              :category="category"
+              class="category__link-articleForm"
+            />
+          </ul>
+        </div>
+        <div class="aboutArticle__area-author">
+          <AuthorCard :article="article" />
+          <SocialNetworksCard />
+        </div>
+      </div>
     </div>
-  </article>
+  </div>
 </template>
 
 <script>
-import CategoryCard from './CategoryCard.vue'
-import ArticleCardMixin from '@/mixins/ArticleCardMixin'
-import Article from '@/services/Article.js'
+import ArticleBigCard from '@/components/article/ArticleBigCard.vue'
+import CategoryCard from '@/components/article/CategoryCard.vue'
+import AboutArticleCard from '@/components/article/AboutArticleCard.vue'
+import SocialNetworksCard from '@/components/general/SocialNetworksCard.vue'
+import AuthorCard from '@/components/general/AuthorCard.vue'
+
+import ArticleCardMixin from '@/mixins/ArticleCardMixin.js'
+
 export default {
   name: 'ArticleCard',
-  components: { CategoryCard },
+  components: {
+    ArticleBigCard,
+    AboutArticleCard,
+    CategoryCard,
+    SocialNetworksCard,
+    AuthorCard
+  },
   mixins: [ArticleCardMixin],
 
   props: {
     article: {
       type: Object,
       required: true
-    }
-  },
-  methods: {
-    async deleteArticle() {
-      const response = await Article.delete(this.article, this.article.id)
-      if (response?.status === 200) {
-        this.$router.go({ name: 'my-profile' })
-      }
-    }
-  },
-  computed: {
-    currentRouteName() {
-      return this.$route.name
     }
   }
 }

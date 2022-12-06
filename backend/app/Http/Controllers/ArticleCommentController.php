@@ -20,11 +20,16 @@ class ArticleCommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Article $article)
+    public function index(Article $article = null)
     {
-        $comments = Comment::where('article_id', $article->id)->paginate(5);
-        return $comments;
+        return Comment::query()
+            ->with('author')
+            ->limit(request('limit'))
+            ->fromArticle(request('article_id') ?? $article?->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(request('per_page'))->appends(request()->all());
     }
+
 
     /**
      * Store a newly created resource in storage.

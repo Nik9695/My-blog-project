@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
+use App\Models\Category;
+use App\Models\User;
 use App\Utils\StringUtils;
+use Illuminate\Support\Facades\Request;
 
 class ArticleController extends Controller
 {
@@ -20,15 +23,16 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user = null)
     {
-        /*     return Article::query()
-            ->category(request('category'))
-            ->newest()
-            ->get(); */
-
-        $articles = Article::with('author')->paginate(8);
-        return $articles;
+        return Article::query()
+            ->with('author')
+            ->with('categories')
+            ->limit(request('limit'))
+            ->inCategory(request('category'))
+            ->fromUser(request('user_id') ?? $user?->id)
+            ->orderBy(request('ordering'), request('direction'))
+            ->paginate(request('per_page'))->appends(request()->all());
     }
 
     /**
@@ -39,12 +43,26 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        $article = new Article($request->validated());
+        $validated = $request->validated();
+
+
+        if ($request->background_image) {
+            $path = $request->file('background_image')->store('images', ['disk' => 'public']);
+            if (!$path) {
+                return response()->json(['msg' => 'Background image could not be saved'], 500);
+            }
+            $validated['background_image_path'] = $path;
+        }
+        $article = new Article($validated);
         $article->user_id = auth()->id();
         $article->slug = StringUtils::slugify($article->title);
         $article->save();
         $article->categories()->attach($request->category_id);
         return $article;
+    }
+
+    public function storeBackgroundImage(Request $request)
+    {
     }
 
     /**
@@ -55,7 +73,9 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        return Article::with('author')->findOrFail($id);
+        return Article::with('author')
+            ->with('categories')
+            ->findOrFail($id);
     }
 
     /**
@@ -67,8 +87,24 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
-        $article->update($request->validated());
-        $article->slug = StringUtils::slugify($request->title);
+        $validated = $request->validated();
+
+        if ($request->background_image) {
+            $path = $request->file('background_image')->store('images', ['disk' => 'public']);
+
+            if (!$path) {
+                return response()->json(['msg' => 'background image could not be saved'], 500);
+            }
+
+            $validated['background_image_path'] = $path;
+        }
+        $validated['slug'] = StringUtils::slugify($request->title);
+
+        if (!$article->update($validated)) {
+            return response()->json(['msg' => 'could not update user'], 500);
+        }
+        $article->categories()->sync($request->category_id);
+
         return $article;
     }
 

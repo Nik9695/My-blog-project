@@ -1,86 +1,15 @@
 <template>
   <main>
-    <!--   <AboutArticleCard /> -->
-    <article class="aboutArticle">
-      <div class="aboutArticle__inner">
-        <ul class="aboutArticle__categories">
-          <li class="aboutArticle__category">
-            <a href="#" class="aboutArticle__category-link">Category</a>
-          </li>
-        </ul>
-        <h2 class="aboutArticle__heading">
-          {{ article.title }}
-        </h2>
+    <AboutArticleCard :article="article" />
+    <ArticleCard :article="article" />
 
-        <p class="aboutArticle__content-author">
-          {{ article.author.name }}
-        </p>
-      </div>
-    </article>
-    <div class="section">
-      <div class="section__inner section__inner--aboutArticle__page">
-        <div class="aboutArticle__timeline">
-          <div class="aboutArticle__date">{{ formatDate }}</div>
-          <div class="aboutArticle__timeline-divider"></div>
-          <div class="aboutArticle__time">{{ articleLifeTime }} minutes</div>
-        </div>
-        <div class="aboutArticle__area">
-          <div class="aboutArticle__area-content">
-            <div class="aboutArticle__area-text">
-              {{ article.content }}
-            </div>
-          </div>
-          <div class="aboutArticle__area-tags">
-            <ul class="section__categories-list">
-              <RouterLink to="/" class="aboutArticle__area-tag-item"
-                >adventure</RouterLink
-              >
-              <RouterLink to="/" class="aboutArticle__area-tag-item"
-                >photo</RouterLink
-              >
-              <RouterLink to="/" class="aboutArticle__area-tag-item"
-                >design</RouterLink
-              >
-            </ul>
-          </div>
-          <div class="aboutArticle__area-author">
-            <div class="aboutArticle__area-author-info">
-              <img
-                src="@/assets/images/authorImage.jpg"
-                class="aboutArticle__area-author-photo"
-              />
-              <div class="aboutArticle__area-author-content">
-                <div class="aboutArticle__area-author-name">
-                  {{ article.author.name }}
-                </div>
-                <div class="aboutArticle__area-author-title">
-                  {{ article.author.slug }}
-                </div>
-              </div>
-            </div>
-            <div class="aboutArticle__area-author-social-networks">
-              <a href="#" target="_blank">
-                <i class="fa-brands fa-twitter"></i>
-              </a>
-              <a href="#" target="_blank">
-                <i class="fa-brands fa-pinterest"></i>
-              </a>
-              <a href="#" target="_blank">
-                <i class="fa-brands fa-facebook"></i>
-              </a>
-              <a href="#" target="_blank">
-                <i class="fa-brands fa-instagram"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <CommentsOnArticle :articleId="this.$route.params.id" />
+
     <div class="section">
       <div class="section__inner">
         <h2 class="aboutArticle__section-heading">Related Posts</h2>
         <div class="section__articles">
-          <ArticleCard
+          <ArticleBigCard
             v-for="article in articlesRelated"
             :key="article.id"
             :article="article"
@@ -92,25 +21,37 @@
 </template>
 
 <script>
-import ArticleCard from '../components/article/ArticleCard.vue'
-import AboutArticleCard from '../components/article/AboutArticleCard.vue'
-import ArticleCardMixin from '@/mixins/ArticleCardMixin'
-import { parseISO } from 'date-fns'
-import { differenceInMinutes } from 'date-fns'
+import ArticleBigCard from '@/components/article/ArticleBigCard.vue'
+import AboutArticleCard from '@/components/article/AboutArticleCard.vue'
+import ArticleCard from '@/components/article/ArticleCard.vue'
+import CommentsOnArticle from '@/components/comment/CommentsOnArticle.vue'
+
 import Article from '@/services/Article.js'
 import handleError from '@/helpers/handleError.js'
+import ArticleCardMixin from '@/mixins/ArticleCardMixin.js'
+
+import { mapStores } from 'pinia'
+import { useAuthStore } from '@/store/Auth.js'
+
+import 'v3-infinite-loading/lib/style.css'
 
 export default {
   name: 'Article',
-  components: { ArticleCard, AboutArticleCard },
+  components: {
+    ArticleBigCard,
+    AboutArticleCard,
+    ArticleCard,
+    CommentsOnArticle
+  },
   mixins: [ArticleCardMixin],
   data() {
     return {
       articlesRelated: [],
-      article: {}
+      article: {
+        author: {}
+      }
     }
   },
-
   async created() {
     try {
       const response = await Article.show(this.$route.params.id)
@@ -119,19 +60,18 @@ export default {
       handleError(error)
     }
 
-    Article.getAll()
-      .then((response) => {
-        this.articlesRelated = response.data.data.slice(0, 3)
-      })
-      .catch((error) => {
-        handleError(error)
-      })
+    try {
+      const response = await Article.getAll('created_at', 'desc', 3)
+      this.articlesRelated = response.data.data
+    } catch (error) {
+      handleError(error)
+    }
   },
+
   computed: {
-    articleLifeTime() {
-      const created = parseISO(this.article.created_at)
-      const now = Date.now()
-      return differenceInMinutes(now, created)
+    ...mapStores(useAuthStore),
+    user() {
+      return this.authStore.user
     }
   }
 }

@@ -1,8 +1,7 @@
 <template>
   <main>
     <ProfileCard
-      :name="user.name"
-      :email="user.email"
+      :user="user"
       :link="'/edit-my-profile'"
       :linkLabel="'Edit profile'"
     />
@@ -14,7 +13,7 @@
       >
         <h2 class="myProfile__section-heading">My articles:</h2>
         <div class="section__articles section__articles--myProfile">
-          <ArticleCard
+          <ArticleBigCard
             v-for="article in articles"
             :key="article.id"
             :article="article"
@@ -36,13 +35,19 @@
         v-else
       >
         <h2 class="myProfile__section-heading">You don't have any articles</h2>
+        <div class="addArticle">
+          <RouterLink :to="{ name: 'create-article' }" class="addArticle__btn">
+            +
+          </RouterLink>
+          <p class="addArticle__btn-text">Add new article</p>
+        </div>
       </div>
     </div>
   </main>
 </template>
 
 <script>
-import ArticleCard from '../components/article/ArticleCard.vue'
+import ArticleBigCard from '../components/article/ArticleBigCard.vue'
 import ProfileCard from '@/components/general/ProfileCard.vue'
 import Article from '@/services/Article.js'
 import { mapStores } from 'pinia'
@@ -50,7 +55,7 @@ import { useAuthStore } from '@/store/Auth.js'
 import handleError from '@/helpers/handleError.js'
 
 export default {
-  components: { ArticleCard, ProfileCard },
+  components: { ArticleBigCard, ProfileCard },
   data() {
     return {
       articles: []

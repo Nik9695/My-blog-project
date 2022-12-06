@@ -34,6 +34,9 @@
 
   .aboutArticle__area {
     max-width: 860px;
+    br {
+      display: none;
+    }
   }
   @include for-phone-only {
     display: flex;
@@ -44,7 +47,10 @@
 }
 
 .aboutArticle__categories {
+  display: flex;
+  justify-content: center;
   list-style: none;
+
   padding: 0;
 }
 
@@ -142,8 +148,10 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 25px;
+  p {
+    margin-top: 0;
+  }
   @include for-phone-only {
-    //align-items: baseline;
   }
 }
 
@@ -208,11 +216,14 @@
   display: flex;
   justify-content: space-between;
   border-top: 0.5px solid #c4c4c4;
+  border-bottom: 0.5px solid #c4c4c4;
+  padding-bottom: 30px;
   padding-top: 30px;
 }
 .aboutArticle__area-author-info {
   display: flex;
   align-items: flex-start;
+  padding-left: 10px;
 }
 
 .aboutArticle__area-author-photo {
@@ -258,4 +269,8 @@
       }
     }
   }
+}
+
+.p {
+  color: red;
 }

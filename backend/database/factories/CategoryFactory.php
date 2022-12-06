@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Utils\StringUtils;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Nette\Utils\Strings;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
@@ -20,6 +21,9 @@ class CategoryFactory extends Factory
         $name = fake()->sentence(2);
         $slug = StringUtils::slugify($name);
 
-        return compact('slug', 'name');
+        return [
+            'slug' => $slug,
+            'name' => $name,
+        ];
     }
 }

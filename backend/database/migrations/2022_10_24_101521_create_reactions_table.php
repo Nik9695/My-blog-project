@@ -18,11 +18,8 @@ return new class extends Migration
         Schema::create('reactions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-
             $table->enum('type', config('constants.reactions'));
-
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-
             $table->morphs('reactable');
         });
     }

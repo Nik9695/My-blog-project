@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -38,13 +40,10 @@ class UserController extends Controller
         $validated['password'] = Hash::make($validated['password']);
 
         if ($request->avatar) {
-            $path = $request->file('avatar')->store('images/pictures', 's3');
+            $path = $request->file('avatar')->store('public/images');
             if (!$path) {
                 return response()->json(['msg' => 'avatar could not be saved'], 500);
             }
-            $validated['avatar_path'] = $path;
-        } else {
-            $path = 'public/images/default-user-image.jpg';
             $validated['avatar_path'] = $path;
         }
         $user = new User($validated);
@@ -62,9 +61,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return $user;
     }
 
     /**
@@ -76,7 +75,24 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user->update($request->validated());
+        $validated = $request->validated();
+        if ($request->password) {
+            $validated['password'] = Hash::make($validated['password']);
+        }
+
+        if ($request->avatar) {
+            $path = $request->file('avatar')->store('images', ['disk' => 'public']);
+
+            if (!$path) {
+                return response()->json(['msg' => 'avatar could not be saved'], 500);
+            }
+
+            $validated['avatar_path'] = $path;
+        }
+        if (!$user->update($validated)) {
+            return response()->json(['msg' => 'could not update user'], 500);
+        }
+
         return $user;
     }
 

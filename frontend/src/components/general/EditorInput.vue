@@ -1,31 +1,12 @@
 <template>
-  <div v-if="!isTextArea" class="editor__inputForm-wrapper">
-    <div class="inputForm__error" v-if="errorStore.errors[name]">
-      {{ errorStore.errors[name][0] }}
-    </div>
+  <div class="editor__inputForm-wrapper">
     <label :for="name" class="editor__inputForm-label">{{ lable }}</label>
     <input
       v-model="inputValue"
       :type="type"
       :name="name"
       :placeholder="placeholder"
-      :isTextArea="isTextArea"
       class="editor__inputForm-input"
-    />
-  </div>
-
-  <div v-else="isTextArea" class="editor__inputForm-wrapper">
-    <div class="inputForm__error" v-if="errorStore.errors[name]">
-      {{ errorStore.errors[name][0] }}
-    </div>
-    <label :for="name" class="editor__inputForm-label">{{ lable }}</label>
-    <textarea
-      v-model="inputValue"
-      :type="type"
-      :name="name"
-      :placeholder="placeholder"
-      :isTextArea="isTextArea"
-      class="editor__inputForm-input editor__inputForm-input--article-content"
     />
   </div>
 </template>
@@ -55,10 +36,6 @@ export default {
     placeholder: {
       type: String,
       default: 'text'
-    },
-    isTextArea: {
-      type: Boolean,
-      default: false
     }
   },
   data() {

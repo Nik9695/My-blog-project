@@ -26,6 +26,9 @@ class UpdateArticleRequest extends FormRequest
         return [
             'content' => ['required'],
             'title' => ['required'],
+            'category_id' => ['nullable',],
+            'categories_id.*' => ['integer', 'exists:categories,id'],
+            'background_image' => ['nullable']
         ];
     }
 }

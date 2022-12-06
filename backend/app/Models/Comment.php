@@ -26,8 +26,14 @@ class Comment extends Model
     {
         return $this->morphMany(Reaction::class, 'reactable');
     }
-    public function getRouteKeyName()
+
+
+    public function scopeFromArticle($builder, $article_id)
     {
-        return 'id';
+        if ($article_id === null) {
+            return $builder;
+        }
+
+        return $builder->where('article_id', $article_id);
     }
 }
